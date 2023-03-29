@@ -14,7 +14,11 @@
         android:id="@+id/gangChuFragment"
         android:name="com.incava.gangchuplace.view.main.GangChuFragment"
         android:label="fragment_gang_chu"
-        tools:layout="@layout/fragment_gang_chu" />
+        tools:layout="@layout/fragment_gang_chu" >
+        <action
+            android:id="@+id/action_gangChuFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
     <fragment
         android:id="@+id/rouletteFragment"
         android:name="com.incava.gangchuplace.view.main.RouletteFragment"
@@ -25,4 +29,8 @@
         android:name="com.incava.gangchuplace.view.main.MyInfoFragment"
         android:label="fragment_my_info"
         tools:layout="@layout/fragment_my_info" />
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.incava.gangchuplace.view.main.MapFragment"
+        android:label="MapFragment" />
 </navigation>

@@ -7,13 +7,13 @@
     <data>
         <variable
             name="login"
-            type="com.incava.gangchuplace.view.LoginActivity" />
+            type="com.incava.gangchuplace.view.login.LoginActivity" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.LoginActivity">
+    tools:context=".view.login.LoginActivity">
 
     <TextView
         android:id="@+id/textView"

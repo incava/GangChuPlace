@@ -1,4 +1,4 @@
-package com.incava.gangchuplace.view
+package com.incava.gangchuplace.view.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -15,6 +15,9 @@
         android:theme="@style/Theme.GangChuPlace"
         tools:targetApi="31">
         <activity
+            android:name=".view.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.LoginActivity"
             android:exported="true">
             <intent-filter>

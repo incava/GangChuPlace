@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">GangChuPlace</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_gang_chu">강추</string>
+    <string name="title_roulette">룰렛</string>
+    <string name="title_friend">친구</string>
+    <string name="title_my_info">내 정보</string>
 </resources>

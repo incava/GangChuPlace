@@ -4,7 +4,7 @@
     <item android:id="@+id/gangChuFragment"
         android:icon="@drawable/baseline_thumb_up_24"
         android:title="@string/title_gang_chu" />
-    <item android:id="@+id/rouletteFragment"
+    <item android:id="@+id/rouletteMenuFragment"
         android:icon="@drawable/vector_roulette"
         android:title="@string/title_roulette" />
     <item android:id="@+id/friendFragment"

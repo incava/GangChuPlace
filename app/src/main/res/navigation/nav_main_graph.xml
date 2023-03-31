@@ -33,4 +33,12 @@
         android:id="@+id/mapFragment"
         android:name="com.incava.gangchuplace.view.main.MapFragment"
         android:label="MapFragment" />
+    <fragment
+        android:id="@+id/rouletteMenuFragment"
+        android:name="com.incava.gangchuplace.view.main.RouletteMenuFragment"
+        android:label="RouletteMenuFragment" >
+        <action
+            android:id="@+id/action_rouletteMenuFragment_to_rouletteFragment"
+            app:destination="@id/rouletteFragment" />
+    </fragment>
 </navigation>

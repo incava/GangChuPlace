@@ -1,0 +1,35 @@
+package com.incava.gangchuplace.adapter
+
+import android.util.Log
+import androidx.databinding.BindingAdapter
+import androidx.lifecycle.LiveData
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.incava.gangchuplace.model.RouletteMenuModel
+
+object RouletteBindingAdapter {
+    @JvmStatic
+    @BindingAdapter("rouletteItem")
+    //리사이클러뷰와 ViewModel을 이어줄 바인딩 어댑터
+    fun setBindItem(view: RecyclerView, item: LiveData<MutableList<RouletteMenuModel>>) {
+        if (view.adapter == null){ // 처음에는 어댑터가 연결되어있지 않다.
+            Log.i("bindingNull","null이동경로 확인")
+            val lm = LinearLayoutManager(view.context)
+            val adapter = RouletteAdapter()
+            view.layoutManager = lm
+            view.adapter = adapter
+        }
+        //널일리가 없지만 널이아니라면 실행하도록.
+        view.adapter?.run {
+            if(this is RouletteAdapter) {
+                item.value?.let { this.rouletteArray = it } ?: run {
+                    rouletteArray = arrayListOf()
+                }
+                Log.i("data",rouletteArray.toString())
+                this.notifyDataSetChanged()
+            }
+        }
+
+
+    }
+}

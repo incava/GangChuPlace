@@ -1,20 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
+    <data>
+        <variable
+            name="friend"
+            type="com.incava.gangchuplace.view.main.friend.FriendFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".view.main.FriendFragment">
+        android:layout_height="match_parent">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="friend" />
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </FrameLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="친구"
+                android:textSize="20sp" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:setFriendAdapter="@{friend}"
+            app:setMediator="@{tabLayout}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </layout>

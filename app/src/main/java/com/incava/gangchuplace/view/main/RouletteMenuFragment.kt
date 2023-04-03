@@ -2,6 +2,7 @@ package com.incava.gangchuplace.view.main
 
 import android.graphics.Color
 import android.util.Log
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
@@ -14,7 +15,7 @@ import com.incava.gangchuplace.viewmodel.RouletteViewModel
 
 
 class RouletteMenuFragment : BaseFragment<FragmentRouletteMenuBinding>(R.layout.fragment_roulette_menu) {
-    private val vm : RouletteViewModel by viewModels()
+    private val vm : RouletteViewModel by activityViewModels()
     override fun init() {
         binding.rouletteMenu = this
         binding.rouletteVM = vm

@@ -1,13 +1,10 @@
 package com.incava.gangchuplace.viewmodel
 
-import android.graphics.Color
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bluehomestudio.luckywheel.WheelItem
 import com.incava.gangchuplace.model.RouletteMenuModel
-import com.incava.gangchuplace.model.RouletteModel
 
 class RouletteViewModel : ViewModel() {
 
@@ -25,8 +22,9 @@ class RouletteViewModel : ViewModel() {
         Log.i("vmInit3",_rouletteList.value.toString())
     }
 
-    fun removeItem(item : RouletteModel){
-        _rouletteList.value
+    fun removeItem(item : RouletteMenuModel){
+        _rouletteList.value?.remove(item)
+        Log.i("delete",_rouletteList.value.toString())
     }
     fun addItem(item : String){
         var a : MutableList<RouletteMenuModel> = _rouletteList.value ?: mutableListOf()

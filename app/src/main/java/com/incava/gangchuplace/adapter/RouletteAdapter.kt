@@ -10,20 +10,14 @@ import com.incava.gangchuplace.model.RouletteMenuModel
 import com.incava.gangchuplace.view.main.MainActivity
 import com.incava.gangchuplace.viewmodel.RouletteViewModel
 
-class RouletteAdapter : RecyclerView.Adapter<RouletteAdapter.VH>() {
-    var rouletteArray = mutableListOf<RouletteMenuModel>()
-
-
-
-
+class RouletteAdapter(private val rouletteArray: MutableList<RouletteMenuModel> ) : RecyclerView.Adapter<RouletteAdapter.VH>() {
     //bind시 변수 붙여주기.
     inner class VH(val binding : ItemRouletteBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: RouletteMenuModel) {
 //            binding.tvMenu.text = item.menuItem 뷰바인딩으로 되는지 확인 후 리펙토링
                 binding.rouletteItem = item
                 binding.rouletteViewModel = ViewModelProvider(binding.root.context as MainActivity).get(RouletteViewModel::class.java)
-
-
+                binding.executePendingBindings()
         }
     }
 

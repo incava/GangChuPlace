@@ -1,12 +1,12 @@
-package com.incava.gangchuplace.view
+package com.incava.gangchuplace.view.search
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.incava.gangchuplace.R
 
-class MainActivity : AppCompatActivity() {
+class SearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_search)
     }
 }

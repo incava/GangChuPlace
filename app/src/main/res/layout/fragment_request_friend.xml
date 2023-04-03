@@ -6,9 +6,6 @@
         <variable
             name="friendVM"
             type="com.incava.gangchuplace.viewmodel.FriendViewModel" />
-        <variable
-            name="txtType"
-            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,11 +13,10 @@
         android:layout_height="match_parent"
         android:padding="16dp">
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:setFriendAdapter="@{friendVM.friendList}" />
+            app:setFriendAdapter="@{friendVM.requestFriendList}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

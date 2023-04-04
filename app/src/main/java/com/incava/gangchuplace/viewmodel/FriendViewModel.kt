@@ -1,5 +1,6 @@
 package com.incava.gangchuplace.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -32,4 +33,19 @@ class FriendViewModel : ViewModel() {
         _requestFriendList.value = a
         _myRequestFriendList.value = a
     }
+
+    fun loadFriend(){
+        Log.i("loadFriend","잘됩니다!")
+    }
+
+    fun loadRequestFriend(){
+        Log.i("loadRequestFriend","잘됩니다!")
+    }
+
+    fun loadMyRequestFriend(){
+        Log.i("loadMyRequestFriend","잘됩니다!")
+    }
+
+
+
 }

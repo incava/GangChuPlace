@@ -43,9 +43,9 @@ object FriendBindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter(value=["setFriendAdapter","btnStr"], requireAll = true)
+    @BindingAdapter(value=["setFriendAdapter","friendType"], requireAll = true)
     //리사이클러뷰와 ViewModel을 이어줄 바인딩 어댑터
-    fun setFriendAdapter(view: RecyclerView, item : MutableList<User>, txt : String) {
+    fun setFriendAdapter(view: RecyclerView, item : MutableList<User>, txt : Int) {
         view.apply {
             layoutManager = LinearLayoutManager(view.context)
             adapter = FriendAdapter(item, txt)

@@ -34,7 +34,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
             app:setFriendAdapter="@{friendVM.requestFriendList}"
-            app:btnStr="@{`수락`}" />
+            app:friendType="@{Integer.valueOf(1)}" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView2"
@@ -56,7 +56,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2"
             app:setFriendAdapter="@{friendVM.myRequestFriendList}"
-            app:btnStr="@{`취소`}" />
+            app:friendType="@{Integer.valueOf(2)}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

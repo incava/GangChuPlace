@@ -7,11 +7,12 @@ import com.incava.gangchuplace.R
 import com.incava.gangchuplace.base.BaseFragment
 import com.incava.gangchuplace.databinding.FragmentGangChuBinding
 import com.incava.gangchuplace.view.search.SearchActivity
+import com.incava.gangchuplace.view.write.WriteActivity
 
 class GangChuFragment : BaseFragment<FragmentGangChuBinding>(R.layout.fragment_gang_chu){
 
     override fun init() {
-
+        binding.gangChu = this
         binding.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.search -> startActivity(Intent(requireActivity(),SearchActivity::class.java)) // 검색창으로 이동
@@ -20,6 +21,12 @@ class GangChuFragment : BaseFragment<FragmentGangChuBinding>(R.layout.fragment_g
             }
             true
         }
+
+    }
+
+    fun moveWrite(){
+        Log.i("moveWrite", "good")
+        startActivity(Intent(requireActivity(),WriteActivity::class.java))
     }
 
 

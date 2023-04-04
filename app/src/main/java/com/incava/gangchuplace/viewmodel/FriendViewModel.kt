@@ -18,6 +18,9 @@ class FriendViewModel : ViewModel() {
     private var _requestFriendList = MutableLiveData<MutableList<User>>()
     val requestFriendList : MutableLiveData<MutableList<User>> get() = _requestFriendList
 
+    private var _myRequestFriendList = MutableLiveData<MutableList<User>>()
+    val myRequestFriendList : MutableLiveData<MutableList<User>> get() = _myRequestFriendList
+
     init {// test용. 추후 Repo에 구현.
         //setvalue -> 메인 쓰레드로 즉각적 반응, postValue -> 백그라운드에서 작동, 조금늦음.
         //값을 많이 넣지 않아 setvalue로 설정.
@@ -27,5 +30,6 @@ class FriendViewModel : ViewModel() {
         }
         _friendList.value = a
         _requestFriendList.value = a
+        _myRequestFriendList.value = a
     }
 }

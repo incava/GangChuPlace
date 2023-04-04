@@ -14,8 +14,6 @@ class MyFriendFragment : BaseFragment<FragmentMyFriendBinding>(R.layout.fragment
         val vm : FriendViewModel = ViewModelProvider(this)[FriendViewModel::class.java]
         binding.apply {
             binding.friendVM = vm
-            binding.txtType = "해제"
-            binding.lifecycleOwner = this@MyFriendFragment
         }
     }
 }

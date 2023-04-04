@@ -26,7 +26,7 @@ object FriendBindingAdapter {
 
     //Viewpager를 설정하는 어댑터
     @JvmStatic
-    @BindingAdapter("app:setFriendAdapter")
+    @BindingAdapter("setFriendPagerAdapter")
     fun setAdapter(view: ViewPager2, fragment: Fragment) {
         view.apply {
             adapter = FriendViewPagerAdapter(fragment, fragmentList)
@@ -35,7 +35,7 @@ object FriendBindingAdapter {
 
     //Mediator를 설정하는 어댑터
     @JvmStatic
-    @BindingAdapter("app:setMediator")
+    @BindingAdapter("setMediator")
     fun setMediator(viewpager: ViewPager2, tabLayout: TabLayout) {
         TabLayoutMediator(tabLayout, viewpager) { tab, position ->
             tab.text = tabList[position]
@@ -43,16 +43,16 @@ object FriendBindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("app:setFriendAdapter")
+    @BindingAdapter(value=["setFriendAdapter","btnStr"], requireAll = true)
     //리사이클러뷰와 ViewModel을 이어줄 바인딩 어댑터
-    fun setFriendAdapter(view: RecyclerView, item : MutableList<User>,) {
+    fun setFriendAdapter(view: RecyclerView, item : MutableList<User>, txt : String) {
         view.apply {
             layoutManager = LinearLayoutManager(view.context)
-            adapter = FriendAdapter(item, 0)
+            adapter = FriendAdapter(item, txt)
         }
     }
     @JvmStatic
-    @BindingAdapter("app:setImage")
+    @BindingAdapter("setImage")
     fun setImage(view : CircleImageView, url : String){
         Glide.with(view.context)
             .load(url)

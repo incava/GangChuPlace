@@ -6,9 +6,6 @@
         <variable
             name="friendVM"
             type="com.incava.gangchuplace.viewmodel.FriendViewModel" />
-        <variable
-            name="txtType"
-            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +17,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:setFriendAdapter="@{friendVM.friendList}" />
+            app:setFriendAdapter="@{friendVM.friendList}"
+            app:btnStr="@{`해제`}"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

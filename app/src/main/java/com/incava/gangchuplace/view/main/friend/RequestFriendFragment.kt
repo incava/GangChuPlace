@@ -14,7 +14,6 @@ class RequestFriendFragment : BaseFragment<FragmentRequestFriendBinding>(R.layou
         val vm: FriendViewModel = ViewModelProvider(this)[FriendViewModel::class.java]
         binding.apply {
             binding.friendVM = vm
-            binding.lifecycleOwner = this@RequestFriendFragment
         }
     }
 }

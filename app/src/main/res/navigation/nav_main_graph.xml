@@ -26,9 +26,16 @@
         tools:layout="@layout/fragment_roulette" />
     <fragment
         android:id="@+id/myInfoFragment"
-        android:name="com.incava.gangchuplace.view.main.MyInfoFragment"
+        android:name="com.incava.gangchuplace.view.main.info.MyInfoFragment"
         android:label="fragment_my_info"
-        tools:layout="@layout/fragment_my_info" />
+        tools:layout="@layout/fragment_my_info" >
+        <action
+            android:id="@+id/action_myInfoFragment_to_myReviewFragment"
+            app:destination="@id/myReviewFragment" />
+        <action
+            android:id="@+id/action_myInfoFragment_to_myHeartFragment"
+            app:destination="@id/myHeartFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.incava.gangchuplace.view.main.MapFragment"
@@ -41,4 +48,14 @@
             android:id="@+id/action_rouletteMenuFragment_to_rouletteFragment"
             app:destination="@id/rouletteFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/myReviewFragment"
+        android:name="com.incava.gangchuplace.view.main.info.MyReviewFragment"
+        android:label="fragment_my_review"
+        tools:layout="@layout/fragment_my_review" />
+    <fragment
+        android:id="@+id/myHeartFragment"
+        android:name="com.incava.gangchuplace.view.main.info.MyHeartFragment"
+        android:label="fragment_my_heart"
+        tools:layout="@layout/fragment_my_heart" />
 </navigation>

@@ -49,7 +49,7 @@
         android:id="@+id/imageView"
         android:layout_width="109dp"
         android:layout_height="53dp"
-        android:src="@drawable/baseline_thumb_up_24"
+        android:src="@drawable/vector_thumb_up"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

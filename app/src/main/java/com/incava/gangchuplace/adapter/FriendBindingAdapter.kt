@@ -9,7 +9,6 @@ import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.incava.gangchuplace.R
-import com.incava.gangchuplace.model.RouletteMenuModel
 import com.incava.gangchuplace.model.User
 import com.incava.gangchuplace.view.main.friend.MyFriendFragment
 import com.incava.gangchuplace.view.main.friend.RequestFriendFragment
@@ -56,7 +55,7 @@ object FriendBindingAdapter {
     fun setImage(view : CircleImageView, url : String){
         Glide.with(view.context)
             .load(url)
-            .error(R.drawable.baseline_thumb_up_24)
+            .error(R.drawable.vector_thumb_up)
             .into(view)
     }
 

@@ -1,10 +1,13 @@
 package com.incava.gangchuplace.adapter
 
-import android.util.Log
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.BindingAdapter
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.incava.gangchuplace.model.StorePlace
+import com.incava.gangchuplace.viewmodel.WriteViewModel
 
 object WriteBindingAdapter {
 
@@ -17,4 +20,16 @@ object WriteBindingAdapter {
             //Log.i("write",item.toString())
         }
     }
+
+    @JvmStatic
+    @BindingAdapter("setToolbar")
+    fun setToolbar(view: Toolbar, writeViewModel: WriteViewModel) {
+        view.setupWithNavController(view.findNavController())
+        view.title = "장소 평가"
+        view.setOnMenuItemClickListener {
+            writeViewModel.finishReview(view)
+            true
+        }
+    }
+
 }

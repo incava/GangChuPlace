@@ -1,9 +1,12 @@
 package com.incava.gangchuplace.viewmodel
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
+import com.incava.gangchuplace.R
 import com.incava.gangchuplace.model.RouletteMenuModel
 
 class RouletteViewModel : ViewModel() {
@@ -35,6 +38,10 @@ class RouletteViewModel : ViewModel() {
         newList.add(RouletteMenuModel(menuItem = item))
         _rouletteList.value = newList
         Log.i("addItem",rouletteList.value.toString())
+    }
+
+    fun goRoulette(view : View){
+        view.findNavController().navigate(R.id.action_rouletteMenuFragment_to_rouletteFragment)
     }
 
 

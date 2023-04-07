@@ -16,6 +16,6 @@
     <fragment
         android:id="@+id/writeReviewFragment"
         android:name="com.incava.gangchuplace.view.write.WriteReviewFragment"
-        android:label="fragment_write_review"
+        android:label="장소 평가"
         tools:layout="@layout/fragment_write_review" />
 </navigation>

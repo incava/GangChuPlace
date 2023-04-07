@@ -25,7 +25,6 @@ object WriteBindingAdapter {
     @BindingAdapter("setToolbar")
     fun setToolbar(view: Toolbar, writeViewModel: WriteViewModel) {
         view.setupWithNavController(view.findNavController())
-        view.title = "장소 평가"
         view.setOnMenuItemClickListener {
             writeViewModel.finishReview(view)
             true

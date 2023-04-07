@@ -34,8 +34,8 @@ class WriteViewModel : ViewModel() {
 
     fun finishReview(view: View) {
         // 저장하는 기능 수행.
-
         //다 수행하고 나서 view의 액티비티를 finish()
+        Toast.makeText(view.context, "리뷰 작성 완료!", Toast.LENGTH_SHORT).show()
         (view.context as WriteActivity).finish()
     }
 

@@ -50,15 +50,4 @@ object FriendBindingAdapter {
             adapter = FriendAdapter(item, txt)
         }
     }
-    @JvmStatic
-    @BindingAdapter("setImage")
-    fun setImage(view : CircleImageView, url : String){
-        Glide.with(view.context)
-            .load(url)
-            .error(R.drawable.vector_thumb_up)
-            .into(view)
-    }
-
-
-
 }

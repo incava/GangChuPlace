@@ -15,14 +15,6 @@ import com.incava.gangchuplace.viewmodel.GangChuViewModel
 
 object GangChuBindingAdapter{
     @JvmStatic
-    @BindingAdapter("setGangChuAdapter")
-    fun setGangChuAdapter (view : RecyclerView, item : MutableList<GangChuPreview>){
-        view.apply {
-            adapter = GangChuAdapter(item)
-            layoutManager = GridLayoutManager(view.context,2,GridLayoutManager.VERTICAL,false)
-        }
-    }
-    @JvmStatic
     @BindingAdapter("setGangChuToolbar")
     fun setGangChuToolbar (view : Toolbar, vm : GangChuViewModel){
         view.setOnMenuItemClickListener { vm.itemClick(view,it)

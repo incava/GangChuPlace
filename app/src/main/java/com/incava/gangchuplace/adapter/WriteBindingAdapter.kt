@@ -10,17 +10,6 @@ import com.incava.gangchuplace.model.StorePlace
 import com.incava.gangchuplace.viewmodel.WriteViewModel
 
 object WriteBindingAdapter {
-
-    @JvmStatic
-    @BindingAdapter("setWriteAdapter")
-    fun setWriteAdapter(view: RecyclerView, item: MutableList<StorePlace>) {
-        view.apply {
-            layoutManager = LinearLayoutManager(view.context)
-            adapter = WriteAdapter(item)
-            //Log.i("write",item.toString())
-        }
-    }
-
     @JvmStatic
     @BindingAdapter("setToolbar")
     fun setToolbar(view: Toolbar, writeViewModel: WriteViewModel) {

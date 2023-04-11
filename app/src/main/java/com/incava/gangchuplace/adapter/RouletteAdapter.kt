@@ -27,8 +27,6 @@ class RouletteAdapter(private val rouletteArray: MutableList<RouletteMenuModel> 
         return VH(binding)
     }
 
-
-
     override fun getItemCount() = rouletteArray.size
 
     override fun onBindViewHolder(holder: VH, position: Int) {

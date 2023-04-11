@@ -7,6 +7,9 @@
         <variable
             name="gangChu"
             type="com.incava.gangchuplace.view.main.GangChuFragment"/>
+        <variable
+            name="gangChuVM"
+            type="com.incava.gangchuplace.viewmodel.GangChuViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,10 +21,30 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            setGangChuToolbar="@{gangChuVM}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/gangchu_menu" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_gang_chu"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            recyclerAdapter="@{gangChuVM.gangChuList}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/vector_create"
+            android:layout_margin="16dp"
+            app:backgroundTint="#F1F3C50F"
+            app:tint="#0F50C5"
+            android:onClick="@{(view)->gangChuVM.moveWrite(view)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

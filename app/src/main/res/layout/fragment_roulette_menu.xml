@@ -5,9 +5,6 @@
 
     <data>
         <variable
-            name="rouletteMenu"
-            type="com.incava.gangchuplace.view.main.RouletteMenuFragment" />
-        <variable
             name="rouletteVM"
             type="com.incava.gangchuplace.viewmodel.RouletteViewModel" />
     </data>
@@ -22,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="시작하기"
-            android:onClick="@{()->rouletteMenu.goRoulette()}"
+            android:onClick="@{(view)->rouletteVM.goRoulette(view)}"
             app:layout_constraintBottom_toTopOf="@+id/et_write"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="0dp" />
@@ -54,7 +51,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            rouletteItem="@{rouletteVM.rouletteList}"
+            recyclerAdapter="@{rouletteVM.rouletteList}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

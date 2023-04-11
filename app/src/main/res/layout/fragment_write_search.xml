@@ -1,58 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-            name="friend"
-            type="com.incava.gangchuplace.view.main.friend.FriendFragment" />
+            name="writeVM"
+            type="com.incava.gangchuplace.viewmodel.WriteViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        tools:context=".view.write.WriteSearchFragment">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbar2"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="친구"
-                android:textSize="20sp" />
+                android:text="리뷰쓰기" />
         </androidx.appcompat.widget.Toolbar>
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edit_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/rect_edit_border"
+            android:drawableRight="@drawable/vector_search"
+            android:hint="장소 선택"
+            android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager2"
+        <androidx.recyclerview.widget.RecyclerView
+            recyclerAdapter="@{writeVM.placeList}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:setFriendPagerAdapter="@{friend}"
-            app:setMediator="@{tabLayout}"
+            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
-
-
+            app:layout_constraintTop_toBottomOf="@+id/edit_search" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
 </layout>
+

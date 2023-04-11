@@ -4,11 +4,11 @@
 
     <item android:id="@+id/search"
         android:title="검색"
-        android:icon="@drawable/baseline_search_24"
+        android:icon="@drawable/vector_search"
         app:showAsAction="ifRoom"/>
     <item android:id="@+id/map"
         android:title="지도"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/baseline_map_24"/>
+        android:icon="@drawable/vector_map"/>
 
 </menu>

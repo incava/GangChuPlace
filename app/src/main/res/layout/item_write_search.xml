@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="storePlace"
+            type="com.incava.gangchuplace.model.StorePlace" />
+
+        <variable
+            name="writeVM"
+            type="com.incava.gangchuplace.viewmodel.WriteViewModel" />
+    </data>
+
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPadding="6dp"
+        android:onClick="@{(view)->writeVM.moveNext(view,storePlace)}"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{storePlace.title}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{storePlace.address}" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

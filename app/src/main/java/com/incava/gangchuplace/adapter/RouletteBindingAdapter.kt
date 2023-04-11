@@ -19,22 +19,13 @@ import com.incava.gangchuplace.R
 import com.incava.gangchuplace.model.RouletteMenuModel
 
 object RouletteBindingAdapter {
-    @JvmStatic
-    @BindingAdapter("rouletteItem")
-    //리사이클러뷰와 ViewModel을 이어줄 바인딩 어댑터
-    fun setBindItem(view: RecyclerView,item : MutableList<RouletteMenuModel>) {
-        view.apply {
-            layoutManager = LinearLayoutManager(view.context)
-            adapter = RouletteAdapter(item)
-        }
-    }
 
     // 사진과 색깔은 고정으로 Text만 바꿔서 add하는 식으로 구현. 추후 랜덤요소로 변환 예정.
     @JvmStatic
     @BindingAdapter("rouletteSetting")
-    fun rouletteSetting(view: LuckyWheel, item: LiveData<MutableList<RouletteMenuModel>>) {
+    fun rouletteSetting(view: LuckyWheel, item: MutableList<RouletteMenuModel>) {
         val list = mutableListOf<WheelItem>()
-        for (menu in item.value!!) {
+        for (menu in item) {
             list.add(
                 WheelItem(
                     Color.BLUE,

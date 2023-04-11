@@ -11,78 +11,97 @@
             name="gangChuPreview"
             type="com.incava.gangchuplace.model.GangChuPreview" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="400dp">
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_image"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="16dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/normal_image"
+            setImages="@{gangChuPreview.img}"
+            tools:background="@drawable/normal_image"
             app:layout_constraintBottom_toTopOf="@+id/tv_distance"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/tb"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_margin="16dp"
-            android:src="@drawable/vector_thumb_up_heart_on"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:background="@drawable/vector_thumb_up_selector"
+            android:clickable="true"
+            android:focusable="true"
+            android:checked="@{gangChuPreview.heart}"
+            android:onCheckedChanged="@{(view,checked)->gangChuVM.setHeart(view,checked,gangChuPreview)}"
+            android:textOn=" "
+            android:textOff=" "
+            app:layout_constraintEnd_toEndOf="@+id/iv_image"
+            app:layout_constraintTop_toTopOf="@+id/iv_image" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_distance"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="지금 거리에서  900m"
+            android:text='@{"지금 거리에서" + String.valueOf(gangChuPreview.storePlace.mapx) + "m"}'
+            android:textSize="11sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_image" />
+            app:layout_constraintStart_toStartOf="@+id/iv_image"
+            app:layout_constraintTop_toBottomOf="@+id/iv_image"
+            tools:text="지금 거리에서  900m" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="우동 가조쿠"
+            android:text="@{gangChuPreview.storePlace.title}"
+            tools:text="우동 가조쿠"
+            android:textSize="11sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_category"
-            app:layout_constraintTop_toBottomOf="@+id/tv_distance"
-            tools:layout_editor_absoluteX="0dp" />
+            app:layout_constraintStart_toStartOf="@+id/tv_distance"
+            app:layout_constraintTop_toBottomOf="@+id/tv_distance" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_category"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="일식 / 라멘, 소바"
+            tools:text="일식 / 라멘, 소바"
+            android:text="@{gangChuPreview.storePlace.description}"
+            android:textSize="11sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_stars"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title"
-            tools:layout_editor_absoluteX="16dp" />
+            app:layout_constraintStart_toStartOf="@+id/tv_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_stars"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4.6 (리뷰 157)"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="@{String.valueOf(gangChuPreview.rank)}"
+            tools:text="4.6 (리뷰 157)"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_recommend"
+            app:layout_constraintStart_toStartOf="@+id/tv_category"
             app:layout_constraintTop_toBottomOf="@+id/tv_category" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_recommend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="추천 : 인기 외 2명"
-            app:layout_constraintBottom_toBottomOf="@id/tv_stars"
-            app:layout_constraintStart_toEndOf="@+id/tv_stars"
-            app:layout_constraintTop_toTopOf="@+id/tv_stars" />
-
+            tools:text="추천 : 인기 외 2명"
+            android:text="@{gangChuPreview.gangChuMember}"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_stars"
+            app:layout_constraintTop_toBottomOf="@+id/tv_stars" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

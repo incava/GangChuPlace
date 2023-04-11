@@ -15,9 +15,9 @@ import de.hdodenhof.circleimageview.CircleImageView
 
 object Common {
     @JvmStatic
-    @BindingAdapter("RecyclerAdapter")
+    @BindingAdapter("recyclerAdapter")
     //리사이클러뷰와 ViewModel을 이어줄 바인딩 어댑터
-    fun setBindItems(view: RecyclerView, items: Any) {
+    fun recyclerAdapter(view: RecyclerView, items: Any) {
         view.apply {
             if (items is MutableList<*>) {
                 if (items.all { it is RouletteMenuModel }) {

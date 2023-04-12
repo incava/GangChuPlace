@@ -6,7 +6,9 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import com.google.gson.Gson
 import com.incava.gangchuplace.R
+import com.incava.gangchuplace.base.BaseContainerFragmentDirections
 import com.incava.gangchuplace.model.GangChuPreview
 import com.incava.gangchuplace.model.StorePlace
 import com.incava.gangchuplace.view.main.MainActivity
@@ -38,6 +40,12 @@ class GangChuViewModel : ViewModel() {
     fun moveWrite(view: View) {
         (view.context as MainActivity).findNavController(R.id.main_nav_host).navigate(R.id.action_baseContainerFragment_to_nav_write_graph)
     }
+    fun moveDetail(view: View,storePlace: StorePlace) {
+        Toast.makeText(view.context, "moveDetail", Toast.LENGTH_SHORT).show()
+        val item = Gson().toJson(storePlace)
+        val action = BaseContainerFragmentDirections.actionBaseContainerFragmentToDetailPageFragment(storePlace= item)
+        (view.context as MainActivity).findNavController(R.id.main_nav_host).navigate(action)
+    }
 
     fun itemClick(view: View, item: MenuItem) {
         when (item.itemId) {
@@ -49,4 +57,6 @@ class GangChuViewModel : ViewModel() {
         }
         true
     }
+
+
 }

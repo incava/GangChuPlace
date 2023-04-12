@@ -1,5 +1,7 @@
 package com.incava.gangchuplace.model
 
+import android.os.Parcelable
+
 /**
  * 네이버 검색 지역 API를 받아오는 DTO
  */

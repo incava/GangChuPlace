@@ -15,6 +15,10 @@
         <action
             android:id="@+id/action_baseContainerFragment_to_storeSearchFragment"
             app:destination="@id/storeSearchFragment" />
+        <action
+            android:id="@+id/action_baseContainerFragment_to_detailPageFragment"
+            app:destination="@id/detailPageFragment"
+            />
     </fragment>
 
     <navigation
@@ -45,5 +49,13 @@
         android:id="@+id/storeSearchFragment"
         android:name="com.incava.gangchuplace.view.search.StoreSearchFragment"
         android:label="StoreSearchFragment" />
+    <fragment
+        android:id="@+id/detailPageFragment"
+        android:name="com.incava.gangchuplace.view.write.DetailPageFragment"
+        android:label="DetailPageFragment">
+        <argument
+            android:name="storePlace"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

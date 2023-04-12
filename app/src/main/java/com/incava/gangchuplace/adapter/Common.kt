@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.incava.gangchuplace.R
 import com.incava.gangchuplace.model.GangChuPreview
+import com.incava.gangchuplace.model.ReviewInfo
 import com.incava.gangchuplace.model.RouletteMenuModel
 import com.incava.gangchuplace.model.StorePlace
 import com.incava.gangchuplace.model.User
@@ -29,8 +30,6 @@ object Common {
                 } else if (items.all { it is StorePlace }) {
                     adapter = WriteAdapter(items as MutableList<StorePlace>)
                     layoutManager = LinearLayoutManager(view.context)
-                } else if (items.all { it is User }) {
-                    return@apply
                 }
             }
         }
@@ -53,4 +52,8 @@ object Common {
             .error(R.drawable.normal_image)
             .into(view)
     }
+
+
+
+
 }

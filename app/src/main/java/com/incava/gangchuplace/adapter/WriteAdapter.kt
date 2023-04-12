@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.incava.gangchuplace.databinding.ItemWriteSearchBinding
 import com.incava.gangchuplace.model.StorePlace
 import com.incava.gangchuplace.view.main.MainActivity
-import com.incava.gangchuplace.view.write.WriteActivity
 import com.incava.gangchuplace.viewmodel.WriteViewModel
 
 class WriteAdapter(private val placeList: MutableList<StorePlace>) :
@@ -24,7 +23,7 @@ class WriteAdapter(private val placeList: MutableList<StorePlace>) :
         //bind에서 처리.
         holder.binding.storePlace = placeList[position]
         holder.binding.writeVM =
-            ViewModelProvider(holder.binding.root.context as WriteActivity)[WriteViewModel::class.java]
+            ViewModelProvider(holder.binding.root.context as MainActivity)[WriteViewModel::class.java]
     }
 
 

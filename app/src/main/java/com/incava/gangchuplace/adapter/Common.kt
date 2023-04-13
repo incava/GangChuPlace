@@ -45,8 +45,8 @@ object Common {
     }
 
     @JvmStatic
-    @BindingAdapter("setImages")
-    fun setImages(view: ImageView, url: String) {
+    @BindingAdapter("setCircleImage")
+    fun setCircleImage(view: ImageView, url: String) {
         Glide.with(view.context)
             .load(url)
             .error(R.drawable.normal_image)

@@ -52,9 +52,20 @@
     <fragment
         android:id="@+id/detailPageFragment"
         android:name="com.incava.gangchuplace.view.write.DetailPageFragment"
-        android:label="DetailPageFragment">
+        android:label="가게 정보">
         <argument
             android:name="storePlace"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_detailPageFragment_to_reviewPageFragment"
+            app:destination="@id/reviewPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewPageFragment"
+        android:name="com.incava.gangchuplace.view.write.ReviewPageFragment"
+        android:label="리뷰" >
+        <argument
+            android:name="reviewInfo"
             app:argType="string" />
     </fragment>
 

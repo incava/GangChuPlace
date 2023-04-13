@@ -6,4 +6,5 @@ data class ReviewInfo(
     val timeStamp : String, // 작성 시간
     val rank : String, // 작성한 평점
     val body : String, // 작성한 글
+    val store : String,
 )

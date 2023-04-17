@@ -2,60 +2,121 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/gangChuFragment">
+    android:id="@+id/nav_main_graph"
+    app:startDestination="@id/baseContainerFragment">
 
     <fragment
-        android:id="@+id/friendFragment"
-        android:name="com.incava.gangchuplace.view.main.friend.FriendFragment"
-        android:label="fragment_friend"
-        tools:layout="@layout/fragment_friend" />
-    <fragment
-        android:id="@+id/gangChuFragment"
-        android:name="com.incava.gangchuplace.view.main.GangChuFragment"
-        android:label="fragment_gang_chu"
-        tools:layout="@layout/fragment_gang_chu" >
+        android:id="@+id/myHeartFragment"
+        android:name="com.incava.gangchuplace.view.main.info.MyHeartFragment"
+        android:label="찜한 가게"
+        tools:layout="@layout/fragment_my_heart" >
         <action
-            android:id="@+id/action_gangChuFragment_to_mapFragment"
-            app:destination="@id/mapFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/rouletteFragment"
-        android:name="com.incava.gangchuplace.view.main.RouletteFragment"
-        android:label="fragment_roulette"
-        tools:layout="@layout/fragment_roulette" />
-    <fragment
-        android:id="@+id/myInfoFragment"
-        android:name="com.incava.gangchuplace.view.main.info.MyInfoFragment"
-        android:label="fragment_my_info"
-        tools:layout="@layout/fragment_my_info" >
-        <action
-            android:id="@+id/action_myInfoFragment_to_myReviewFragment"
-            app:destination="@id/myReviewFragment" />
-        <action
-            android:id="@+id/action_myInfoFragment_to_myHeartFragment"
-            app:destination="@id/myHeartFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/mapFragment"
-        android:name="com.incava.gangchuplace.view.main.MapFragment"
-        android:label="MapFragment" />
-    <fragment
-        android:id="@+id/rouletteMenuFragment"
-        android:name="com.incava.gangchuplace.view.main.RouletteMenuFragment"
-        android:label="RouletteMenuFragment" >
-        <action
-            android:id="@+id/action_rouletteMenuFragment_to_rouletteFragment"
-            app:destination="@id/rouletteFragment" />
+            android:id="@+id/action_myHeartFragment_to_detailPageFragment"
+            app:destination="@id/detailPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/myReviewFragment"
         android:name="com.incava.gangchuplace.view.main.info.MyReviewFragment"
         android:label="fragment_my_review"
-        tools:layout="@layout/fragment_my_review" />
+        tools:layout="@layout/fragment_my_review" >
+        <action
+            android:id="@+id/action_myReviewFragment_to_reviewPageFragment"
+            app:destination="@id/reviewPageFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/myHeartFragment"
-        android:name="com.incava.gangchuplace.view.main.info.MyHeartFragment"
-        android:label="fragment_my_heart"
-        tools:layout="@layout/fragment_my_heart" />
+        android:id="@+id/baseContainerFragment"
+        android:name="com.incava.gangchuplace.base.BaseContainerFragment"
+        android:label="BaseContainerFragment">
+        <action
+            android:id="@+id/action_baseContainerFragment_to_nav_write_graph"
+            app:destination="@id/nav_write_graph" />
+        <action
+            android:id="@+id/action_baseContainerFragment_to_storeSearchFragment"
+            app:destination="@id/storeSearchFragment" />
+        <action
+            android:id="@+id/action_baseContainerFragment_to_detailPageFragment"
+            app:destination="@id/detailPageFragment" />
+        <action
+            android:id="@+id/action_baseContainerFragment_to_myHeartFragment"
+            app:destination="@id/myHeartFragment" />
+        <action
+            android:id="@+id/action_baseContainerFragment_to_myReviewFragment"
+            app:destination="@id/myReviewFragment" />
+        <action
+            android:id="@+id/action_baseContainerFragment_to_reviseInfoFragment"
+            app:destination="@id/reviseInfoFragment" />
+        <action
+            android:id="@+id/action_baseContainerFragment_to_revisePasswordFragment"
+            app:destination="@id/revisePasswordFragment" />
+    </fragment>
+
+    <navigation
+        android:id="@+id/nav_write_graph"
+        app:startDestination="@id/writeSearchFragment">
+        <fragment
+            android:id="@+id/writeSearchFragment"
+            android:name="com.incava.gangchuplace.view.write.WriteSearchFragment"
+            android:label="WriteSearchFragment">
+            <action
+                android:id="@+id/action_writeSearchFragment_to_writeReviewFragment"
+                app:destination="@id/writeReviewFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/writeReviewFragment"
+            android:name="com.incava.gangchuplace.view.write.WriteReviewFragment"
+            android:label="장소 평가"
+            tools:layout="@layout/fragment_write_review" />
+        <action
+            android:id="@+id/action_global_baseContainerFragment"
+            app:destination="@id/baseContainerFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/baseContainerFragment"
+            app:popUpToInclusive="true" />
+
+    </navigation>
+    <fragment
+        android:id="@+id/storeSearchFragment"
+        android:name="com.incava.gangchuplace.view.search.StoreSearchFragment"
+        android:label="StoreSearchFragment" >
+        <action
+            android:id="@+id/action_storeSearchFragment_to_storeSearchResultFragment"
+            app:destination="@id/storeSearchResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailPageFragment"
+        android:name="com.incava.gangchuplace.view.write.DetailPageFragment"
+        android:label="가게 정보">
+        <argument
+            android:name="storePlace"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_detailPageFragment_to_reviewPageFragment"
+            app:destination="@id/reviewPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewPageFragment"
+        android:name="com.incava.gangchuplace.view.write.ReviewPageFragment"
+        android:label="리뷰" >
+        <argument
+            android:name="reviewInfo"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviseInfoFragment"
+        android:name="com.incava.gangchuplace.view.main.info.ReviseInfoFragment"
+        android:label="프로필 변경"
+        tools:layout="@layout/fragment_revise_info" />
+    <fragment
+        android:id="@+id/revisePasswordFragment"
+        android:name="com.incava.gangchuplace.view.main.info.RevisePasswordFragment"
+        android:label="비밀번호 변경" />
+    <fragment
+        android:id="@+id/storeSearchResultFragment"
+        android:name="com.incava.gangchuplace.view.search.StoreSearchResultFragment"
+        android:label="검색 결과" >
+        <action
+            android:id="@+id/action_storeSearchResultFragment_to_detailPageFragment"
+            app:destination="@id/detailPageFragment" />
+    </fragment>
+
 </navigation>

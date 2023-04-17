@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.incava.gangchuplace.R
 import com.incava.gangchuplace.model.StorePlace
-import com.incava.gangchuplace.view.write.WriteActivity
+import com.incava.gangchuplace.view.main.MainActivity
 
 class WriteViewModel : ViewModel() {
 
@@ -34,9 +34,9 @@ class WriteViewModel : ViewModel() {
 
     fun finishReview(view: View) {
         // 저장하는 기능 수행.
-        //다 수행하고 나서 view의 액티비티를 finish()
+        //다 수행하고 나서 다시 처음으로 돌아가기.
         Toast.makeText(view.context, "리뷰 작성 완료!", Toast.LENGTH_SHORT).show()
-        (view.context as WriteActivity).finish()
+        (view.context as MainActivity).findNavController(R.id.main_nav_host).navigate(R.id.action_global_baseContainerFragment)
     }
 
 

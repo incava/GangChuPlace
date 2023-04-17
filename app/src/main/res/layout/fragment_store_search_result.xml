@@ -12,24 +12,26 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.search.StoreSearchFragment">
+        tools:context=".view.search.StoreSearchResultFragment">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/edit_search"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rect_edit_border"
-            android:drawableEnd="@drawable/vector_search"
-            android:hint="장소를 검색해주세요"
-            android:layout_margin="8dp"
-            android:onTextChanged="@{(text,start,before,count) -> gangChuVM.setSearchKeyword(text.toString())}"
-            android:padding="16dp"
-            android:inputType="text"
-            android:imeOptions="actionSearch"
-            setSearchListener="@{gangChuVM}"
+            android:layout_height="?attr/actionBarSize"
+            setSearchToolbar="@{gangChuVM}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_gang_chu"
+            recyclerAdapter="@{gangChuVM.gangChuSearchList}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

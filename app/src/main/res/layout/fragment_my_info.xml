@@ -8,6 +8,9 @@
         <variable
             name="myInfo"
             type="com.incava.gangchuplace.view.main.info.MyInfoFragment" />
+        <variable
+            name="myInfoVM"
+            type="com.incava.gangchuplace.viewmodel.MyInfoViewModel" />
     </data>
 
 
@@ -37,11 +40,10 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/civ_profile"
+            setCircleImage="@{myInfoVM.myInfo.image}"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/appCompatButton3"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -51,52 +53,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="인기"
+            android:text="@{myInfoVM.myInfo.nickName}"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/tv_friend"
             app:layout_constraintStart_toEndOf="@+id/civ_profile"
             app:layout_constraintTop_toTopOf="@+id/civ_profile"
-            app:layout_constraintVertical_chainStyle="spread_inside" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_friend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="친구"
-            app:layout_constraintBottom_toTopOf="@+id/appCompatTextView7"
-            app:layout_constraintStart_toStartOf="@+id/tv_nickname"
-            app:layout_constraintTop_toBottomOf="@+id/tv_nickname" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_friendNum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:text="200"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_friend"
-            app:layout_constraintStart_toEndOf="@+id/tv_friend"
-            app:layout_constraintTop_toTopOf="@+id/tv_friend" />
+            app:layout_constraintVertical_chainStyle="spread_inside"
+            tools:text="인기" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ingi1118@naver.com"
+            android:text="@{myInfoVM.myInfo.email}"
             app:layout_constraintBottom_toBottomOf="@+id/civ_profile"
-            app:layout_constraintStart_toStartOf="@+id/tv_friend"
-            app:layout_constraintTop_toBottomOf="@+id/tv_friend" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/appCompatButton3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="수정"
-            app:layout_constraintBottom_toBottomOf="@+id/civ_profile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/civ_profile"
-            app:layout_constraintTop_toTopOf="@+id/civ_profile" />
+            app:layout_constraintStart_toStartOf="@+id/tv_nickname"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nickname"
+            tools:text="ingi1118@naver.com" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/appCompatButton4"
@@ -104,26 +76,56 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:drawableRight="@drawable/vector_arrow_forward"
+            android:onClick="@{()->myInfo.moveMyReview()}"
             android:padding="16dp"
             android:text="내가 적은 리뷰"
             android:textSize="16sp"
-            android:onClick="@{()->myInfo.moveMyReview()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/civ_profile" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/appCompatButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:drawableRight="@drawable/vector_arrow_forward"
+            android:onClick="@{()->myInfo.moveMyHeartStore()}"
+            android:padding="16dp"
+            android:text="찜한 가게"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatButton4" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/appCompatButton3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:drawableRight="@drawable/vector_arrow_forward"
+            android:onClick="@{()->myInfo.moveReviseInfo()}"
+            android:padding="16dp"
+            android:text="프로필 변경"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatButton2" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:drawableRight="@drawable/vector_arrow_forward"
+            android:onClick="@{()->myInfo.moveRevisePassword()}"
             android:padding="16dp"
-            android:text="찜한 가게"
+            android:text="비밀번호 변경"
             android:textSize="16sp"
-            android:onClick="@{()->myInfo.moveMyHeartStore()}"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatButton4" />
+            app:layout_constraintTop_toBottomOf="@+id/appCompatButton3" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

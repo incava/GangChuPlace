@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_bottom_graph"
+    app:startDestination="@id/gangChuFragment">
+    <fragment
+        android:id="@+id/myInfoFragment"
+        android:name="com.incava.gangchuplace.view.main.info.MyInfoFragment"
+        android:label="fragment_my_info"
+        tools:layout="@layout/fragment_my_info"/>
+    <fragment
+        android:id="@+id/gangChuFragment"
+        android:name="com.incava.gangchuplace.view.main.GangChuFragment"
+        android:label="fragment_gang_chu"
+        tools:layout="@layout/fragment_gang_chu">
+        <action
+            android:id="@+id/action_gangChuFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rouletteFragment"
+        android:name="com.incava.gangchuplace.view.main.RouletteFragment"
+        android:label="fragment_roulette"
+        tools:layout="@layout/fragment_roulette" />
+    <fragment
+        android:id="@+id/friendFragment"
+        android:name="com.incava.gangchuplace.view.main.friend.FriendFragment"
+        android:label="fragment_friend"
+        tools:layout="@layout/fragment_friend" />
+    <fragment
+        android:id="@+id/rouletteMenuFragment"
+        android:name="com.incava.gangchuplace.view.main.RouletteMenuFragment"
+        android:label="RouletteMenuFragment">
+        <action
+            android:id="@+id/action_rouletteMenuFragment_to_rouletteFragment"
+            app:destination="@id/rouletteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.incava.gangchuplace.view.main.MapFragment"
+        android:label="MapFragment" />
+    <action
+        android:id="@+id/action_global_nav_write_graph"
+        app:destination="@id/nav_write_graph" />
+
+</navigation>

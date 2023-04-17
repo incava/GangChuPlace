@@ -17,7 +17,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            setToolbar="@{writeVM}"
+            setWriteToolbar="@{writeVM}"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:layout_constraintBottom_toTopOf="@+id/rating_eval"

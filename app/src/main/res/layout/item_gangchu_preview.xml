@@ -15,6 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:onClick="@{(view)->gangChuVM.moveDetail(view,gangChuPreview.storePlace)}"
         android:padding="16dp">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -24,7 +25,7 @@
             android:layout_marginTop="16dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            setImages="@{gangChuPreview.img}"
+            setImage="@{gangChuPreview.img}"
             tools:background="@drawable/normal_image"
             app:layout_constraintBottom_toTopOf="@+id/tv_distance"
             app:layout_constraintEnd_toEndOf="parent"

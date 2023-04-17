@@ -1,5 +1,6 @@
 package com.incava.gangchuplace.view.main.info
 
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -11,7 +12,7 @@ import com.incava.gangchuplace.viewmodel.DetailPageViewModel
 
 
 class MyReviewFragment : BaseFragment<FragmentMyReviewBinding>(R.layout.fragment_my_review) {
-    private val detailPageViewModel: DetailPageViewModel by viewModels()
+    private val detailPageViewModel: DetailPageViewModel by activityViewModels()
     override fun init() {
         binding.apply {
             detailPageVM = detailPageViewModel

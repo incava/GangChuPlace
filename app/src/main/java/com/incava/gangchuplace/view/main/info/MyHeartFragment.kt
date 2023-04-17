@@ -1,6 +1,7 @@
 package com.incava.gangchuplace.view.main.info
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -11,7 +12,7 @@ import com.incava.gangchuplace.databinding.FragmentMyHeartBinding
 import com.incava.gangchuplace.viewmodel.GangChuViewModel
 
 class MyHeartFragment : BaseFragment<FragmentMyHeartBinding>(R.layout.fragment_my_heart) {
-    private val gangChuViewModel : GangChuViewModel by viewModels()
+    private val gangChuViewModel : GangChuViewModel by activityViewModels()
     override fun init() {
         binding.apply {
             gangChuVM = gangChuViewModel

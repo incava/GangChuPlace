@@ -1,5 +1,6 @@
 package com.incava.gangchuplace.adapter
 
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.BindingAdapter
@@ -62,6 +63,16 @@ object ToolbarBindingAdapter {
             //todo 리스너 구현
             myInfoViewModel.saveInfo(view)
             true
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("setSearchToolbar")
+    fun setSearchToolbar(view: Toolbar, gangChuViewModel: GangChuViewModel) {
+        view.apply {
+            setupWithNavController(findNavController())
+            Log.i("researchKeyword",gangChuViewModel.researchKeyword)
+            title = "${gangChuViewModel.researchKeyword}의 검색 결과"
         }
     }
 

@@ -42,6 +42,12 @@
         <action
             android:id="@+id/action_baseContainerFragment_to_myReviewFragment"
             app:destination="@id/myReviewFragment" />
+        <action
+            android:id="@+id/action_baseContainerFragment_to_reviseInfoFragment"
+            app:destination="@id/reviseInfoFragment" />
+        <action
+            android:id="@+id/action_baseContainerFragment_to_revisePasswordFragment"
+            app:destination="@id/revisePasswordFragment" />
     </fragment>
 
     <navigation
@@ -91,5 +97,14 @@
             android:name="reviewInfo"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/reviseInfoFragment"
+        android:name="com.incava.gangchuplace.view.main.info.ReviseInfoFragment"
+        android:label="프로필 변경"
+        tools:layout="@layout/fragment_revise_info" />
+    <fragment
+        android:id="@+id/revisePasswordFragment"
+        android:name="com.incava.gangchuplace.view.main.info.RevisePasswordFragment"
+        android:label="비밀번호 변경" />
 
 </navigation>

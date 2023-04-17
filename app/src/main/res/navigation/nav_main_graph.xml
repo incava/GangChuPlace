@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/myHeartFragment"
         android:name="com.incava.gangchuplace.view.main.info.MyHeartFragment"
-        android:label="fragment_my_heart"
+        android:label="찜한 가게"
         tools:layout="@layout/fragment_my_heart" >
         <action
             android:id="@+id/action_myHeartFragment_to_detailPageFragment"

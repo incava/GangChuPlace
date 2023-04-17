@@ -10,17 +10,17 @@ object Common {
 
     @JvmStatic
     @BindingAdapter("setImage")
-    fun setImage(view: CircleImageView, url: String) {
+    fun setImage(view: ImageView, url: String) {
         Glide.with(view.context)
             .load(url)
             .placeholder(R.drawable.normal_image)
-            .error(R.drawable.vector_thumb_up)
+            .error(R.drawable.normal_image)
             .into(view)
     }
 
     @JvmStatic
     @BindingAdapter("setCircleImage")
-    fun setCircleImage(view: ImageView, url: String) {
+    fun setCircleImage(view: CircleImageView, url: String) {
         Glide.with(view.context)
             .load(url)
             .error(R.drawable.normal_image)

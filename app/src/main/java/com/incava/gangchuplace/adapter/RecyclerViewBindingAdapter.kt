@@ -9,6 +9,7 @@ import com.incava.gangchuplace.model.RouletteMenuModel
 import com.incava.gangchuplace.model.StorePlace
 import com.incava.gangchuplace.model.User
 import com.incava.gangchuplace.viewmodel.DetailPageViewModel
+import com.incava.gangchuplace.viewmodel.GangChuViewModel
 
 object RecyclerViewBindingAdapter {
 
@@ -21,6 +22,17 @@ object RecyclerViewBindingAdapter {
             layoutManager = LinearLayoutManager(view.context)
         }
     }
+
+    @JvmStatic
+    @BindingAdapter("setMyHeartAdapter")
+    fun setMyHeartAdapter(view: RecyclerView, vm: GangChuViewModel) {
+        view.apply {
+            adapter = MyHeartAdapter(vm)
+            layoutManager = LinearLayoutManager(view.context)
+        }
+    }
+
+
 
     @JvmStatic
     @BindingAdapter("recyclerAdapter")

@@ -3,6 +3,8 @@ package com.incava.gangchuplace.viewmodel
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.findFragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
@@ -11,7 +13,10 @@ import com.incava.gangchuplace.R
 import com.incava.gangchuplace.base.BaseContainerFragmentDirections
 import com.incava.gangchuplace.model.GangChuPreview
 import com.incava.gangchuplace.model.StorePlace
+import com.incava.gangchuplace.view.main.GangChuFragment
 import com.incava.gangchuplace.view.main.MainActivity
+import com.incava.gangchuplace.view.main.info.MyHeartFragment
+import com.incava.gangchuplace.view.main.info.MyHeartFragmentDirections
 
 
 class GangChuViewModel : ViewModel() {
@@ -24,7 +29,7 @@ class GangChuViewModel : ViewModel() {
             a.add(
                 GangChuPreview(
                     StorePlace("갈비집", "육류", "맛있는 갈비집", "address", "900", "800"),
-                    "인기 외 3명", 4.6, "", true
+                    "인기 외 3명", 4.6, "", true,4.5
                 )
             )
         }
@@ -40,10 +45,16 @@ class GangChuViewModel : ViewModel() {
     fun moveWrite(view: View) {
         (view.context as MainActivity).findNavController(R.id.main_nav_host).navigate(R.id.action_baseContainerFragment_to_nav_write_graph)
     }
+
+    //View에 따른 뷰에서 DetailPageFragment로 이동.
     fun moveDetail(view: View,storePlace: StorePlace) {
-        Toast.makeText(view.context, "moveDetail", Toast.LENGTH_SHORT).show()
         val item = Gson().toJson(storePlace)
-        val action = BaseContainerFragmentDirections.actionBaseContainerFragmentToDetailPageFragment(storePlace= item)
+        val action =
+            if (view.findFragment<Fragment>() is GangChuFragment){ // GangChuFragment에서 이동
+                BaseContainerFragmentDirections.actionBaseContainerFragmentToDetailPageFragment(storePlace = item)
+            } else { // MyHeartFragment에서 이동 (view.findFragment<Fragment>() is MyHeartFragment)
+                MyHeartFragmentDirections.actionMyHeartFragmentToDetailPageFragment(storePlace = item)
+            }
         (view.context as MainActivity).findNavController(R.id.main_nav_host).navigate(action)
     }
 

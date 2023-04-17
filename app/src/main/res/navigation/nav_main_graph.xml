@@ -9,7 +9,11 @@
         android:id="@+id/myHeartFragment"
         android:name="com.incava.gangchuplace.view.main.info.MyHeartFragment"
         android:label="fragment_my_heart"
-        tools:layout="@layout/fragment_my_heart" />
+        tools:layout="@layout/fragment_my_heart" >
+        <action
+            android:id="@+id/action_myHeartFragment_to_detailPageFragment"
+            app:destination="@id/detailPageFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myReviewFragment"
         android:name="com.incava.gangchuplace.view.main.info.MyReviewFragment"

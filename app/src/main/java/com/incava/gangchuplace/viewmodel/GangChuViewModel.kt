@@ -15,7 +15,6 @@ import com.incava.gangchuplace.model.GangChuPreview
 import com.incava.gangchuplace.model.StorePlace
 import com.incava.gangchuplace.view.main.GangChuFragment
 import com.incava.gangchuplace.view.main.MainActivity
-import com.incava.gangchuplace.view.main.info.MyHeartFragment
 import com.incava.gangchuplace.view.main.info.MyHeartFragmentDirections
 
 
@@ -29,7 +28,7 @@ class GangChuViewModel : ViewModel() {
             a.add(
                 GangChuPreview(
                     StorePlace("갈비집", "육류", "맛있는 갈비집", "address", "900", "800"),
-                    "인기 외 3명", 4.6, "", true,4.5
+                    "인기 외 3명", 4.6, "", true, 4.5
                 )
             )
         }
@@ -43,15 +42,18 @@ class GangChuViewModel : ViewModel() {
 
     //이동시 글쓰기로 이동.
     fun moveWrite(view: View) {
-        (view.context as MainActivity).findNavController(R.id.main_nav_host).navigate(R.id.action_baseContainerFragment_to_nav_write_graph)
+        (view.context as MainActivity).findNavController(R.id.main_nav_host)
+            .navigate(R.id.action_baseContainerFragment_to_nav_write_graph)
     }
 
     //View에 따른 뷰에서 DetailPageFragment로 이동.
-    fun moveDetail(view: View,storePlace: StorePlace) {
+    fun moveDetail(view: View, storePlace: StorePlace) {
         val item = Gson().toJson(storePlace)
         val action =
-            if (view.findFragment<Fragment>() is GangChuFragment){ // GangChuFragment에서 이동
-                BaseContainerFragmentDirections.actionBaseContainerFragmentToDetailPageFragment(storePlace = item)
+            if (view.findFragment<Fragment>() is GangChuFragment) { // GangChuFragment에서 이동
+                BaseContainerFragmentDirections.actionBaseContainerFragmentToDetailPageFragment(
+                    storePlace = item
+                )
             } else { // MyHeartFragment에서 이동 (view.findFragment<Fragment>() is MyHeartFragment)
                 MyHeartFragmentDirections.actionMyHeartFragmentToDetailPageFragment(storePlace = item)
             }
@@ -61,12 +63,13 @@ class GangChuViewModel : ViewModel() {
     fun itemClick(view: View, item: MenuItem) {
         when (item.itemId) {
             R.id.search -> { // searchFragment로 이동.
-                (view.context as MainActivity).findNavController(R.id.main_nav_host).navigate(R.id.action_baseContainerFragment_to_storeSearchFragment)
+                (view.context as MainActivity).findNavController(R.id.main_nav_host)
+                    .navigate(R.id.action_baseContainerFragment_to_storeSearchFragment)
             }
+
             R.id.map -> view.findNavController()
                 .navigate(R.id.action_gangChuFragment_to_mapFragment) // map으로 이동.
         }
-        true
     }
 
 

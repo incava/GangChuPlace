@@ -9,7 +9,6 @@ import com.incava.gangchuplace.viewmodel.FriendViewModel
 
 class RequestFriendFragment : BaseFragment<FragmentRequestFriendBinding>(R.layout.fragment_request_friend) {
     override fun init() {
-
         // 자동으로  해주는 AACviewModel말고 직접 provider로 받기
         val vm: FriendViewModel = ViewModelProvider(this)[FriendViewModel::class.java]
         binding.apply {

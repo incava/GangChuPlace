@@ -27,7 +27,7 @@ class FriendViewModel : ViewModel() {
         //값을 많이 넣지 않아 setvalue로 설정.
         val a = mutableListOf<User>()
         repeat(6){
-            a.add(User("인기","","ingi1118@naver.com"))
+            a.add(User("인기","","ingi1118@naver.com","카카오톡"))
         }
         _friendList.value = a
         _requestFriendList.value = a

@@ -10,7 +10,6 @@ import com.incava.gangchuplace.base.BaseFragment
 import com.incava.gangchuplace.databinding.FragmentDetailPageBinding
 import com.incava.gangchuplace.model.StorePlace
 import com.incava.gangchuplace.viewmodel.DetailPageViewModel
-import com.incava.gangchuplace.viewmodel.DetailPageViewModelFactory
 
 class DetailPageFragment : BaseFragment<FragmentDetailPageBinding>(R.layout.fragment_detail_page) {
 
@@ -21,13 +20,13 @@ class DetailPageFragment : BaseFragment<FragmentDetailPageBinding>(R.layout.frag
     }
 
     // 뷰모델에 생성자가 필요해 factory를 이용한 뷰모델 객체 생성.
-    private val detailPageViewModel: DetailPageViewModel by viewModels {
-        DetailPageViewModelFactory(storePlace)
-    }
+    private val detailPageViewModel: DetailPageViewModel by viewModels()
 
     override fun init() {
         binding.apply {
             detailPageVM = detailPageViewModel
+            // storePlace를 전달.
+            detailPageViewModel.setStorePlace(storePlace)
             // 툴바를 연결
             toolbar.setupWithNavController(findNavController())
         }

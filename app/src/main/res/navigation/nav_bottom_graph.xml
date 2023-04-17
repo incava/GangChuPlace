@@ -5,22 +5,10 @@
     android:id="@+id/nav_bottom_graph"
     app:startDestination="@id/gangChuFragment">
     <fragment
-        android:id="@+id/myReviewFragment"
-        android:name="com.incava.gangchuplace.view.main.info.MyReviewFragment"
-        android:label="fragment_my_review"
-        tools:layout="@layout/fragment_my_review" />
-    <fragment
         android:id="@+id/myInfoFragment"
         android:name="com.incava.gangchuplace.view.main.info.MyInfoFragment"
         android:label="fragment_my_info"
-        tools:layout="@layout/fragment_my_info">
-        <action
-            android:id="@+id/action_myInfoFragment_to_myReviewFragment"
-            app:destination="@id/myReviewFragment" />
-        <action
-            android:id="@+id/action_myInfoFragment_to_myHeartFragment"
-            app:destination="@id/myHeartFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_my_info"/>
     <fragment
         android:id="@+id/gangChuFragment"
         android:name="com.incava.gangchuplace.view.main.GangChuFragment"
@@ -30,11 +18,6 @@
             android:id="@+id/action_gangChuFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/myHeartFragment"
-        android:name="com.incava.gangchuplace.view.main.info.MyHeartFragment"
-        android:label="fragment_my_heart"
-        tools:layout="@layout/fragment_my_heart" />
     <fragment
         android:id="@+id/rouletteFragment"
         android:name="com.incava.gangchuplace.view.main.RouletteFragment"

@@ -1,5 +1,6 @@
 package com.incava.gangchuplace.view.main.info
 
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.incava.gangchuplace.R
 import com.incava.gangchuplace.base.BaseFragment
@@ -11,10 +12,10 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(R.layout.fragment_my_
     }
 
     fun moveMyReview(){
-        findNavController().navigate(R.id.action_myInfoFragment_to_myReviewFragment)
+        requireActivity().findNavController(R.id.main_nav_host).navigate(R.id.action_baseContainerFragment_to_myReviewFragment)
     }
     fun moveMyHeartStore(){
-        findNavController().navigate(R.id.action_myInfoFragment_to_myHeartFragment)
+        requireActivity().findNavController(R.id.main_nav_host).navigate(R.id.action_baseContainerFragment_to_myHeartFragment)
     }
 
 }

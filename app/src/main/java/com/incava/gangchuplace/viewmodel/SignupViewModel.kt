@@ -4,11 +4,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
-import com.google.firebase.firestore.FirebaseFirestore
 import com.incava.gangchuplace.R
+import com.incava.gangchuplace.adapter.Common.fireStore
 
 class SignupViewModel : ViewModel() {
-    val fireStore = FirebaseFirestore.getInstance()
+
     private var id = ""
     private var nickname = ""
     private var password = ""

@@ -17,7 +17,7 @@ class MyInfoViewModel : ViewModel() {
     val myInfo : MutableLiveData<User> get() = _myInfo
 
     init {
-        _myInfo.value = User("인기","","ingi111111@naver.com","카카오")
+        _myInfo.value = User("인기","","ingi111111@naver.com","카카오","123123")
     }
 
     // 비밀번호 text와 바인딩된 변수

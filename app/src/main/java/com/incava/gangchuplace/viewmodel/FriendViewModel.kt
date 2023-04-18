@@ -1,9 +1,14 @@
 package com.incava.gangchuplace.viewmodel
 
 import android.util.Log
+import android.view.View
+import android.widget.Toast
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.findFragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
 import com.incava.gangchuplace.model.RouletteMenuModel
 import com.incava.gangchuplace.model.User
 
@@ -22,12 +27,14 @@ class FriendViewModel : ViewModel() {
     private var _myRequestFriendList = MutableLiveData<MutableList<User>>()
     val myRequestFriendList : MutableLiveData<MutableList<User>> get() = _myRequestFriendList
 
+    private var friendName : String = "" // 친구추가시 editText에 반응하여 넣어지는 값 변수
+
     init {// test용. 추후 Repo에 구현.
         //setvalue -> 메인 쓰레드로 즉각적 반응, postValue -> 백그라운드에서 작동, 조금늦음.
         //값을 많이 넣지 않아 setvalue로 설정.
         val a = mutableListOf<User>()
         repeat(6){
-            a.add(User("인기","","ingi1118@naver.com","카카오톡"))
+            a.add(User("인기","","ingi1118@naver.com","카카오톡","123123"))
         }
         _friendList.value = a
         _requestFriendList.value = a
@@ -44,6 +51,18 @@ class FriendViewModel : ViewModel() {
 
     fun loadMyRequestFriend(){
         Log.i("loadMyRequestFriend","잘됩니다!")
+    }
+
+    fun setFriendName(editString : String){
+        friendName = editString
+    }
+
+    fun dismissView(view : View){
+        (view.findFragment() as DialogFragment).dismiss()
+    }
+    fun requestFriend(view : View){
+        Toast.makeText(view.context, friendName, Toast.LENGTH_SHORT).show()
+        //(view.rootView as DialogFragment).dismiss()
     }
 
 

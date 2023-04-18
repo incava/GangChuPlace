@@ -17,7 +17,7 @@ class MyReviewFragment : BaseFragment<FragmentMyReviewBinding>(R.layout.fragment
         binding.apply {
             detailPageVM = detailPageViewModel
             // storePlace를 전달.
-            detailPageViewModel.setUser(User("인간","","ingi1118@naver.com","카카오톡"))
+            detailPageViewModel.setUser(User("인간","","ingi1118@naver.com","카카오톡","123123"))
             toolbar.setupWithNavController(findNavController())
         }
     }

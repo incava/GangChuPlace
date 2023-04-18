@@ -27,7 +27,11 @@
         android:id="@+id/friendFragment"
         android:name="com.incava.gangchuplace.view.main.friend.FriendFragment"
         android:label="fragment_friend"
-        tools:layout="@layout/fragment_friend" />
+        tools:layout="@layout/fragment_friend" >
+        <action
+            android:id="@+id/action_friendFragment_to_requestFriendFragmentDialog"
+            app:destination="@id/requestFriendFragmentDialog" />
+    </fragment>
     <fragment
         android:id="@+id/rouletteMenuFragment"
         android:name="com.incava.gangchuplace.view.main.RouletteMenuFragment"
@@ -43,5 +47,9 @@
     <action
         android:id="@+id/action_global_nav_write_graph"
         app:destination="@id/nav_write_graph" />
+    <dialog
+        android:id="@+id/requestFriendFragmentDialog"
+        android:name="com.incava.gangchuplace.view.main.friend.RequestFriendFragmentDialog"
+        android:label="RequestFriendFragmentDialog" />
 
 </navigation>

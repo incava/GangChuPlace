@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="signupVM"
+            type="com.incava.gangchuplace.viewmodel.SignupViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar3"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="회원 가입"
+                android:textSize="24sp"/>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="56dp"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/toolbar3">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="아이디"
+                android:onTextChanged="@{(txt,start,before,count)->signupVM.setId(txt.toString)}"
+                app:layout_constraintBottom_toTopOf="@+id/et_nickname"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="45dp" />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="닉네임"
+                android:onTextChanged="@{(txt,start,before,count)->signupVM.setNickname(txt.toString)}"
+                app:layout_constraintBottom_toTopOf="@+id/et_password"
+                app:layout_constraintTop_toBottomOf="@+id/et_id"
+                tools:layout_editor_absoluteX="4dp" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="비밀 번호"
+                android:onTextChanged="@{(txt,start,before,count)->signupVM.setPassword(txt.toString)}"
+                app:layout_constraintBottom_toTopOf="@+id/et_password_confirm"
+                app:layout_constraintTop_toBottomOf="@+id/et_nickname"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_password_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="비밀번호 확인"
+                android:onTextChanged="@{(txt,start,before,count)->signupVM.setPasswordConfirm(txt.toString)}"
+                app:layout_constraintBottom_toTopOf="@+id/btn_submit"
+                app:layout_constraintTop_toBottomOf="@+id/et_password"
+                tools:layout_editor_absoluteX="19dp" />
+
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="회원가입"
+                android:onClick="@{(view)->signupVM.signupCheck(view)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.95"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_password_confirm" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

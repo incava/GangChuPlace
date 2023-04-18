@@ -35,4 +35,6 @@ object FriendBindingAdapter {
             tab.text = tabList[position]
         }.attach()
     }
+
+
 }

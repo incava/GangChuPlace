@@ -8,6 +8,9 @@
         <variable
             name="friend"
             type="com.incava.gangchuplace.view.main.friend.FriendFragment" />
+        <variable
+            name="friendVM"
+            type="com.incava.gangchuplace.viewmodel.FriendViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,6 +21,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/request_friend_menu"
+            setFriendToolbar="@{friendVM}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

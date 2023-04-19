@@ -2,13 +2,20 @@ package com.incava.gangchuplace.adapter
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
+import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.incava.gangchuplace.R
+import com.incava.gangchuplace.view.main.MainActivity
+import com.incava.gangchuplace.viewmodel.WriteViewModel
 import de.hdodenhof.circleimageview.CircleImageView
 import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
@@ -54,6 +61,11 @@ object Common {
             .error(R.drawable.normal_image)
             .into(view)
     }
+
+
+
+
+
 
 
 }

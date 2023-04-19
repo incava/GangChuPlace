@@ -1,14 +1,21 @@
 package com.incava.gangchuplace.viewmodel
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
+import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.Gson
 import com.incava.gangchuplace.R
 import com.incava.gangchuplace.adapter.Common.fireStore
@@ -22,6 +29,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.io.File
 import java.lang.StringBuilder
 
 class WriteViewModel : ViewModel() {
@@ -38,6 +46,17 @@ class WriteViewModel : ViewModel() {
 
     //리뷰 내용
     private var editReview = ""
+
+    //이미지 uri를 가지고 있는 변수
+    var image = MutableLiveData("")
+
+    //프로그레스바 반응 변수
+    var isLoading = MutableLiveData(false)
+
+    //sharePreference에서 가져온 id
+    private var id = ""
+    //sharePreference에서 가져온 loginRoute
+    private var loginRoute = ""
 
 
     init {
@@ -65,30 +84,32 @@ class WriteViewModel : ViewModel() {
         view.findNavController().navigate(R.id.action_writeSearchFragment_to_writeReviewFragment)
     }
 
-    fun finishReview(view: View) {
-        // 저장하는 기능 수행.
-        //다 수행하고 나서 다시 처음으로 돌아가기.
-        updateReview(view)
+    fun removeImage(){
+        image.postValue("")
     }
 
-    fun updateReview(view: View) {
-        // sharedPreference 파일 접근.
-        val sharedPreferences =
-            view.context.getSharedPreferences("userInfo", Context.MODE_PRIVATE) ?: return
-        val id = sharedPreferences.getString("id", "null")
-        val loginRoute = sharedPreferences.getString("loginRoute", "null")
-        val time = getCurrentDateTime()
-        // 보낼 reviewDTO
-        val reviewDTO = ReviewDTO(
-            time,
-            rank = ratingBarRank.toString(),
-            body = editReview,
-            store = storePlace.title
-        )
-
+    fun finishReview(view: View) {
+        isLoading.postValue(true)
         viewModelScope.launch {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
+
+                    // sharedPreference 파일 접근.
+                    setSharedPreference(view)
+
+                    //사진을 스토리지에 업로드 및 image저장.
+                    val imageUri = uploadStorage()
+
+                    val time = getCurrentDateTime()
+                    // 보낼 reviewDTO
+                    val reviewDTO = ReviewDTO(
+                        timeStamp = time,
+                        rank = ratingBarRank.toString(),
+                        body = editReview,
+                        store = storePlace.title,
+                        image = imageUri
+                    )
+
                     //자신Review 대한 저장.
                     val reviewResult = fireStore.collection("User")
                         .document("${loginRoute}+${id}")
@@ -124,8 +145,30 @@ class WriteViewModel : ViewModel() {
                         Toast.makeText(view.context, "리뷰 작성 실패!", Toast.LENGTH_SHORT).show()
                     }
                 }
+                isLoading.postValue(false)
+                Log.i("image의 값",image.value.toString())
             }
         }
+    }
+
+    //스토리지에 사진을 업로드 하는 메서드
+    private suspend fun uploadStorage() : String {
+        val storageRef = FirebaseStorage.getInstance().reference
+        val imagesRef = storageRef.child("images")
+        val file = Uri.fromFile(File(image.value?:""))
+        val imageRef = imagesRef.child("image.jpg")
+        val uploadTask = imageRef.putFile(file)
+        uploadTask.await()
+        return imageRef.downloadUrl.await().toString() //url을 다운 받은 후 리턴.
+    }
+
+
+    // sharedPreference 파일 접근해 저장하는 메서드
+    private fun setSharedPreference(view : View){
+
+        val sharedPreferences = view.context.getSharedPreferences("userInfo", Context.MODE_PRIVATE) ?: return
+        id = sharedPreferences.getString("id", "null")?:""
+        loginRoute = sharedPreferences.getString("loginRoute", "null")?:""
     }
 
 

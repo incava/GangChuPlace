@@ -5,4 +5,5 @@ data class ReviewDTO(
     val rank : String, // 작성한 평점
     val body : String, // 작성한 글
     val store : String,
+    val image : String,
 )

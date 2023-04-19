@@ -1,9 +1,12 @@
 package com.incava.gangchuplace.viewmodel
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import com.google.firebase.firestore.DocumentSnapshot
 import com.incava.gangchuplace.R
 import com.incava.gangchuplace.adapter.Common
 import com.incava.gangchuplace.adapter.Common.fireStore
@@ -33,6 +36,17 @@ class LoginViewModel : ViewModel() {
         }
     }
 
+    private fun saveInfo(view: View, snapshot: DocumentSnapshot) {
+        //빌더 패턴 사용으로 sharePreference 파일에 저장
+        view.context.getSharedPreferences("userInfo", Context.MODE_PRIVATE).edit()
+            .putString("id", id)
+            .putString("password", password)
+            .putString("loginRoute",snapshot.getString("loginRoute"))
+            .putString("nickname",snapshot.getString("nickname"))
+            .putString("image",snapshot.getString("image"))
+            .apply()
+    }
+
 
     fun loginCheck(view: View) {
         //todo 로그인 체크 후 홈화면 이동.
@@ -41,13 +55,14 @@ class LoginViewModel : ViewModel() {
             .addOnSuccessListener { //해당되는 document의 Snapshot을 찾기.
                 if (it.exists()) {
                     val value = it.getString("password")
+                    val nickname = it.getString("nickname")
                     Log.i("Value", value ?: "nulls")
                     if (value == password) { //비밀번호와 대조
+                        saveInfo(view,it) // 파일에 아이디 비밀번호 저장.
                         moveHome(view) //맞을 때 홈으로 이동.
-                    }else{ //틀렸을 때
-                        showDialog(view,"로그인 실패","비밀번호가 다릅니다.\n다시한번 확인해 주세요.")
+                    } else { //틀렸을 때
+                        showDialog(view, "로그인 실패", "비밀번호가 다릅니다.\n다시한번 확인해 주세요.")
                     }
-
                 } else {
                     showDialog(view, "로그인 실패", "아이디가 없습니다.")
                     Log.i("Value", "empty!")

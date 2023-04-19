@@ -31,6 +31,7 @@ class GangChuViewModel : ViewModel() {
     var researchKeyword = ""
 
     init {
+
         val a = mutableListOf<GangChuPreview>()
         val b = mutableListOf<GangChuPreview>()
         repeat(6) {

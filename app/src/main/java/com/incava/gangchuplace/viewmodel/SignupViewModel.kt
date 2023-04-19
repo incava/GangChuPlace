@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.incava.gangchuplace.R
 import com.incava.gangchuplace.adapter.Common.fireStore
+import com.incava.gangchuplace.model.UserDTO
 
 class SignupViewModel : ViewModel() {
 
@@ -33,12 +34,13 @@ class SignupViewModel : ViewModel() {
 
     fun signupCheck(view: View) {
         //todo loginRoute 추후 구현.
-        val user = hashMapOf(
-            "nickname" to nickname,
-            "img" to "",
-            "loginRoute" to loginRoute, // 기본은 home 카카오는 kakao, 구글은 google
-            "password" to password
-        )
+//        val user = hashMapOf(
+//            "nickname" to nickname,
+//            "img" to "",
+//            "loginRoute" to loginRoute, // 기본은 home 카카오는 kakao, 구글은 google
+//            "password" to password
+//        )
+        val user = UserDTO(nickname,"",loginRoute,password)
         fireStore.collection("User")
             .document("home+${id}")
             .set(user)

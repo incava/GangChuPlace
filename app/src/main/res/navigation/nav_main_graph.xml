@@ -69,7 +69,7 @@
         <action
             android:id="@+id/action_global_baseContainerFragment"
             app:destination="@id/baseContainerFragment"
-            app:launchSingleTop="false"
+            app:launchSingleTop="true"
             app:popUpTo="@id/baseContainerFragment"
             app:popUpToInclusive="true" />
 

@@ -61,9 +61,29 @@ class FriendViewModel : ViewModel() {
 
     }
 
-    fun loadRequestFriend() {
-        Log.i("loadRequestFriend", "잘됩니다!")
+    //요청한 친구정보를 불러오는 메서드.
+    fun loadRequestFriend(view: View) {
+        CoroutineScope(Dispatchers.IO).launch {
+            var query = loadFriendId(view, "RequestFriend")
+
+        }
     }
+
+    //load할 친구의 id 데이터를 가져오기 위한 메서드. collection에는 collection에 들어갈 문자열 사용.
+    private suspend fun loadFriendId(view: View, collection: String): MutableList<String> {
+        var friendIds = mutableListOf<String>()
+        var user = getSharedPreference(view)
+        val query = fireStore.collection("User")
+            .document("${user.loginRoute}+${user.id}")
+            .collection(collection)
+            .get()
+            .await()
+        for(field in query.documents){
+            friendIds.add(field.data?.get("id").toString())
+        }
+        return friendIds
+    }
+
 
     fun loadMyRequestFriend() {
         Log.i("loadMyRequestFriend", "잘됩니다!")
@@ -95,13 +115,16 @@ class FriendViewModel : ViewModel() {
                     CoroutineScope(Dispatchers.Main).launch {
                         showDialog(view, "친구 추가 실패", "등록된 닉네임이 없습니다.\n다시 한번 확인해 주세요.")
                     }
-                }else if(requestDuplicateCheck(friendId.documents[0].id,"${user.loginRoute}+${user.id}").documents.isNotEmpty()){
-                        //만약 이미 요청한 아이디가 있다면
+                } else if (requestDuplicateCheck(
+                        friendId.documents[0].id,
+                        "${user.loginRoute}+${user.id}"
+                    ).documents.isNotEmpty()
+                ) {
+                    //만약 이미 요청한 아이디가 있다면
                     CoroutineScope(Dispatchers.Main).launch {
                         showDialog(view, "이미 요청한 상태", "이미 친구 요청한 상태입니다.\n다시 한번 확인해 주세요.")
                     }
-                }
-                else { // 친구할 닉네임을 찾았을 때
+                } else { // 친구할 닉네임을 찾았을 때
                     val deffereds = listOf( // 두개의 요청이 완료 되기 위해 list로 묶어서 await시키기.
                         async {
                             uploadRequestFriend(
@@ -146,7 +169,7 @@ class FriendViewModel : ViewModel() {
     }
 
     //요청을 이미 했는지 확인.
-    private suspend fun requestDuplicateCheck(friendId :String, myId : String): QuerySnapshot {
+    private suspend fun requestDuplicateCheck(friendId: String, myId: String): QuerySnapshot {
         return fireStore.collection("User")
             .document(myId)
             .collection("RequestFriend")

@@ -4,6 +4,8 @@ plugins {
     id 'kotlin-kapt'
     // navigation args
     id 'androidx.navigation.safeargs.kotlin'
+    // firebase
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -41,6 +43,14 @@ android {
 
 dependencies {
 
+    //Cloud Storage
+    implementation 'com.google.firebase:firebase-storage-ktx'
+
+    //Cloud FireStore
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+
+    //firebase
+    implementation platform('com.google.firebase:firebase-bom:31.5.0')
 
     //CircleImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'

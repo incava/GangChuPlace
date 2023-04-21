@@ -80,7 +80,6 @@ class WriteViewModel : ViewModel() {
     //버튼을 눌렀을때,
     fun moveNext(view: View, store: StorePlace) {
         storePlace = store
-        Toast.makeText(view.context, storePlace.toString(), Toast.LENGTH_SHORT).show()
         view.findNavController().navigate(R.id.action_writeSearchFragment_to_writeReviewFragment)
     }
 

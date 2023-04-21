@@ -95,7 +95,7 @@ class WriteViewModel : ViewModel() {
                 try {
 
                     // sharedPreference 파일 접근.
-                    setSharedPreference(view)
+                    getSharedPreference(view)
 
                     //사진을 스토리지에 업로드 및 image저장.
                     val imageUri = uploadStorage()
@@ -164,7 +164,7 @@ class WriteViewModel : ViewModel() {
 
 
     // sharedPreference 파일 접근해 저장하는 메서드
-    private fun setSharedPreference(view : View){
+    private fun getSharedPreference(view : View){
 
         val sharedPreferences = view.context.getSharedPreferences("userInfo", Context.MODE_PRIVATE) ?: return
         id = sharedPreferences.getString("id", "null")?:""

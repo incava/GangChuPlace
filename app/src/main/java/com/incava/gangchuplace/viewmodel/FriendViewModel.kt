@@ -84,9 +84,10 @@ class FriendViewModel : ViewModel() {
     }
 
     fun requestFriend(view: View) {
+        val user = getSharedPreference(view)
         viewModelScope.launch {
             CoroutineScope(Dispatchers.IO).launch {
-                if (nameCheck() == 0) { //같은 이름이 없을 경우.
+                if (friendName == user.nickname  || nameCheck() == 0) { //자신의 닉네임과 같거나 같은 이름이 없을 경우.
                     CoroutineScope(Dispatchers.Main).launch {
                         showDialog(view, "친구 추가 실패", "등록된 닉네임이 없습니다.\n다시 한번 확인해 주세요.")
                     }

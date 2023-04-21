@@ -55,7 +55,6 @@ class LoginViewModel : ViewModel() {
             .addOnSuccessListener { //해당되는 document의 Snapshot을 찾기.
                 if (it.exists()) {
                     val value = it.getString("password")
-                    val nickname = it.getString("nickname")
                     Log.i("Value", value ?: "nulls")
                     if (value == password) { //비밀번호와 대조
                         saveInfo(view,it) // 파일에 아이디 비밀번호 저장.

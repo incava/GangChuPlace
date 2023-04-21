@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="writeVM"
-            type="com.incava.gangchuplace.viewmodel.WriteViewModel" />
+            name="writeStoreVM"
+            type="com.incava.gangchuplace.viewmodel.WriteStoreViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,7 +45,7 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
 
         <androidx.recyclerview.widget.RecyclerView
-            recyclerAdapter="@{writeVM.placeList}"
+            setWriteStoreAdapter="@{writeStoreVM}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"

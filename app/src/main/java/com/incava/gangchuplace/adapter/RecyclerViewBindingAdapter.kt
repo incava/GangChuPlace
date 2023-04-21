@@ -10,6 +10,7 @@ import com.incava.gangchuplace.model.StorePlace
 import com.incava.gangchuplace.model.User
 import com.incava.gangchuplace.viewmodel.DetailPageViewModel
 import com.incava.gangchuplace.viewmodel.GangChuViewModel
+import com.incava.gangchuplace.viewmodel.WriteStoreViewModel
 
 object RecyclerViewBindingAdapter {
 
@@ -32,6 +33,15 @@ object RecyclerViewBindingAdapter {
         }
     }
 
+    @JvmStatic
+    @BindingAdapter("setWriteStoreAdapter")
+    fun setWriteStoreAdapter(view: RecyclerView, vm: WriteStoreViewModel) {
+        view.apply {
+            adapter = WriteAdapter(vm)
+            layoutManager = LinearLayoutManager(view.context)
+        }
+    }
+
 
 
     @JvmStatic
@@ -47,9 +57,6 @@ object RecyclerViewBindingAdapter {
                     adapter = GangChuAdapter(items as MutableList<GangChuPreview>)
                     layoutManager =
                         GridLayoutManager(view.context, 2, GridLayoutManager.VERTICAL, false)
-                } else if (items.all { it is StorePlace }) {
-                    adapter = WriteAdapter(items as MutableList<StorePlace>)
-                    layoutManager = LinearLayoutManager(view.context)
                 }
             }
         }

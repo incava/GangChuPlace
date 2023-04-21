@@ -20,9 +20,11 @@ import com.google.gson.Gson
 import com.incava.gangchuplace.R
 import com.incava.gangchuplace.adapter.Common.fireStore
 import com.incava.gangchuplace.adapter.Common.getCurrentDateTime
+import com.incava.gangchuplace.adapter.Common.getSharedPreference
 import com.incava.gangchuplace.model.ReviewDTO
 import com.incava.gangchuplace.model.ReviewInfo
 import com.incava.gangchuplace.model.StorePlace
+import com.incava.gangchuplace.model.User
 import com.incava.gangchuplace.model.UserDTO
 import com.incava.gangchuplace.view.main.MainActivity
 import kotlinx.coroutines.CoroutineScope
@@ -34,9 +36,6 @@ import java.lang.StringBuilder
 
 class WriteViewModel : ViewModel() {
 
-
-    private var _placeList = MutableLiveData<MutableList<StorePlace>>()
-    val placeList: MutableLiveData<MutableList<StorePlace>> get() = _placeList
 
     // 리뷰를 적을 가게 정보
     private lateinit var storePlace: StorePlace
@@ -55,16 +54,13 @@ class WriteViewModel : ViewModel() {
 
     //sharePreference에서 가져온 id
     private var id = ""
+
     //sharePreference에서 가져온 loginRoute
     private var loginRoute = ""
 
-
-    init {
-        val a = mutableListOf<StorePlace>()
-        repeat(6) {
-            a.add(StorePlace("갈비집", "육류", "맛있는 갈비집", "address", "mapx", "mapy"))
-        }
-        _placeList.value = a
+    fun setStorePlace(storePlace: StorePlace){
+        this.storePlace = storePlace
+        Log.i("storePlace",storePlace.toString())
     }
 
     //ratingBar와 연결된 메서드
@@ -77,13 +73,7 @@ class WriteViewModel : ViewModel() {
         editReview = text
     }
 
-    //버튼을 눌렀을때,
-    fun moveNext(view: View, store: StorePlace) {
-        storePlace = store
-        view.findNavController().navigate(R.id.action_writeSearchFragment_to_writeReviewFragment)
-    }
-
-    fun removeImage(){
+    fun removeImage() {
         image.postValue("")
     }
 
@@ -94,7 +84,10 @@ class WriteViewModel : ViewModel() {
                 try {
 
                     // sharedPreference 파일 접근.
-                    getSharedPreference(view)
+                    getSharedPreference(view).also {
+                        id = it.id
+                        loginRoute = it.loginRoute
+                    }
 
                     //사진을 스토리지에 업로드 및 image저장.
                     val imageUri = uploadStorage()
@@ -145,29 +138,20 @@ class WriteViewModel : ViewModel() {
                     }
                 }
                 isLoading.postValue(false)
-                Log.i("image의 값",image.value.toString())
+                Log.i("image의 값", image.value.toString())
             }
         }
     }
 
     //스토리지에 사진을 업로드 하는 메서드
-    private suspend fun uploadStorage() : String {
+    private suspend fun uploadStorage(): String {
         val storageRef = FirebaseStorage.getInstance().reference
         val imagesRef = storageRef.child("images")
-        val file = Uri.fromFile(File(image.value?:""))
+        val file = Uri.fromFile(File(image.value ?: ""))
         val imageRef = imagesRef.child("image.jpg")
         val uploadTask = imageRef.putFile(file)
         uploadTask.await()
         return imageRef.downloadUrl.await().toString() //url을 다운 받은 후 리턴.
-    }
-
-
-    // sharedPreference 파일 접근해 저장하는 메서드
-    private fun getSharedPreference(view : View){
-
-        val sharedPreferences = view.context.getSharedPreferences("userInfo", Context.MODE_PRIVATE) ?: return
-        id = sharedPreferences.getString("id", "null")?:""
-        loginRoute = sharedPreferences.getString("loginRoute", "null")?:""
     }
 
 

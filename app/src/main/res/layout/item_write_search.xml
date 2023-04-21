@@ -8,8 +8,8 @@
             type="com.incava.gangchuplace.model.StorePlace" />
 
         <variable
-            name="writeVM"
-            type="com.incava.gangchuplace.viewmodel.WriteViewModel" />
+            name="writeStoreVM"
+            type="com.incava.gangchuplace.viewmodel.WriteStoreViewModel" />
     </data>
 
 
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:contentPadding="6dp"
-        android:onClick="@{(view)->writeVM.moveNext(view,storePlace)}"
+        android:onClick="@{(view)->writeStoreVM.moveNext(view,storePlace)}"
         >
 
         <LinearLayout

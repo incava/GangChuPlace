@@ -65,7 +65,11 @@
             android:id="@+id/writeReviewFragment"
             android:name="com.incava.gangchuplace.view.write.WriteReviewFragment"
             android:label="장소 평가"
-            tools:layout="@layout/fragment_write_review" />
+            tools:layout="@layout/fragment_write_review" >
+            <argument
+                android:name="storePlaceInfo"
+                app:argType="string" />
+        </fragment>
         <action
             android:id="@+id/action_global_baseContainerFragment"
             app:destination="@id/baseContainerFragment"

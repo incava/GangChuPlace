@@ -8,7 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="gray">#DCD6D6</color>
+    <color name="gray">#E4E4E4</color>
     <!-- 강추 브랜드와 반대색깔 -->
     <color name="gang_chu_brand">#F1F3C50F</color>
     <color name="gang_chu_brand_opp">#0F50C5</color>

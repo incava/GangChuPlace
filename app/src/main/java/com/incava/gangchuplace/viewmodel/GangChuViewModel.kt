@@ -19,6 +19,7 @@ import com.incava.gangchuplace.view.main.MainActivity
 import com.incava.gangchuplace.view.main.info.MyHeartFragmentDirections
 import com.incava.gangchuplace.view.search.StoreSearchResultFragment
 import com.incava.gangchuplace.view.search.StoreSearchResultFragmentDirections
+import java.util.Random
 
 
 class GangChuViewModel : ViewModel() {
@@ -29,6 +30,10 @@ class GangChuViewModel : ViewModel() {
     val gangChuSearchList: MutableLiveData<MutableList<GangChuPreview>> get() = _gangChuSearchList
 
     var researchKeyword = ""
+
+    var filterName = MutableLiveData("평점순")
+
+    var filterMethod = mutableListOf("평점순","거리순","리뷰순","친구 리뷰순","친구 평점순")
 
     init {
 
@@ -58,6 +63,11 @@ class GangChuViewModel : ViewModel() {
     }
 
     //이동시 글쓰기로 이동.
+
+    fun setFilterList(view: View){
+        filterName.value =  filterMethod[Random().nextInt(filterMethod.size)]
+        Log.i("filterName",filterName.value.toString())
+    }
 
 
     fun setSearchKeyword(text : String){

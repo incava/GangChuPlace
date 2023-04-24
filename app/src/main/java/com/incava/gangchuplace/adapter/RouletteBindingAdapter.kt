@@ -11,32 +11,53 @@ import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bluehomestudio.luckywheel.LuckyWheel
 import com.bluehomestudio.luckywheel.WheelItem
 import com.incava.gangchuplace.R
 import com.incava.gangchuplace.model.RouletteMenuModel
+import com.incava.gangchuplace.viewmodel.RouletteViewModel
 
 object RouletteBindingAdapter {
 
-    // 사진과 색깔은 고정으로 Text만 바꿔서 add하는 식으로 구현. 추후 랜덤요소로 변환 예정.
+    //색깔은 4가지 색깔로 고정적으로 설정
+    private val rouletteColor = listOf(Color.RED,Color.BLUE,Color.GREEN,Color.MAGENTA)
     @JvmStatic
     @BindingAdapter("rouletteSetting")
-    fun rouletteSetting(view: LuckyWheel, item: MutableList<RouletteMenuModel>) {
+    fun rouletteSetting(view: LuckyWheel, rouletteViewModel: RouletteViewModel) {
         val list = mutableListOf<WheelItem>()
-        for (menu in item) {
+        for (menu in rouletteViewModel.rouletteList.value!!) {
             list.add(
                 WheelItem(
-                    Color.BLUE,
-                    ContextCompat.getDrawable(view.context, R.drawable.ic_money)
+                    rouletteColor[list.size % rouletteColor.size],
+                    ContextCompat.getDrawable(view.context, R.drawable.vector_thumb_up)
                         ?.let { setBitmap(it) },
                     menu.menuItem
                 )
             )
         }
-        view.addWheelItems(list)
+        view.apply {
+            //아이템 삽입
+            addWheelItems(list)
+
+            //돌림판이 멈췄을때 반응하는 리스너
+            setLuckyWheelReachTheTarget {
+                rouletteViewModel.isRotate = false
+                Common.showDialog(this,"메뉴 결과","${rouletteViewModel.point.value}로 결정되었습니다.\n 먹으러 가볼까요?")
+            }
+        }
+
     }
+
+    @JvmStatic
+    @BindingAdapter("setRotateRoulette")
+    fun setRotateRoulette(view: LuckyWheel, point : Int){
+        if (point >= 0)
+            view.rotateWheelTo(point)
+    }
+
     //LuckyWheel은 크기도 줘야해서 만들때 크기를 주는 메서드
     fun setBitmap(drawable: Drawable) : Bitmap{
         val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth,drawable.intrinsicHeight,Bitmap.Config.ARGB_8888)
@@ -45,6 +66,8 @@ object RouletteBindingAdapter {
         drawable.draw(canvas)
         return bitmap
     }
+
+
 
 
 }

@@ -14,6 +14,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.incava.gangchuplace.R
+import com.incava.gangchuplace.model.User
 import com.incava.gangchuplace.view.main.MainActivity
 import com.incava.gangchuplace.viewmodel.WriteViewModel
 import de.hdodenhof.circleimageview.CircleImageView
@@ -60,6 +61,23 @@ object Common {
             .load(url)
             .error(R.drawable.normal_image)
             .into(view)
+    }
+
+    // sharedPreference 파일 가져올 수 있는 메서드
+    fun getSharedPreference(view : View): User {
+        //파일이 없으면 빈 값으로 리턴.
+        val sharedPreferences = view.context.getSharedPreferences("userInfo", Context.MODE_PRIVATE)
+            ?: return(User("","","","",""))
+
+        return sharedPreferences.run {
+            User(
+                getString("nickname", "null") ?: "",
+                getString("image", "null") ?: "",
+                getString("id", "null") ?: "",
+                getString("loginRoute", "null") ?: "",
+                getString("password", "null") ?: "",
+            )
+        }
     }
 
 

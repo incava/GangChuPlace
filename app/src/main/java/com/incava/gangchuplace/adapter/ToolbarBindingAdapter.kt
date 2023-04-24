@@ -100,4 +100,7 @@ object ToolbarBindingAdapter {
         }
     }
 
+
+
+
 }

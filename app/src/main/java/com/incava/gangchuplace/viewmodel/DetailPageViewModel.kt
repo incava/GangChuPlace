@@ -78,7 +78,7 @@ class DetailPageViewModel : ViewModel() {
                             "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
                             "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
                             "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠"
-                    , user.nickName)
+                    , user.nickname)
             )
         }
         _detailPageList.value = list

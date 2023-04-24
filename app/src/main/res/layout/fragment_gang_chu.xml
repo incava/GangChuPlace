@@ -19,32 +19,74 @@
         <!--  toolbar위젯을 사용하는 것이지 제목줄은 아님. -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
+            setGangChuToolbar="@{gangChuVM}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            setGangChuToolbar="@{gangChuVM}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:menu="@menu/gangchu_menu" />
+            app:menu="@menu/gangchu_menu">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                setNameBind='@{""}'
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@color/gang_chu_brand"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="님 환영 합니다!"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="강추 만의 맛집 리스트"
+            android:paddingStart="8dp"
+            android:layout_margin="16dp"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/appCompatButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_no_border"
+            android:drawableEnd="@drawable/vector_drop_down"
+            android:onClick="@{(view)->gangChuVM.setFilterList(view)}"
+            setFilterName="@{gangChuVM.filterName}"
+            android:padding="8dp"
+            android:layout_margin="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_gang_chu"
+            recyclerAdapter="@{gangChuVM.gangChuList}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            recyclerAdapter="@{gangChuVM.gangChuList}"
+            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/appCompatButton" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/vector_create"
             android:layout_margin="16dp"
-            app:backgroundTint="#F1F3C50F"
-            app:tint="#0F50C5"
             android:onClick="@{(view)->gangChuVM.moveWrite(view)}"
+            android:src="@drawable/vector_create"
+            app:backgroundTint="#F1F3C50F"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="#0F50C5" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

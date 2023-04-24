@@ -9,10 +9,13 @@ import android.view.View
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import com.incava.gangchuplace.R
 import com.incava.gangchuplace.base.BaseFragment
 import com.incava.gangchuplace.databinding.FragmentWriteReviewBinding
+import com.incava.gangchuplace.model.StorePlace
 import com.incava.gangchuplace.view.main.MainActivity
 import com.incava.gangchuplace.viewmodel.WriteViewModel
 import java.io.File
@@ -21,13 +24,15 @@ import java.io.File
 class WriteReviewFragment :
     BaseFragment<FragmentWriteReviewBinding>(R.layout.fragment_write_review) {
 
+    val args  : WriteReviewFragmentArgs by navArgs()
     private val writeViewModel: WriteViewModel by lazy {
-        ViewModelProvider(requireActivity())[WriteViewModel::class.java]
+        ViewModelProvider(this)[WriteViewModel::class.java]
     }
 
     override fun init() {
         binding.writeVM = writeViewModel
         binding.writeFragment = this@WriteReviewFragment
+        writeViewModel.setStorePlace(Gson().fromJson(args.storePlaceInfo,StorePlace::class.java))
     }
     fun uploadImage() {
         pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))

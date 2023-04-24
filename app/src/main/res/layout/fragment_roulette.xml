@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="vm"
+            name="rouletteVM"
             type="com.incava.gangchuplace.viewmodel.RouletteViewModel" />
     </data>
 
@@ -13,17 +13,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
         <com.bluehomestudio.luckywheel.LuckyWheel
             android:id="@+id/lwv"
+            rouletteSetting="@{rouletteVM}"
+            setRotateRoulette="@{rouletteVM.point}"
             android:layout_width="wrap_content"
             android:layout_height="250dp"
-            android:layout_marginTop="96dp"
-            rouletteSetting="@{vm.rouletteList}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="spread">
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6">
 
             <TextView
                 android:id="@+id/btnGo"
@@ -33,8 +42,24 @@
                 android:background="@drawable/circle_roulette"
                 android:gravity="center"
                 android:text="실행"
+                android:onClick="@{()->rouletteVM.playRoulette()}"
                 android:textColor="@color/black" />
         </com.bluehomestudio.luckywheel.LuckyWheel>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="실행버튼을 눌러 메뉴 결정을 해봐요!"
+            android:textSize="24sp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/lwv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

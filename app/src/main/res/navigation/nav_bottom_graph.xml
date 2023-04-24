@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/rouletteFragment"
         android:name="com.incava.gangchuplace.view.main.RouletteFragment"
-        android:label="fragment_roulette"
+        android:label="메뉴 정하기"
         tools:layout="@layout/fragment_roulette" />
     <fragment
         android:id="@+id/friendFragment"

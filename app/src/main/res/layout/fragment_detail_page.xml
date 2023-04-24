@@ -87,14 +87,19 @@
                     android:layout_margin="8dp"
                     />
 
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="\n 강추의 댓글\n"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="@color/gang_chu_brand"
+                        android:background="@color/gray"
+                        android:layout_marginTop="8dp"
+                        />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="\n댓글!!!!!!\n"
-                    android:gravity="center"
-                    android:layout_marginBottom="16dp"
-                    />
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     setDetailAdapter="@{detailPageVM}"

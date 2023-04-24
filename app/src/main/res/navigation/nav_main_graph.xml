@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/myReviewFragment"
         android:name="com.incava.gangchuplace.view.main.info.MyReviewFragment"
-        android:label="fragment_my_review"
+        android:label="내 리뷰"
         tools:layout="@layout/fragment_my_review" >
         <action
             android:id="@+id/action_myReviewFragment_to_reviewPageFragment"
@@ -48,6 +48,11 @@
         <action
             android:id="@+id/action_baseContainerFragment_to_revisePasswordFragment"
             app:destination="@id/revisePasswordFragment" />
+        <action
+            android:id="@+id/action_baseContainerFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/baseContainerFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <navigation

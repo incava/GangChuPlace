@@ -114,6 +114,7 @@
             app:layout_constraintTop_toBottomOf="@+id/appCompatButton2" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/appCompatButton5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -126,6 +127,35 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appCompatButton3" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/appCompatButton6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:drawableRight="@drawable/vector_arrow_forward"
+            android:onClick="@{(view)->myInfoVM.withdrawalMember(view)}"
+            android:padding="16dp"
+            android:text="회원 탈퇴"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatButton5" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/vector_arrow_forward"
+            android:onClick="@{(view)->myInfoVM.logout(view)}"
+            android:padding="16dp"
+            android:text="로그아웃"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatButton6" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

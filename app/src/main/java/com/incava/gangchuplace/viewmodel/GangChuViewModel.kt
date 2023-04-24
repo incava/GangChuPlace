@@ -42,13 +42,13 @@ class GangChuViewModel : ViewModel() {
         repeat(6) {
             a.add(
                 GangChuPreview(
-                    StorePlace("갈비집", "육류", "맛있는 갈비집", "address", "900", "800"),
+                    StorePlace("갈비집", "육류", "맛있는 갈비집", "address", "37.0", "127.0"),
                     "인기 외 3명", 4.6, "", true, 4.5
                 )
             )
             b.add(
                 GangChuPreview(
-                    StorePlace("방탈출", "비트", "비트포비아", "address123", "90011", "80044"),
+                    StorePlace("방탈출", "비트", "비트포비아", "address123", "36.0", "128.0"),
                     "상완 외 2명", 4.66, "", false, 4.8
                 )
             )

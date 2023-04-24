@@ -10,7 +10,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://jitpack.io' }
+        //LuckyWheel
+        maven { url 'https://jitpack.io'}
+        //naverMap
+        maven { url 'https://naver.jfrog.io/artifactory/maven/' }
     }
 }
 rootProject.name = "GangChuPlace"

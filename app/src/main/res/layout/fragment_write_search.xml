@@ -41,6 +41,7 @@
             android:background="@drawable/rect_edit_border"
             android:drawableRight="@drawable/vector_search"
             android:hint="장소 선택"
+            android:afterTextChanged="@{(editable)->writeStoreVM.getStoreInfo(editable.toString)}"
             android:padding="16dp"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"

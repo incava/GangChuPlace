@@ -37,6 +37,7 @@ object RecyclerViewBindingAdapter {
     @BindingAdapter("setWriteStoreAdapter")
     fun setWriteStoreAdapter(view: RecyclerView, vm: WriteStoreViewModel) {
         view.apply {
+            vm.placeList.value = mutableListOf()
             adapter = WriteAdapter(vm)
             layoutManager = LinearLayoutManager(view.context)
         }

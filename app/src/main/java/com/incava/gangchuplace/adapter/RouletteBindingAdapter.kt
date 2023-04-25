@@ -45,7 +45,7 @@ object RouletteBindingAdapter {
             //돌림판이 멈췄을때 반응하는 리스너
             setLuckyWheelReachTheTarget {
                 rouletteViewModel.isRotate = false
-                Common.showDialog(this,"메뉴 결과","${rouletteViewModel.point.value}로 결정되었습니다.\n 먹으러 가볼까요?")
+                Common.showDialog(this.context,"메뉴 결과","${rouletteViewModel.point.value}로 결정되었습니다.\n 먹으러 가볼까요?")
             }
         }
 

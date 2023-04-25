@@ -35,8 +35,8 @@ object Common {
 
 
     //Dialog 띄울 때 다른 이벤트가 없을 경우 사용 할 common method
-    fun showDialog(view: View, title: String, message: String) {
-        AlertDialog.Builder(view.context)
+    fun showDialog(context: Context, title: String, message: String) {
+        AlertDialog.Builder(context)
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton("확인") { dialog, _ ->

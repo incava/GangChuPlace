@@ -8,6 +8,9 @@
         <variable
             name="loginVM"
             type="com.incava.gangchuplace.viewmodel.LoginViewModel" />
+        <variable
+            name="loginFragment"
+            type="com.incava.gangchuplace.view.login.LoginFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -90,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="로그인"
-            android:onClick="@{(view)->loginVM.loginCheck(view)}"
+            android:onClick="@{()->loginVM.loginCheck()}"
             app:layout_constraintEnd_toEndOf="@+id/et_password"
             app:layout_constraintHorizontal_bias="0.491"
             app:layout_constraintStart_toStartOf="@+id/et_password"
@@ -132,18 +135,19 @@
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:text="회원가입"
-            android:onClick="@{(view)->loginVM.moveSignup(view)}"
+            android:onClick="@{()->loginFragment.moveSignup()}"
             app:layout_constraintEnd_toEndOf="@+id/btn_login"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btn_findPass"
             app:layout_constraintTop_toTopOf="@+id/btn_findPass" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="#FEE500"
             android:src="@drawable/kakao_button"
             android:layout_marginTop="10dp"
+            android:onClick="@{(view)->loginVM.kakaoLogin(view)}"
             app:layout_constraintEnd_toEndOf="@+id/btn_sign_Up"
             app:layout_constraintStart_toStartOf="@+id/btn_findId"
             app:layout_constraintTop_toBottomOf="@+id/btn_findPass" />

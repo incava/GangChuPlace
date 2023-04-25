@@ -1,79 +1,67 @@
 package com.incava.gangchuplace.viewmodel
 
+import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.ViewModel
+import android.widget.Toast
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.google.firebase.firestore.DocumentSnapshot
 import com.incava.gangchuplace.R
 import com.incava.gangchuplace.adapter.Common
 import com.incava.gangchuplace.adapter.Common.fireStore
-import com.incava.gangchuplace.adapter.Common.showDialog
+import com.incava.gangchuplace.viewmodel.repository.LoginRepo
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * 로그인에 사용되는 뷰모델
  */
-class LoginViewModel : ViewModel() {
+class LoginViewModel(application: Application) : AndroidViewModel(application) {
     private var id = "" //로그인시 edit에 표시되는 id Text
     private var password = ""
+
+    //repo객체.
+    private var loginRepo = LoginRepo(application)
+
+    //로그인이 잘 되었는지 확인하는 메서드.
+    private val isCheckLogin: MutableLiveData<Boolean> get() = loginRepo.checkLogin
+
 
     //바인딩시 sync를 맞춰줄 set 메서드
     fun setId(txt: String) {
         id = txt
     }
 
+    //바인딩시 sync를 맞춰줄 set 메서드
     fun setPass(txt: String) {
         password = txt
     }
 
-    //홈화면으로 이동시키는 메서드
-    private fun moveHome(view: View) {
-        view.findNavController().apply {
-            graph.setStartDestination(R.id.baseContainerFragment)// nav graph의 처음 도착지를 변경
-            navigate(R.id.action_loginFragment_to_baseContainerFragment) // home화면으로 이동.
-        }
+    fun loginCheck() {
+        loginRepo.requestHomeLogin(id, password)
     }
 
-    private fun saveInfo(view: View, snapshot: DocumentSnapshot) {
-        //빌더 패턴 사용으로 sharePreference 파일에 저장
-        view.context.getSharedPreferences("userInfo", Context.MODE_PRIVATE).edit()
-            .putString("id", id)
-            .putString("password", password)
-            .putString("loginRoute",snapshot.getString("loginRoute"))
-            .putString("nickname",snapshot.getString("nickname"))
-            .putString("image",snapshot.getString("image"))
-            .apply()
+    fun kakaoLogin(view: View) {
+        // 카카오톡으로 로그인 요청
+        loginRepo.requestKakaoLogin(view)
+
+    }
+
+    //메서드로 간접적으로 observer를 붙여 사용
+    fun checkLogin(owner: LifecycleOwner, observer : Observer<Boolean>) {
+        isCheckLogin.observe(owner, observer)
     }
 
 
-    fun loginCheck(view: View) {
-        //todo 로그인 체크 후 홈화면 이동.
-        fireStore.collection("User")
-            .document("home+${id}").get() //document찾기.
-            .addOnSuccessListener { //해당되는 document의 Snapshot을 찾기.
-                if (it.exists()) {
-                    val value = it.getString("password")
-                    Log.i("Value", value ?: "nulls")
-                    if (value == password) { //비밀번호와 대조
-                        saveInfo(view,it) // 파일에 아이디 비밀번호 저장.
-                        moveHome(view) //맞을 때 홈으로 이동.
-                    } else { //틀렸을 때
-                        showDialog(view, "로그인 실패", "비밀번호가 다릅니다.\n다시한번 확인해 주세요.")
-                    }
-                } else {
-                    showDialog(view, "로그인 실패", "아이디가 없습니다.")
-                    Log.i("Value", "empty!")
-                }
-            }
-    }
 
-    //회원가입 화면으로 이동
-    fun moveSignup(view: View) {
-        //todo 로그인 체크 후 홈화면 이동.
-        view.findNavController()
-            .navigate(R.id.action_loginFragment_to_signupFragment) // home화면으로 이동.
-    }
+
+
 
 }

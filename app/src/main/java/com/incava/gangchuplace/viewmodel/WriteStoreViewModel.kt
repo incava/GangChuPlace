@@ -29,7 +29,7 @@ class WriteStoreViewModel : ViewModel() {
     private var searchJob: Job? = null
 
     init {
-
+        _placeList.value = mutableListOf()
 //        val a = mutableListOf<StorePlace>()
 //        repeat(6) {
 //            a.add(StorePlace("갈비집", "육류", "맛있는 갈비집", "address", "mapx", "mapy"))
@@ -45,22 +45,23 @@ class WriteStoreViewModel : ViewModel() {
 
     //검색시 textChange마다 호출.
     fun getStoreInfo(query : String){
-        Log.i("query",query)
-        //이전 2초동안 중복 작업이 있었다면 cancel
-        val a = mutableListOf<StorePlace>()
-        repeat(6) {
-            a.add(StorePlace("갈비집", "육류", "맛있는 갈비집", "address", "mapx", "mapy"))
-        }
-        _placeList.postValue(a)
-        Log.i("playList",placeList.value.toString())
-
-//        searchJob?.cancel()
-//        searchJob = CoroutineScope(Dispatchers.IO).launch {
-//            Log.i("코루틴","됨")
-//            delay(2000L)
-//            var retrofit = RetrofitHelper.retrofitHelper(baseUrl = "https://openapi.naver.com/")
-//            //Retrofit으로 장소검색 하는 메서드.
-//            storeSearchRepo.searchPlace(query, retrofit)
+//        Log.i("query",query)
+//        //이전 2초동안 중복 작업이 있었다면 cancel
+//        val a = mutableListOf<StorePlace>()
+//        repeat(6) {
+//            a.add(StorePlace("갈비집", "육류", "맛있는 갈비집", "address", "mapx", "mapy"))
 //        }
+        //_placeList.postValue(a)
+        //Log.i("playList",placeList.value.toString())
+
+        searchJob?.cancel()
+        searchJob = CoroutineScope(Dispatchers.IO).launch {
+            Log.i("코루틴","됨")
+            delay(1000L)
+            var retrofit = RetrofitHelper.retrofitHelper(baseUrl = "https://openapi.naver.com/")
+            //Retrofit으로 장소검색 하는 메서드.
+            storeSearchRepo.searchPlace(query, retrofit)
+        }
+
     }
 }

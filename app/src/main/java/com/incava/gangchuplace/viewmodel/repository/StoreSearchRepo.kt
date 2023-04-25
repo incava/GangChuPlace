@@ -1,5 +1,6 @@
 package com.incava.gangchuplace.viewmodel.repository
 
+import android.text.Html
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.incava.gangchuplace.model.StorePlace
@@ -24,6 +25,10 @@ class StoreSearchRepo {
                     response: Response<StorePlaceDTO>
                 ) {
                     Log.i("장소검색", response.body()?.items.toString())
+                    response.body()?.items?.forEach {
+                        it.title = Html.fromHtml(it.title,Html.FROM_HTML_MODE_LEGACY).toString()
+                    }
+                    response.body()?.items ?: return //이 부분 !?
                     searchData.postValue(response.body()?.items)
                 }
 

@@ -73,11 +73,14 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/appCompatTextView8"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:autoSizeTextType="uniform"
+                android:maxLines="1"
                 android:padding="8dp"
-                android:text="메뉴 추가해보기"
+                android:text="여러 장소 중 고민 된다면 룰렛을 돌려보세요!"
                 android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

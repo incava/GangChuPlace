@@ -69,6 +69,10 @@ class GangChuViewModel : ViewModel() {
         Log.i("filterName",filterName.value.toString())
     }
 
+    fun loadGangChuList(){
+
+    }
+
 
     fun setSearchKeyword(text : String){
         Log.i("keyword",text)

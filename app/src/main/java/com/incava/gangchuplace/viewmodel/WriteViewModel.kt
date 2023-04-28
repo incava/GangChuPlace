@@ -121,7 +121,7 @@ class WriteViewModel : ViewModel() {
                         .document(storePlace.title)
                         .collection("Review")
                         .document("${loginRoute}+${id}")
-                        .set(mapOf("time" to time))
+                        .set(reviewDTO)
                         .await()
 
                     //코루틴의 await()로 작업이 모두 성공적(catch가 아닐때) Toast호출하도록.

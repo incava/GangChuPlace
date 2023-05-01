@@ -11,5 +11,6 @@ data class StorePlace(
     val description : String,
     val address : String,
     val mapx : String,
-    val mapy : String
+    val mapy : String,
+    var image : String
 )

@@ -84,7 +84,7 @@ class WriteViewModel : ViewModel() {
                 try {
 
                     // sharedPreference 파일 접근.
-                    getSharedPreference(view).also {
+                    getSharedPreference(view.context).also {
                         id = it.id
                         loginRoute = it.loginRoute
                     }
@@ -101,6 +101,8 @@ class WriteViewModel : ViewModel() {
                         store = storePlace.title,
                         image = imageUri
                     )
+                    //storePlace에 이미지를 기입.
+                    storePlace.image = imageUri
 
                     //자신Review 대한 저장.
                     val reviewResult = fireStore.collection("User")

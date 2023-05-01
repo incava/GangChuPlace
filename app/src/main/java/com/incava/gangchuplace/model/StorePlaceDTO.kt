@@ -1,3 +1,5 @@
 package com.incava.gangchuplace.model
 
-data class StorePlaceDTO (val items:MutableList<StorePlace>)
+data class StorePlaceDTO (
+    val items:MutableList<StorePlace>
+    )

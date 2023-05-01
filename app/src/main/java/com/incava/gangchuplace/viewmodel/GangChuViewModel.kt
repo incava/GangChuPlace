@@ -19,11 +19,15 @@ import com.incava.gangchuplace.view.main.MainActivity
 import com.incava.gangchuplace.view.main.info.MyHeartFragmentDirections
 import com.incava.gangchuplace.view.search.StoreSearchResultFragment
 import com.incava.gangchuplace.view.search.StoreSearchResultFragmentDirections
+import com.incava.gangchuplace.viewmodel.repository.GangChuStoreRepo
 import java.util.Random
 
 
 class GangChuViewModel : ViewModel() {
-    private var _gangChuList = MutableLiveData<MutableList<GangChuPreview>>()
+
+    val gangChuStoreRepo by lazy {  GangChuStoreRepo() }
+
+    private var _gangChuList = gangChuStoreRepo.storeList
     val gangChuList: MutableLiveData<MutableList<GangChuPreview>> get() = _gangChuList
 
     private var _gangChuSearchList = MutableLiveData<MutableList<GangChuPreview>>()
@@ -35,26 +39,28 @@ class GangChuViewModel : ViewModel() {
 
     var filterMethod = mutableListOf("평점순","거리순","리뷰순","친구 리뷰순","친구 평점순")
 
-    init {
 
-        val a = mutableListOf<GangChuPreview>()
-        val b = mutableListOf<GangChuPreview>()
-        repeat(6) {
-            a.add(
-                GangChuPreview(
-                    StorePlace("갈비집", "육류", "맛있는 갈비집", "address", "37.0", "127.0"),
-                    "인기 외 3명", 4.6, "", true, 4.5
-                )
-            )
-            b.add(
-                GangChuPreview(
-                    StorePlace("방탈출", "비트", "비트포비아", "address123", "36.0", "128.0"),
-                    "상완 외 2명", 4.66, "", false, 4.8
-                )
-            )
-        }
-        _gangChuList.value = a
-        _gangChuSearchList.value = b
+
+    init {
+        _gangChuList.value = mutableListOf()
+//        val a = mutableListOf<GangChuPreview>()
+//        val b = mutableListOf<GangChuPreview>()
+//        repeat(6) {
+//            a.add(
+//                GangChuPreview(
+//                    StorePlace("갈비집", "육류", "맛있는 갈비집", "address", "37.0", "127.0"),
+//                    "인기 외 3명", 4.6, "", true, 4.5
+//                )
+//            )
+//            b.add(
+//                GangChuPreview(
+//                    StorePlace("방탈출", "비트", "비트포비아", "address123", "36.0", "128.0"),
+//                    "상완 외 2명", 4.66, "", false, 4.8
+//                )
+//            )
+//        }
+//        _gangChuList.value = a
+//        _gangChuSearchList.value = b
     }
 
     fun setHeart(view: View, checked: Boolean, item: GangChuPreview) {
@@ -69,8 +75,8 @@ class GangChuViewModel : ViewModel() {
         Log.i("filterName",filterName.value.toString())
     }
 
-    fun loadGangChuList(){
-
+    fun loadGangChuList(id : String){
+        gangChuStoreRepo.loadStoreInfo(id)
     }
 
 

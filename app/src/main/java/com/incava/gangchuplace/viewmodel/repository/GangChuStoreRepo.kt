@@ -33,11 +33,9 @@ class GangChuStoreRepo {
                 //document의 field를 모두 가져와 storePlace로 반환.
                 val storePlace = loadStoreInfo(document.data)
 
-                // 가게의 대표 이미지 적용
-                val storeUrl: String = storePlace.image
-
                 // Rank를 저장하는 List
                 var rankList = mutableListOf<Double>()
+
                 // 친구의 Rank를 저장하는 List
                 var friendRankList = mutableListOf<Double>()
 
@@ -75,7 +73,6 @@ class GangChuStoreRepo {
                     storePlace,
                     gangChuMember,
                     rank,
-                    storeUrl,
                     heartList.contains(document.id),
                     friendRank
                 )

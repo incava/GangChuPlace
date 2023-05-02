@@ -32,9 +32,8 @@ class LoginRepo(private val application: Application) {
                     val loginRoute = "kakao"
                     val id = "${loginRoute}+${user.id}"
                     val userDTO = UserDTO(nickname = id+"0", image = image, loginRoute = loginRoute, password = "")
-
-                    //회원가입이 되어있는지 확인.
-                    requestSignUp(id = id, userDTO = userDTO)
+                    saveInfo(userDTO,id)
+                    checkLogin.postValue(true)
                     Log.i("user정보", "${user.id.toString()} + ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
                 } else {
                     Log.e(TAG, "카카오 로그인 실패", error)
@@ -58,7 +57,7 @@ class LoginRepo(private val application: Application) {
 
     fun requestHomeLogin(id: String, password: String) {
         //todo 로그인 체크 후 홈화면 이동.
-        Common.fireStore.collection("User")
+        fireStore.collection("User")
             .document("home+${id}").get() //document찾기.
             .addOnSuccessListener { //해당되는 document의 Snapshot을 찾기.
                 if (it.exists()) {
@@ -87,8 +86,19 @@ class LoginRepo(private val application: Application) {
             .putString("image", snapshot.getString("image"))
             .apply()
     }
+    // 오버로딩으로 userDTO로 sharedPreferences를 사용해 로그인시 정보를 저장.
+    private fun saveInfo(userDTO: UserDTO, id: String) {
+        //빌더 패턴 사용으로 sharePreference 파일에 저장
+        application.getSharedPreferences("userInfo", Context.MODE_PRIVATE).edit()
+            .putString("id", id)
+            .putString("password", userDTO.password)
+            .putString("loginRoute", userDTO.loginRoute)
+            .putString("nickname", userDTO.nickname)
+            .putString("image",userDTO.image)
+            .apply()
+    }
 
-    fun requestSignUp(id: String, userDTO: UserDTO) {
+    fun requestLogin(id: String, userDTO: UserDTO) {
         val docRef = fireStore.collection("User").document(id)
         CoroutineScope(Dispatchers.IO).launch {
             try {

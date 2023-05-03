@@ -59,12 +59,7 @@ class GangChuStoreRepo {
                 // 하나의 가게 정보를 가져온 뒤
 
                 // 강추 멤버는 경우에 따른 문자열
-                val gangChuMember = when (gangChuFriendMemberList.size) {
-                    0 -> ""
-                    1 -> gangChuFriendMemberList[0]
-                    else -> "${gangChuFriendMemberList[0]} 외${gangChuFriendMemberList.size - 1}명"
-                }
-                //
+                val gangChuMember = gangChuFriendMemberList.size
                 val rank = getEverage(rankList)
                 val friendRank = getEverage((friendRankList))
 

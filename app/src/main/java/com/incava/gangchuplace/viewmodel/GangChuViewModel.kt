@@ -114,20 +114,20 @@ class GangChuViewModel(application: Application) : AndroidViewModel(application)
 
 
     //View에 따른 뷰에서 DetailPageFragment로 이동.
-    fun moveDetail(view: View, storePlace: StorePlace) {
-        val item = Gson().toJson(storePlace)
+    fun moveDetail(view: View, gangChuPreview: GangChuPreview) {
+        val item = Gson().toJson(gangChuPreview)
         val action =
             if (view.findFragment<Fragment>() is GangChuFragment) { // GangChuFragment에서 이동
                 BaseContainerFragmentDirections.actionBaseContainerFragmentToDetailPageFragment(
-                    storePlace = item
+                    gangChuPreview = item
                 )
             } else if (view.findFragment<Fragment>() is StoreSearchResultFragment) { // StoreSearchResultFragment에서 이동.
                 StoreSearchResultFragmentDirections.actionStoreSearchResultFragmentToDetailPageFragment(
-                    storePlace = item
+                    gangChuPreview = item
                 )
 
             } else { // MyHeartFragment에서 이동 (view.findFragment<Fragment>() is MyHeartFragment)
-                MyHeartFragmentDirections.actionMyHeartFragmentToDetailPageFragment(storePlace = item)
+                MyHeartFragmentDirections.actionMyHeartFragmentToDetailPageFragment(gangChuPreview = item)
             }
         (view.context as MainActivity).findNavController(R.id.main_nav_host).navigate(action)
     }

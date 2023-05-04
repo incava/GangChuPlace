@@ -41,11 +41,10 @@ object RouletteBindingAdapter {
         view.apply {
             //아이템 삽입
             addWheelItems(list)
-
             //돌림판이 멈췄을때 반응하는 리스너
             setLuckyWheelReachTheTarget {
                 rouletteViewModel.isRotate = false
-                Common.showDialog(this,"메뉴 결과","${rouletteViewModel.point.value}로 결정되었습니다.\n 먹으러 가볼까요?")
+                Common.showDialog(this.context,"메뉴 결과","${list[rouletteViewModel.point.value?.toInt()!!].text}(으)로 결정되었습니다.\n그 곳으로 가볼까요?")
             }
         }
 
@@ -55,7 +54,8 @@ object RouletteBindingAdapter {
     @BindingAdapter("setRotateRoulette")
     fun setRotateRoulette(view: LuckyWheel, point : Int){
         if (point >= 0)
-            view.rotateWheelTo(point)
+            //rotateWheelTo는 index처럼 0부터 시작이 아닌 1부터 시작
+            view.rotateWheelTo(point+1)
     }
 
     //LuckyWheel은 크기도 줘야해서 만들때 크기를 주는 메서드

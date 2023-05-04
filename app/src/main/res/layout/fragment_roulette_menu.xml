@@ -11,78 +11,107 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:layout_height="match_parent">
 
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/start"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar4"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="@{(view)->rouletteVM.goRoulette(view)}"
-            android:text="시작하기"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.846" />
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_write"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rect_signup_state_border"
-            android:ems="10"
-            android:hint="메뉴를 추가해 보세요!"
-            android:layout_marginTop="16dp"
-            android:paddingTop="16dp"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="16dp"
-            android:maxEms="10"
-            android:singleLine="true"
-            app:layout_constraintStart_toStartOf="@+id/appCompatTextView8"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView8" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="룰렛 아이템 추가"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/appCompatTextView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="메뉴 추가해보기"
-            android:textSize="24sp"
-            android:layout_margin="8dp"
-            android:padding="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{()->rouletteVM.addItem(etWrite.getText().toString())}"
-            android:text="추가"
-            app:layout_constraintBottom_toBottomOf="@+id/et_write"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/et_write"
-            app:layout_constraintTop_toTopOf="@+id/et_write" />
+        </androidx.appcompat.widget.Toolbar>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            recyclerAdapter="@{rouletteVM.rouletteList}"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/rect_edit_normal_border"
-            android:padding="24dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/start"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/et_write"
-            app:layout_constraintTop_toBottomOf="@+id/et_write" />
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar4">
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{(view)->rouletteVM.goRoulette(view)}"
+                android:text="시작하기"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.846" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_write"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rect_signup_state_border"
+                android:ems="10"
+                android:hint="메뉴를 추가해 보세요!"
+                android:maxEms="10"
+                android:paddingStart="8dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="16dp"
+                android:singleLine="true"
+                app:layout_constraintStart_toStartOf="@+id/appCompatTextView8"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView8" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:autoSizeTextType="uniform"
+                android:maxLines="1"
+                android:padding="8dp"
+                android:text="여러 장소 중 고민 된다면 룰렛을 돌려보세요!"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{()->rouletteVM.addItem(etWrite.getText().toString(),etWrite)}"
+                android:text="추가"
+                app:layout_constraintBottom_toBottomOf="@+id/et_write"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/et_write"
+                app:layout_constraintTop_toTopOf="@+id/et_write" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                recyclerAdapter="@{rouletteVM.rouletteList}"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rect_edit_normal_border"
+                android:padding="24dp"
+                app:layout_constraintBottom_toTopOf="@+id/start"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/et_write"
+                app:layout_constraintTop_toBottomOf="@+id/et_write" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 

@@ -2,6 +2,7 @@ package com.incava.gangchuplace.viewmodel
 
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -39,7 +40,9 @@ class RouletteViewModel : ViewModel() {
         Log.i("delete", _rouletteList.value.toString())
     }
     // 룰렛에 들어갈 아이템을 얻는 메서드
-    fun addItem(item : String){
+    fun addItem(item : String,view : EditText){
+        //추가하면 글쓰는 곳은 기존 글씨 삭제.
+        view.text.clear()
         var newList = _rouletteList.value ?: mutableListOf()
         newList.add(RouletteMenuModel(menuItem = item))
         _rouletteList.value = newList
@@ -55,6 +58,8 @@ class RouletteViewModel : ViewModel() {
         if (isRotate) return else isRotate = true
         point.value = Random().nextInt(rouletteList.value!!.size)
         Log.i("point",point.value.toString())
+        Log.i("roulette",rouletteList.value.toString())
+
     }
 
 

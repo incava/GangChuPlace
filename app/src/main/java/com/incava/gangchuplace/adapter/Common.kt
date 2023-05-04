@@ -35,8 +35,8 @@ object Common {
 
 
     //Dialog 띄울 때 다른 이벤트가 없을 경우 사용 할 common method
-    fun showDialog(view: View, title: String, message: String) {
-        AlertDialog.Builder(view.context)
+    fun showDialog(context: Context, title: String, message: String) {
+        AlertDialog.Builder(context)
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton("확인") { dialog, _ ->
@@ -64,9 +64,9 @@ object Common {
     }
 
     // sharedPreference 파일 가져올 수 있는 메서드
-    fun getSharedPreference(view : View): User {
+    fun getSharedPreference(context : Context): User {
         //파일이 없으면 빈 값으로 리턴.
-        val sharedPreferences = view.context.getSharedPreferences("userInfo", Context.MODE_PRIVATE)
+        val sharedPreferences = context.getSharedPreferences("userInfo", Context.MODE_PRIVATE)
             ?: return(User("","","","",""))
 
         return sharedPreferences.run {

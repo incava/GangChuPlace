@@ -24,6 +24,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/scv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:padding="16dp"
@@ -78,14 +79,19 @@
                     android:layout_marginBottom="8dp"
                     />
 
-                <TextView
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.naver.maps.map.MapFragment"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:text="Map 보여질 곳"
-                    android:gravity="center"
-                    android:background="@drawable/rect_edit_normal_border"
-                    android:layout_margin="8dp"
-                    />
+                    android:layout_height="200dp">
+
+                    <View
+                        android:id="@+id/ivMapTransparent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@android:color/transparent"/>
+
+                </fragment>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
@@ -98,8 +104,6 @@
                         android:background="@color/gray"
                         android:layout_marginTop="8dp"
                         />
-
-
 
                 <androidx.recyclerview.widget.RecyclerView
                     setDetailAdapter="@{detailPageVM}"

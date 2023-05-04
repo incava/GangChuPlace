@@ -14,7 +14,7 @@ object GangChuBindingAdapter {
     @JvmStatic
     @BindingAdapter("setNameBind")
     fun setNameBind(view : TextView, noUse: String){
-        view.text = getSharedPreference(view).nickname
+        view.text = getSharedPreference(view.context).nickname
     }
 
     @JvmStatic

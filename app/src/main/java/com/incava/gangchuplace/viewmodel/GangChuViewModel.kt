@@ -1,13 +1,14 @@
 package com.incava.gangchuplace.viewmodel
 
+import android.app.Application
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.findFragment
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.google.gson.Gson
 import com.incava.gangchuplace.R
@@ -23,9 +24,9 @@ import com.incava.gangchuplace.viewmodel.repository.GangChuStoreRepo
 import java.util.Random
 
 
-class GangChuViewModel : ViewModel() {
+class GangChuViewModel(application: Application) : AndroidViewModel(application) {
 
-    val gangChuStoreRepo by lazy { GangChuStoreRepo() }
+    val gangChuStoreRepo by lazy { GangChuStoreRepo(application) }
 
     private var _gangChuList = gangChuStoreRepo.storeList
     val gangChuList: MutableLiveData<MutableList<GangChuPreview>> get() = _gangChuList

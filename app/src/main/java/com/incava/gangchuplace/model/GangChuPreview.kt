@@ -5,5 +5,6 @@ data class GangChuPreview(
     val gangChuMember : Int, // 강추한 친구의 맴버 리스트
     val rank : Double,
     val isHeart : Boolean,
-    val friendRank : Double
+    val friendRank : Double,
+    val distance : Int,
 )

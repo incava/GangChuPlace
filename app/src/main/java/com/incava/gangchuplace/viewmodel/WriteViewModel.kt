@@ -33,6 +33,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.io.File
 import java.lang.StringBuilder
+import kotlin.math.log
 
 class WriteViewModel : ViewModel() {
 
@@ -84,13 +85,14 @@ class WriteViewModel : ViewModel() {
                 try {
 
                     // sharedPreference 파일 접근.
-                    getSharedPreference(view).also {
+                    getSharedPreference(view.context).also {
                         id = it.id
                         loginRoute = it.loginRoute
                     }
 
                     //사진을 스토리지에 업로드 및 image저장.
-                    val imageUri = uploadStorage()
+                    val imageUri = uploadStorage("${id}+${loginRoute}","Review",storePlace.title)
+
 
                     val time = getCurrentDateTime()
                     // 보낼 reviewDTO
@@ -101,6 +103,8 @@ class WriteViewModel : ViewModel() {
                         store = storePlace.title,
                         image = imageUri
                     )
+                    //storePlace에 이미지를 기입.
+                    storePlace.image = imageUri
 
                     //자신Review 대한 저장.
                     val reviewResult = fireStore.collection("User")
@@ -121,7 +125,7 @@ class WriteViewModel : ViewModel() {
                         .document(storePlace.title)
                         .collection("Review")
                         .document("${loginRoute}+${id}")
-                        .set(mapOf("time" to time))
+                        .set(reviewDTO)
                         .await()
 
                     //코루틴의 await()로 작업이 모두 성공적(catch가 아닐때) Toast호출하도록.
@@ -143,12 +147,12 @@ class WriteViewModel : ViewModel() {
         }
     }
 
-    //스토리지에 사진을 업로드 하는 메서드
-    private suspend fun uploadStorage(): String {
+    //스토리지 Review에 사진을 업로드 하는 메서드
+    private suspend fun uploadStorage(id : String,position:String, title: String): String {
         val storageRef = FirebaseStorage.getInstance().reference
-        val imagesRef = storageRef.child("images")
+        val imagesRef = storageRef.child("images").child(id).child(position)
         val file = Uri.fromFile(File(image.value ?: ""))
-        val imageRef = imagesRef.child("image.jpg")
+        val imageRef = imagesRef.child(title)
         val uploadTask = imageRef.putFile(file)
         uploadTask.await()
         return imageRef.downloadUrl.await().toString() //url을 다운 받은 후 리턴.

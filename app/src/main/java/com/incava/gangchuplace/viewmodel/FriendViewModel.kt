@@ -63,7 +63,7 @@ class FriendViewModel : ViewModel() {
     //load할 친구의 id 데이터를 가져오기 위한 메서드. collection에는 collection에 들어갈 문자열 사용.
     private suspend fun loadFriendId(view: View, collection: String): MutableList<String> {
         var friendIds = mutableListOf<String>()
-        var user = getSharedPreference(view)
+        var user = getSharedPreference(view.context)
         val query = fireStore.collection("User")
             .document("${user.loginRoute}+${user.id}")
             .collection(collection)
@@ -98,7 +98,7 @@ class FriendViewModel : ViewModel() {
 
     fun requestFriend(view: View) {
         try {
-            val user = getSharedPreference(view)
+            val user = getSharedPreference(view.context)
             CoroutineScope(Dispatchers.IO).launch {
                 var friendId = nameCheck()
                 //자신의 닉네임과 같거나 같은 이름이 없을 경우.

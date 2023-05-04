@@ -3,11 +3,16 @@ package com.incava.gangchuplace.viewmodel.repository
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
+import com.google.android.gms.tasks.Tasks
+import com.google.firebase.firestore.QuerySnapshot
 import com.incava.gangchuplace.adapter.Common.fireStore
 import com.incava.gangchuplace.model.GangChuPreview
 import com.incava.gangchuplace.model.StorePlace
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
@@ -20,13 +25,15 @@ class GangChuStoreRepo {
     fun loadStoreInfo(id: String) {
         val snapshotStoreList = mutableListOf<GangChuPreview>()
         CoroutineScope(Dispatchers.IO).launch {
+            val start = System.currentTimeMillis()
             //가게 정보 불러 오기.
-            val storeDocuments = loadStore()
-            Log.i("storeDocuments",storeDocuments.documents.toString())
-            //친구 목록 가져 오기.
-            val friendList = loadFriendId(id)
+            val storeJob = loadStore()
+            val friendJob = loadFriendId(id)
+            val heartJob= loadIsHeartId(id)
+            val storeDocuments = storeJob.await()?:return@launch
+            val friendList = getList(friendJob.await()?:return@launch)
+            val heartList = getList(heartJob.await()?:return@launch)
 
-            val heartList = loadIsHeartId(id)
 
             //가게 정보 마다 Review 가져 오기 위한 로직
             for (document in storeDocuments) {
@@ -43,7 +50,7 @@ class GangChuStoreRepo {
                 var gangChuFriendMemberList = mutableListOf<String>()
 
                 // document의 Review컬렉션 정보를 가져와 리턴.
-                val reviewDocuments = loadReviewInfo(document.id)
+                val reviewDocuments = loadReviewInfo(document.id).await()?:return@launch
 
                 // review 마다 rank를 가져 오기 위한 로직.
                 for (review in reviewDocuments) {
@@ -73,8 +80,9 @@ class GangChuStoreRepo {
                 )
                 snapshotStoreList.add(gangChuPreview)
             }
-            Log.i("snapshotStoreList",snapshotStoreList.toString())
+            Log.i("snapshotStoreList", snapshotStoreList.toString())
             storeList.postValue(snapshotStoreList)
+            Log.i("실행시간",(System.currentTimeMillis()-start).toString())
         }
     }
 
@@ -117,54 +125,90 @@ class GangChuStoreRepo {
     }
 
     //가게에 저장된 정보를 가져 오는 메서드.
-    private suspend fun loadStore() =
-        fireStore.collection("Store").get().await()
-
-    //가게에 저장된 리뷰들을 가져 오는 메서드.
-    private suspend fun loadReviewInfo(storeId: String) =
-        fireStore.collection("Store")
-            .document(storeId)
-            .collection("Review").get().await()
+    private fun loadStore(): Deferred<QuerySnapshot?> {
+        //makeLoop()
+        return CoroutineScope(Dispatchers.IO).async {
+            try {
+                val snapshot = fireStore.collection("Store")
+                    .get()
+                    .await()
+                snapshot
+            } catch (e: Exception) {
+                null
+            }
+        }
+    }
 
     // 유저의 찜 목록을 가져 오는 메서드.
-    private suspend fun loadIsHeartId(id: String): MutableList<String> {
-        val heartList = mutableListOf<String>()
-        try {
-
-            val friendDocument = fireStore.collection("User")
-                .document(id)
-                .collection("isHeart")
-                .get()
-                .await()
-            // 모두 가져온 후, id를 List에 넣은 후 return
-            for (document in friendDocument) {
-                heartList.add(document.data["id"].toString())
+    private fun loadIsHeartId(id: String): Deferred<QuerySnapshot?> {
+        //makeLoop()
+        return CoroutineScope(Dispatchers.IO).async {
+            try {
+                val snapshot = fireStore.collection("User")
+                    .document(id)
+                    .collection("isHeart")
+                    .get()
+                    .await()
+                snapshot
+            } catch (e: Exception) {
+                null
             }
-        } catch (e: Exception) {
-            return mutableListOf()
         }
-        return heartList
+    }
+
+    private fun loadFriendId(id: String): Deferred<QuerySnapshot?> {
+        //makeLoop()
+        return CoroutineScope(Dispatchers.IO).async {
+            try {
+                val snapshot = fireStore.collection("User")
+                    .document(id)
+                    .collection("Friend")
+                    .get()
+                    .await()
+                snapshot
+            } catch (e: Exception) {
+                null
+            }
+        }
+    }
+
+    //가게에 저장된 리뷰들을 가져 오는 메서드.
+    private fun loadReviewInfo(storeId: String): Deferred<QuerySnapshot?> {
+        return CoroutineScope(Dispatchers.IO).async {
+            try {
+                val snapshot = fireStore.collection("Store")
+                    .document(storeId)
+                    .collection("Review")
+                    .get()
+                    .await()
+                snapshot
+            } catch (e: Exception) {
+                null
+            }
+        }
     }
 
 
-    // 유저의 친구 목록을 가져 오는 메서드.
-    private suspend fun loadFriendId(id: String): MutableList<String> {
-        val friendList = mutableListOf<String>()
-        try {
-            val friendDocument = fireStore.collection("User")
-                .document(id)
-                .collection("Friend")
-                .get()
-                .await()
-            // 모두 가져온 후, id를 List에 넣은 후 return
-            for (document in friendDocument) {
-                friendList.add(document.data["id"].toString())
-            }
-        } catch (e: Exception) {
-            return mutableListOf()
+// 유저의 친구 목록을 가져 오는 메서드.
+
+    //받은 쿼리스냅샷을 리스트로 바꿔주는 메서드.
+    private fun getList(snapshot: QuerySnapshot): MutableList<String> {
+        val list = mutableListOf<String>()
+        for (document in snapshot) {
+            list.add(document.data["id"].toString())
         }
-        return friendList
+        return list
     }
+
+//    fun makeLoop() {
+//        val startTime = System.currentTimeMillis()
+//        repeat(50000) {
+//            repeat(50000) {
+//
+//            }
+//        }
+//        Log.i("실행시간1",(System.currentTimeMillis()-startTime).toString())
+//    }
 
 
 }

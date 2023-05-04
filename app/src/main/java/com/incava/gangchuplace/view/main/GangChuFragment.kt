@@ -13,6 +13,9 @@ class GangChuFragment : BaseFragment<FragmentGangChuBinding>(R.layout.fragment_g
     override fun init() {
         binding.gangChu = this
         binding.gangChuVM = gangChuViewModel
-        gangChuViewModel.loadGangChuList(getSharedPreference(requireContext()).id)
+        val uniqueId = getSharedPreference(requireContext()).run {
+            "${loginRoute}+${id}"
+        }
+        gangChuViewModel.loadGangChuList(uniqueId)
     }
 }

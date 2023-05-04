@@ -25,7 +25,7 @@ import java.util.Random
 
 class GangChuViewModel : ViewModel() {
 
-    val gangChuStoreRepo by lazy {  GangChuStoreRepo() }
+    val gangChuStoreRepo by lazy { GangChuStoreRepo() }
 
     private var _gangChuList = gangChuStoreRepo.storeList
     val gangChuList: MutableLiveData<MutableList<GangChuPreview>> get() = _gangChuList
@@ -37,7 +37,7 @@ class GangChuViewModel : ViewModel() {
 
     var filterName = MutableLiveData("평점순")
 
-    var filterMethod = mutableListOf("평점순","거리순","리뷰순","친구 리뷰순","친구 평점순")
+    var filterMethod = mutableListOf("평점순", "거리순", "리뷰순", "친구 리뷰순", "친구 평점순")
 
 
 
@@ -70,18 +70,18 @@ class GangChuViewModel : ViewModel() {
 
     //이동시 글쓰기로 이동.
 
-    fun setFilterList(view: View){
-        filterName.value =  filterMethod[Random().nextInt(filterMethod.size)]
-        Log.i("filterName",filterName.value.toString())
+    fun setFilterList(view: View) {
+        filterName.value = filterMethod[Random().nextInt(filterMethod.size)]
+        Log.i("filterName", filterName.value.toString())
     }
 
-    fun loadGangChuList(id : String){
+    fun loadGangChuList(id: String) {
         gangChuStoreRepo.loadStoreInfo(id)
     }
 
 
-    fun setSearchKeyword(text : String){
-        Log.i("keyword",text)
+    fun setSearchKeyword(text: String) {
+        Log.i("keyword", text)
         researchKeyword = text
     }
 
@@ -100,7 +100,7 @@ class GangChuViewModel : ViewModel() {
     //    action_storeSearchResultFragment_to_detailPageFragment
 
     //storeSearchFragment에서 검색결과를 보기위한 이벤트 핸들러
-    fun moveSearchResult(view:View){
+    fun moveSearchResult(view: View) {
         (view.context as MainActivity).findNavController(R.id.main_nav_host)
             .navigate(R.id.action_storeSearchFragment_to_storeSearchResultFragment)
     }
@@ -120,10 +120,12 @@ class GangChuViewModel : ViewModel() {
                 BaseContainerFragmentDirections.actionBaseContainerFragmentToDetailPageFragment(
                     storePlace = item
                 )
-            }else if(view.findFragment<Fragment>() is StoreSearchResultFragment){ // StoreSearchResultFragment에서 이동.
-                StoreSearchResultFragmentDirections.actionStoreSearchResultFragmentToDetailPageFragment(storePlace = item)
+            } else if (view.findFragment<Fragment>() is StoreSearchResultFragment) { // StoreSearchResultFragment에서 이동.
+                StoreSearchResultFragmentDirections.actionStoreSearchResultFragmentToDetailPageFragment(
+                    storePlace = item
+                )
 
-            } else{ // MyHeartFragment에서 이동 (view.findFragment<Fragment>() is MyHeartFragment)
+            } else { // MyHeartFragment에서 이동 (view.findFragment<Fragment>() is MyHeartFragment)
                 MyHeartFragmentDirections.actionMyHeartFragmentToDetailPageFragment(storePlace = item)
             }
         (view.context as MainActivity).findNavController(R.id.main_nav_host).navigate(action)

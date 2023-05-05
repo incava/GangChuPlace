@@ -6,15 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.google.gson.Gson
 import com.incava.gangchuplace.model.StorePlace
-import com.incava.gangchuplace.network.NaverPlaceService
-import com.incava.gangchuplace.network.RetrofitHelper
 import com.incava.gangchuplace.view.write.WriteSearchFragmentDirections
-import com.incava.gangchuplace.viewmodel.repository.StoreSearchRepo
+import com.incava.gangchuplace.viewmodel.repository.WriteStoreSearchRepo
 
 class WriteStoreViewModel : ViewModel() {
 
-    private val storeSearchRepo by lazy { StoreSearchRepo() }
-    private val _placeList: MutableLiveData<MutableList<StorePlace>> get() = storeSearchRepo.searchData
+    private val writeStoreSearchRepo by lazy { WriteStoreSearchRepo() }
+    private val _placeList: MutableLiveData<MutableList<StorePlace>> get() = writeStoreSearchRepo.searchData
     val placeList: MutableLiveData<MutableList<StorePlace>> get() = _placeList
 
     init {
@@ -33,6 +31,6 @@ class WriteStoreViewModel : ViewModel() {
     //검색시 textChange마다 호출.
     fun getStoreInfo(query: String) {
         //Retrofit으로 장소검색 하는 메서드.
-        storeSearchRepo.searchPlace(query)
+        writeStoreSearchRepo.searchNaverPlace(query)
     }
 }

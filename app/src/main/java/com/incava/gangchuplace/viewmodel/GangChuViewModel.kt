@@ -14,7 +14,6 @@ import com.google.gson.Gson
 import com.incava.gangchuplace.R
 import com.incava.gangchuplace.base.BaseContainerFragmentDirections
 import com.incava.gangchuplace.model.GangChuPreview
-import com.incava.gangchuplace.model.StorePlace
 import com.incava.gangchuplace.view.main.GangChuFragment
 import com.incava.gangchuplace.view.main.MainActivity
 import com.incava.gangchuplace.view.main.info.MyHeartFragmentDirections
@@ -31,7 +30,7 @@ class GangChuViewModel(application: Application) : AndroidViewModel(application)
     private var _gangChuList = gangChuStoreRepo.storeList
     val gangChuList: MutableLiveData<MutableList<GangChuPreview>> get() = _gangChuList
 
-    private var _gangChuSearchList = MutableLiveData<MutableList<GangChuPreview>>()
+    private var _gangChuSearchList = gangChuStoreRepo.storeFilterList
     val gangChuSearchList: MutableLiveData<MutableList<GangChuPreview>> get() = _gangChuSearchList
 
     var researchKeyword = ""
@@ -41,27 +40,9 @@ class GangChuViewModel(application: Application) : AndroidViewModel(application)
     var filterMethod = mutableListOf("평점순", "거리순", "리뷰순", "친구 리뷰순", "친구 평점순")
 
 
-
     init {
         _gangChuList.value = mutableListOf()
-//        val a = mutableListOf<GangChuPreview>()
-//        val b = mutableListOf<GangChuPreview>()
-//        repeat(6) {
-//            a.add(
-//                GangChuPreview(
-//                    StorePlace("갈비집", "육류", "맛있는 갈비집", "address", "37.0", "127.0"),
-//                    "인기 외 3명", 4.6, "", true, 4.5
-//                )
-//            )
-//            b.add(
-//                GangChuPreview(
-//                    StorePlace("방탈출", "비트", "비트포비아", "address123", "36.0", "128.0"),
-//                    "상완 외 2명", 4.66, "", false, 4.8
-//                )
-//            )
-//        }
-//        _gangChuList.value = a
-//        _gangChuSearchList.value = b
+        _gangChuSearchList.value = mutableListOf()
     }
 
     fun setHeart(view: View, checked: Boolean, item: GangChuPreview) {
@@ -77,7 +58,10 @@ class GangChuViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun loadGangChuList(id: String) {
-        gangChuStoreRepo.loadStoreInfo(id)
+        gangChuStoreRepo.requestStoreList(id)
+    }
+    fun loadGangChuFilterSearchList(id:String){
+        gangChuStoreRepo.requestFilterSearchStore(researchKeyword,id=id)
     }
 
 

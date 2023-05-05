@@ -86,7 +86,7 @@
     <fragment
         android:id="@+id/storeSearchFragment"
         android:name="com.incava.gangchuplace.view.search.StoreSearchFragment"
-        android:label="StoreSearchFragment" >
+        android:label="강추 검색" >
         <action
             android:id="@+id/action_storeSearchFragment_to_storeSearchResultFragment"
             app:destination="@id/storeSearchResultFragment" />

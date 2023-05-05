@@ -3,6 +3,7 @@ package com.incava.gangchuplace.viewmodel.repository
 import android.text.Html
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.incava.gangchuplace.adapter.Common
 import com.incava.gangchuplace.model.StorePlace
 import com.incava.gangchuplace.model.StorePlaceDTO
 import com.incava.gangchuplace.network.NaverPlaceService
@@ -12,12 +13,15 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class StoreSearchRepo {
+/**
+ * 네이버에서 가게 정보에 관련된 값을 가져 오는 Repo
+ */
+class WriteStoreSearchRepo {
 
     var searchData = MutableLiveData<MutableList<StorePlace>>()
     var call: Call<StorePlaceDTO>? = null
 
-    fun searchPlace(query: String) {
+    fun searchNaverPlace(query: String) {
         //retrofit 작업중이였던 것은 캔슬하고 새로 작업
         if (call?.isExecuted == true) {
             call?.cancel()
@@ -48,6 +52,7 @@ class StoreSearchRepo {
 
         })
     }
+
 
 
 }

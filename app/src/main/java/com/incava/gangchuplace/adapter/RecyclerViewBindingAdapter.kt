@@ -26,18 +26,18 @@ object RecyclerViewBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("setMyHeartAdapter")
-    fun setMyHeartAdapter(view: RecyclerView, vm: GangChuViewModel) {
+    fun setMyHeartAdapter(view: RecyclerView, items: MutableList<GangChuPreview>) {
         view.apply {
-            adapter = MyHeartAdapter(vm)
+            adapter = MyHeartAdapter(items)
             layoutManager = LinearLayoutManager(view.context)
         }
     }
 
     @JvmStatic
     @BindingAdapter("setWriteStoreAdapter")
-    fun setWriteStoreAdapter(view: RecyclerView, item: MutableList<StorePlace>) {
+    fun setWriteStoreAdapter(view: RecyclerView, items: MutableList<StorePlace>) {
         view.apply {
-            adapter = WriteAdapter(item)
+            adapter = WriteAdapter(items)
             layoutManager = LinearLayoutManager(view.context)
         }
     }

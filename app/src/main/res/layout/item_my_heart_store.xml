@@ -14,12 +14,15 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="180dp">
+        android:layout_height="180dp"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="12dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="true"
+            android:background="@color/gang_chu_brand_70"
             android:onClick="@{(view)->gangChuVM.moveDetail(view,gangChuPreview)}">
 
 
@@ -29,6 +32,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginStart="15dp"
+                android:scaleType="centerCrop"
                 setImage="@{gangChuPreview.storePlace.image}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +89,7 @@
                 app:layout_constraintStart_toStartOf="@+id/tv_category"
                 app:layout_constraintTop_toBottomOf="@+id/tv_category"
                 tools:text="평점 : 4.1점"
-                android:text='@{"평점 :" + gangChuPreview.rank}'/>
+                android:text='@{"평점 : " + String.valueOf(gangChuPreview.rank)}'/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_friend_rank"
@@ -96,7 +100,7 @@
                 app:layout_constraintStart_toEndOf="@+id/tv_rank"
                 app:layout_constraintTop_toTopOf="@+id/tv_rank"
                 tools:text="친구의 평점 : 4.1점"
-                android:text='@{"친구의 평점 :" + gangChuPreview.friendRank}'/>
+                android:text='@{"친구 평점 : " + String.valueOf(gangChuPreview.friendRank)}'/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_address"
@@ -121,7 +125,7 @@
                 app:layout_constraintStart_toStartOf="@+id/tv_address"
                 app:layout_constraintTop_toBottomOf="@+id/tv_address"
                 tools:text="인기 외 2명 추천"
-                android:text="@{gangChuPreview.gangChuMember}"/>
+                android:text='@{"추천 : "+ gangChuPreview.gangChuMember + "명"}'/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

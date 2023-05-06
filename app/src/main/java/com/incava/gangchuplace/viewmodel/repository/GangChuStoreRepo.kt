@@ -39,6 +39,9 @@ class GangChuStoreRepo(val application: Application) {
     // 원하는 가게의 정보를 가지고 있는 List
     var storeFilterList = MutableLiveData<MutableList<GangChuPreview>>()
 
+    // 찜한 가게의 정보를 가지고 있는 List
+    var heartStoreList = MutableLiveData<MutableList<GangChuPreview>>()
+
     fun requestStoreList(id: String) {
         CoroutineScope(Dispatchers.IO).launch {
             storeList.postValue(loadStoreInfo(id))
@@ -169,7 +172,7 @@ class GangChuStoreRepo(val application: Application) {
     }
 
     // 유저의 찜 목록을 가져 오는 메서드.
-    private fun loadIsHeartId(id: String): Deferred<QuerySnapshot?> {
+    fun loadIsHeartId(id: String): Deferred<QuerySnapshot?> {
         //makeLoop()
         return CoroutineScope(Dispatchers.IO).async {
             try {
@@ -272,10 +275,11 @@ class GangChuStoreRepo(val application: Application) {
     fun requestFilterSearchStore(query: String, id: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val queryList = query.split(" ")//만약 여러 결과를 위해 " "가 들어갔을 경우 따로 생각해줘야함.
-            var sampleList = loadStoreInfo(id).toMutableSet()
-            Log.i("sampleList",sampleList.toString())
+            var storeList = loadStoreInfo(id).toMutableSet()
+            Log.i("sampleList",storeList.toString())
+            // 담을 빈 리스트
             var list = mutableListOf<GangChuPreview>()
-            sampleList.forEach { item ->
+            storeList.forEach { item ->
                 // 원하는 검색 결과가 제목, 카테고리, 설명과 일치,포함하는 단어가 있을 경우를 찾음.
                 queryList.forEach { queryItem ->
                     if (item.storePlace.title.contains(queryItem) || item.storePlace.category.contains(
@@ -290,4 +294,21 @@ class GangChuStoreRepo(val application: Application) {
             storeFilterList.postValue(list)
         }
     }
+
+    fun requestMyHeartStore(id: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            var storeList = loadStoreInfo(id).toMutableSet()
+            // 담을 빈 리스트
+            var list = mutableListOf<GangChuPreview>()
+            storeList.forEach { item ->
+                        //찜한 가게의 정보만 담아 저장.
+                        if(item.isHeart) list.add(item)
+                }
+            heartStoreList.postValue(list)
+        }
+    }
+
+
+
+
 }

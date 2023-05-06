@@ -24,16 +24,18 @@ import com.incava.gangchuplace.viewmodel.repository.GangChuStoreRepo
 import com.incava.gangchuplace.viewmodel.repository.HeartStoreRepo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.util.Random
 
 
 class GangChuViewModel(application: Application) : AndroidViewModel(application) {
 
-    val gangChuStoreRepo by lazy { GangChuStoreRepo(application) }
+    private val gangChuStoreRepo by lazy { GangChuStoreRepo(application) }
 
-    val heartStoreRepo by lazy {HeartStoreRepo() }
+    private val heartStoreRepo by lazy { HeartStoreRepo() }
+
+    private var _heartStoreList = gangChuStoreRepo.heartStoreList
+    val heartStoreList: MutableLiveData<MutableList<GangChuPreview>> get() = _heartStoreList
 
     private var _gangChuList = gangChuStoreRepo.storeList
     val gangChuList: MutableLiveData<MutableList<GangChuPreview>> get() = _gangChuList
@@ -51,6 +53,7 @@ class GangChuViewModel(application: Application) : AndroidViewModel(application)
     init {
         _gangChuList.value = mutableListOf()
         _gangChuSearchList.value = mutableListOf()
+        _heartStoreList.value = mutableListOf()
     }
 
     fun setHeart(view: View, checked: Boolean, item: GangChuPreview) {
@@ -59,33 +62,45 @@ class GangChuViewModel(application: Application) : AndroidViewModel(application)
         CoroutineScope(Dispatchers.Main).launch {
             // 체크에 따른 찜하기 or 실패
             if (checked) { // 찜 기능.
-                val result = heartStoreRepo.insertHeartStore("${userInfo.loginRoute}+${userInfo.id}",item)
-                    Toast.makeText(view.context, if (result)"찜 완료 " else "실패", Toast.LENGTH_SHORT).show()
-            } else{
+                val result =
+                    heartStoreRepo.insertHeartStore("${userInfo.loginRoute}+${userInfo.id}", item)
+                Toast.makeText(view.context, if (result) "찜 완료 " else "실패", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
                 //찜 해제 기능
-                val result = heartStoreRepo.deleteHeartStore("${userInfo.loginRoute}+${userInfo.id}",item)
-                Toast.makeText(view.context, if (result)"찜 해제" else "실패", Toast.LENGTH_SHORT).show()
+                val result =
+                    heartStoreRepo.deleteHeartStore("${userInfo.loginRoute}+${userInfo.id}", item)
+                Toast.makeText(view.context, if (result) "찜 해제" else "실패", Toast.LENGTH_SHORT)
+                    .show()
             }
 
         }
 
     }
 
-    //이동시 글쓰기로 이동.
+    //찜한 가게의 정보를 불러 오는 메서드
+    fun loadHeartStoreList(id: String) {
+        gangChuStoreRepo.requestMyHeartStore(id)
+    }
 
+    //임시로 설정한 메서드
     fun setFilterList(view: View) {
+        //todo 추후 리스트에 대한 정렬 하는 기능 구현
         filterName.value = filterMethod[Random().nextInt(filterMethod.size)]
         Log.i("filterName", filterName.value.toString())
     }
 
+    //메인에 들어갈 가게 리스트를 불러오는 메서드
     fun loadGangChuList(id: String) {
         gangChuStoreRepo.requestStoreList(id)
     }
-    fun loadGangChuFilterSearchList(id:String){
-        gangChuStoreRepo.requestFilterSearchStore(researchKeyword,id=id)
+
+    // 검색 결과에 따른 가게 리스트를 불러 오는 메서드
+    fun loadGangChuFilterSearchList(id: String) {
+        gangChuStoreRepo.requestFilterSearchStore(researchKeyword, id = id)
     }
 
-
+    // 검색할 키워드를 저장하는 메서드
     fun setSearchKeyword(text: String) {
         Log.i("keyword", text)
         researchKeyword = text

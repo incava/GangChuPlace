@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import com.google.gson.Gson
 import com.incava.gangchuplace.R
+import com.incava.gangchuplace.adapter.Common.getSharedPreference
 import com.incava.gangchuplace.base.BaseContainerFragmentDirections
 import com.incava.gangchuplace.model.GangChuPreview
 import com.incava.gangchuplace.view.main.GangChuFragment
@@ -20,12 +21,19 @@ import com.incava.gangchuplace.view.main.info.MyHeartFragmentDirections
 import com.incava.gangchuplace.view.search.StoreSearchResultFragment
 import com.incava.gangchuplace.view.search.StoreSearchResultFragmentDirections
 import com.incava.gangchuplace.viewmodel.repository.GangChuStoreRepo
+import com.incava.gangchuplace.viewmodel.repository.HeartStoreRepo
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import java.util.Random
 
 
 class GangChuViewModel(application: Application) : AndroidViewModel(application) {
 
     val gangChuStoreRepo by lazy { GangChuStoreRepo(application) }
+
+    val heartStoreRepo by lazy {HeartStoreRepo() }
 
     private var _gangChuList = gangChuStoreRepo.storeList
     val gangChuList: MutableLiveData<MutableList<GangChuPreview>> get() = _gangChuList
@@ -46,8 +54,21 @@ class GangChuViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun setHeart(view: View, checked: Boolean, item: GangChuPreview) {
-        val s = if (checked) "찜하기 완료" else "찜하기 해제"
-        Toast.makeText(view.context, s, Toast.LENGTH_SHORT).show()
+        val userInfo = getSharedPreference(view.context)
+        //Toast때문에 MainThread이용.
+        CoroutineScope(Dispatchers.Main).launch {
+            // 체크에 따른 찜하기 or 실패
+            if (checked) { // 찜 기능.
+                val result = heartStoreRepo.insertHeartStore("${userInfo.loginRoute}+${userInfo.id}",item)
+                    Toast.makeText(view.context, if (result)"찜 완료 " else "실패", Toast.LENGTH_SHORT).show()
+            } else{
+                //찜 해제 기능
+                val result = heartStoreRepo.deleteHeartStore("${userInfo.loginRoute}+${userInfo.id}",item)
+                Toast.makeText(view.context, if (result)"찜 해제" else "실패", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
     }
 
     //이동시 글쓰기로 이동.

@@ -57,8 +57,8 @@ class GangChuStoreRepo(val application: Application) {
             val friendJob = loadFriendId(id)
             val heartJob = loadIsHeartId(id)
             val storeDocuments = storeJob.await() ?: return@async snapshotStoreList
-            val friendList = getList(friendJob.await() ?: return@async snapshotStoreList)
-            val heartList = getList(heartJob.await() ?: return@async snapshotStoreList)
+            val friendList = getList(friendJob.await() ?: return@async snapshotStoreList,"id")
+            val heartList = getList(heartJob.await() ?: return@async snapshotStoreList,"title")
 
 
             //가게 정보 마다 Review 가져 오기 위한 로직
@@ -175,7 +175,7 @@ class GangChuStoreRepo(val application: Application) {
             try {
                 val snapshot = fireStore.collection("User")
                     .document(id)
-                    .collection("isHeart")
+                    .collection("HeartStore")
                     .get()
                     .await()
                 snapshot
@@ -221,10 +221,10 @@ class GangChuStoreRepo(val application: Application) {
 // 유저의 친구 목록을 가져 오는 메서드.
 
     //받은 쿼리스냅샷을 리스트로 바꿔주는 메서드.
-    private fun getList(snapshot: QuerySnapshot): MutableList<String> {
+    private fun getList(snapshot: QuerySnapshot,index : String): MutableList<String> {
         val list = mutableListOf<String>()
         for (document in snapshot) {
-            list.add(document.data["id"].toString())
+            list.add(document.data[index].toString())
         }
         return list
     }

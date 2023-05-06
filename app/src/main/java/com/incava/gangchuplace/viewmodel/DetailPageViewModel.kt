@@ -4,12 +4,14 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.findFragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import com.google.gson.Gson
 import com.incava.gangchuplace.R
+import com.incava.gangchuplace.model.GangChuPreview
 import com.incava.gangchuplace.model.ReviewInfo
 import com.incava.gangchuplace.model.StorePlace
 import com.incava.gangchuplace.model.User
@@ -26,7 +28,15 @@ class DetailPageViewModel : ViewModel() {
     private var _detailPageList = MutableLiveData<MutableList<ReviewInfo>>()
     val detailPageList: MutableLiveData<MutableList<ReviewInfo>> get() = _detailPageList
 
-    fun setStorePlace(storePlace : StorePlace){
+     var gangChuPreview = MutableLiveData<GangChuPreview>()
+
+    init {
+        gangChuPreview.postValue(GangChuPreview())
+    }
+
+
+    fun setGangChuPreview(gangChuPreview : GangChuPreview){
+        this.gangChuPreview.postValue(gangChuPreview)
         var list = mutableListOf<ReviewInfo>()
         repeat(6) {
             list.add(
@@ -49,11 +59,11 @@ class DetailPageViewModel : ViewModel() {
                             "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
                             "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
                             "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠"
-                    , storePlace.title)
+                    , gangChuPreview.storePlace.title)
             )
         }
         _detailPageList.value = list
-        Log.i("storePlace", storePlace.toString())
+        Log.i("storePlace", gangChuPreview.storePlace.toString())
     }
     fun setUser(user : User){
         var list = mutableListOf<ReviewInfo>()

@@ -15,7 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:onClick="@{(view)->gangChuVM.moveDetail(view,gangChuPreview.storePlace)}"
+        android:onClick="@{(view)->gangChuVM.moveDetail(view,gangChuPreview)}"
         android:padding="16dp">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -53,7 +53,7 @@
             android:id="@+id/tv_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{"지금 거리에서" + String.valueOf(gangChuPreview.storePlace.mapx) + "m"}'
+            translateDistance="@{gangChuPreview.distance}"
             android:textSize="11sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_title"
             app:layout_constraintStart_toStartOf="@+id/iv_image"
@@ -92,6 +92,19 @@
             app:layout_constraintBottom_toTopOf="@+id/tv_recommend"
             app:layout_constraintStart_toStartOf="@+id/tv_category"
             app:layout_constraintTop_toBottomOf="@+id/tv_category" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_friend_stars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{"친구 평점 : " + String.valueOf(gangChuPreview.friendRank)}'
+            android:textSize="11sp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_recommend"
+            app:layout_constraintStart_toEndOf="@+id/tv_stars"
+            app:layout_constraintTop_toBottomOf="@+id/tv_category"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="4.6 (리뷰 157)" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_recommend"

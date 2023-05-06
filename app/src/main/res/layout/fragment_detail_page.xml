@@ -43,8 +43,8 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/normal_image"
+                    android:scaleType="centerInside"
+                    setImage="@{detailPageVM.gangChuPreview.storePlace.image}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -59,7 +59,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="성동 오랑"
+                        android:text="@{detailPageVM.gangChuPreview.storePlace.title}"
                         android:layout_weight="3"
                         tools:layout_editor_absoluteX="51dp"
                         tools:layout_editor_absoluteY="459dp" />
@@ -67,7 +67,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="평점 : 4.6"
+                        android:text="@{String.valueOf(detailPageVM.gangChuPreview.rank) + '점'}"
                         android:layout_weight="1"
                         />
                 </LinearLayout>

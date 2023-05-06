@@ -86,7 +86,7 @@
     <fragment
         android:id="@+id/storeSearchFragment"
         android:name="com.incava.gangchuplace.view.search.StoreSearchFragment"
-        android:label="StoreSearchFragment" >
+        android:label="강추 검색" >
         <action
             android:id="@+id/action_storeSearchFragment_to_storeSearchResultFragment"
             app:destination="@id/storeSearchResultFragment" />
@@ -96,7 +96,7 @@
         android:name="com.incava.gangchuplace.view.write.DetailPageFragment"
         android:label="가게 정보">
         <argument
-            android:name="storePlace"
+            android:name="gangChuPreview"
             app:argType="string" />
         <action
             android:id="@+id/action_detailPageFragment_to_reviewPageFragment"

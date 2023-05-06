@@ -106,7 +106,7 @@
                         />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    setDetailAdapter="@{detailPageVM}"
+                    setDetailAdapter="@{detailPageVM.detailPageList}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 

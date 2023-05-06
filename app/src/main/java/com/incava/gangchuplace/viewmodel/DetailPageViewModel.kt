@@ -19,81 +19,36 @@ import com.incava.gangchuplace.view.main.MainActivity
 import com.incava.gangchuplace.view.main.info.MyReviewFragment
 import com.incava.gangchuplace.view.main.info.MyReviewFragmentDirections
 import com.incava.gangchuplace.view.write.DetailPageFragmentDirections
+import com.incava.gangchuplace.viewmodel.repository.ReviewStoreRepo
 
 /**
  * 가게 정보를 가지고 있는 fragment
  */
 class DetailPageViewModel : ViewModel() {
 
-    private var _detailPageList = MutableLiveData<MutableList<ReviewInfo>>()
+    private val reviewStoreRepo by lazy { ReviewStoreRepo() }
+
+    private var _detailPageList = reviewStoreRepo.storeReviewList
     val detailPageList: MutableLiveData<MutableList<ReviewInfo>> get() = _detailPageList
 
      var gangChuPreview = MutableLiveData<GangChuPreview>()
 
     init {
-        gangChuPreview.postValue(GangChuPreview())
+        gangChuPreview.value = GangChuPreview()
+        _detailPageList.value = mutableListOf()
     }
 
 
     fun setGangChuPreview(gangChuPreview : GangChuPreview){
         this.gangChuPreview.postValue(gangChuPreview)
-        var list = mutableListOf<ReviewInfo>()
-        repeat(6) {
-            list.add(
-                ReviewInfo(
-                    "인기",
-                    "",
-                    "2023-04-12",
-                    "4.5",
-                    "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠"
-                    , gangChuPreview.storePlace.title)
-            )
-        }
-        _detailPageList.value = list
-        Log.i("storePlace", gangChuPreview.storePlace.toString())
+        //리뷰 배열을 요청 하는 메서드
+        reviewStoreRepo.loadStoreReviewList(gangChuPreview.storePlace.title)
     }
     fun setUser(user : User){
-        var list = mutableListOf<ReviewInfo>()
-        repeat(6) {
-            list.add(
-                ReviewInfo(
-                    "인기",
-                    "",
-                    "2023-04-12",
-                    "4.5",
-                    "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠" +
-                            "아니 너무 맛있잖아요. 나도 가고 싶어서 간건데 같이갈사람 선착순 1명 구해요 :D 대박적!!! 그쵸 대박이죠"
-                    , user.nickname)
-            )
-        }
-        _detailPageList.value = list
-        Log.i("storePlace", user.toString())
+        //todo 내 리뷰 구현부
     }
+
+
 
     // ReviewPage로 가는 이벤트 핸들러.
     fun moveReviewPage(view : View, reviewInfo: ReviewInfo){

@@ -18,6 +18,6 @@ class StoreSearchResultFragment :
     }
     override fun init() {
         binding.gangChuVM = gangChuViewModel
-        gangChuViewModel.loadGangChuFilterSearchList(uniqueId)
+        gangChuViewModel.requestGangChuFilterSearchList(uniqueId)
     }
 }

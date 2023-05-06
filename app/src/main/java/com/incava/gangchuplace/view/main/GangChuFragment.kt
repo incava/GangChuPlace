@@ -24,7 +24,7 @@ class GangChuFragment : BaseFragment<FragmentGangChuBinding>(R.layout.fragment_g
         requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
     }
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
-        gangChuViewModel.loadGangChuList(uniqueId)
+        gangChuViewModel.requestGangChuList(uniqueId)
     }
 
 }

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.incava.gangchuplace.model.GangChuPreview
+import com.incava.gangchuplace.model.ReviewInfo
 import com.incava.gangchuplace.model.RouletteMenuModel
 import com.incava.gangchuplace.model.StorePlace
 import com.incava.gangchuplace.model.User
@@ -17,9 +18,9 @@ object RecyclerViewBindingAdapter {
     // DetailAdapter를 연결하는 바인딩 어댑터
     @JvmStatic
     @BindingAdapter("setDetailAdapter")
-    fun setDetailAdapter(view: RecyclerView, vm: DetailPageViewModel) {
+    fun setDetailAdapter(view: RecyclerView, items : MutableList<ReviewInfo>) {
         view.apply {
-            adapter = DetailAdapter(vm)
+            adapter = DetailAdapter(items)
             layoutManager = LinearLayoutManager(view.context)
         }
     }

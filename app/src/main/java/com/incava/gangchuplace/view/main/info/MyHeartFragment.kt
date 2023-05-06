@@ -22,7 +22,7 @@ class MyHeartFragment : BaseFragment<FragmentMyHeartBinding>(R.layout.fragment_m
     override fun init() {
         binding.apply {
             gangChuVM = gangChuViewModel
-            gangChuViewModel.loadHeartStoreList(uniqueId)
+            gangChuViewModel.requestHeartStoreList(uniqueId)
             toolbar.setupWithNavController(findNavController())
         }
 

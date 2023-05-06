@@ -78,8 +78,8 @@ class GangChuViewModel(application: Application) : AndroidViewModel(application)
 
     }
 
-    //찜한 가게의 정보를 불러 오는 메서드
-    fun loadHeartStoreList(id: String) {
+    //찜한 가게의 정보를 요청 하는 메서드
+    fun requestHeartStoreList(id: String) {
         gangChuStoreRepo.requestMyHeartStore(id)
     }
 
@@ -90,13 +90,13 @@ class GangChuViewModel(application: Application) : AndroidViewModel(application)
         Log.i("filterName", filterName.value.toString())
     }
 
-    //메인에 들어갈 가게 리스트를 불러오는 메서드
-    fun loadGangChuList(id: String) {
+    //메인에 들어갈 가게 리스트를 요청 하는 메서드
+    fun requestGangChuList(id: String) {
         gangChuStoreRepo.requestStoreList(id)
     }
 
-    // 검색 결과에 따른 가게 리스트를 불러 오는 메서드
-    fun loadGangChuFilterSearchList(id: String) {
+    // 검색 결과에 따른 가게 리스트를 요청 하는 메서드
+    fun requestGangChuFilterSearchList(id: String) {
         gangChuStoreRepo.requestFilterSearchStore(researchKeyword, id = id)
     }
 

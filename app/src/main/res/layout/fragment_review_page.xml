@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="reviewInfo"
-            type="com.incava.gangchuplace.model.ReviewInfo" />
+            name="myReviewInfo"
+            type="com.incava.gangchuplace.model.MyReviewInfo" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            setReviewPageToolbar="@{reviewInfo}"
+            setReviewPageToolbar="@{myReviewInfo}"
             app:menu="@menu/review_page_menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
                         android:id="@+id/circleImageView2"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        setCircleImage="@{reviewInfo.img}"
+                        setCircleImage="@{myReviewInfo.profile}"
                         tools:src="@drawable/normal_image"
                         tools:layout_editor_absoluteX="0dp"
                         tools:layout_editor_absoluteY="19dp" />
@@ -55,7 +55,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:text="@{reviewInfo.name}"
+                        android:text="@{myReviewInfo.name}"
                         tools:text="incava"
                         app:layout_constraintStart_toEndOf="@+id/circleImageView2"
                         app:layout_constraintTop_toTopOf="@+id/circleImageView2" />
@@ -77,7 +77,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginEnd="16dp"
-                        android:text="@{reviewInfo.rank}"
+                        android:text="@{myReviewInfo.rank}"
                         tools:text="4.6"/>
 
 
@@ -86,8 +86,19 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="가게명 : 우동 가조쿠"
-                    android:text="@{reviewInfo.store}"/>
+                    tools:text="장소 : 우동 가조쿠"
+                    android:text='@{"장소 : "  + myReviewInfo.store}'
+                    android:textSize="18sp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    setImage="@{myReviewInfo.image}"
+
+                    />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -96,7 +107,7 @@
                     tools:text="asdsadsadsadsadasdsadasdasda\n1\n1\n1\n1\
                     1nsdsadasdasdsad\nd\nd\nd\nd\dnasdfdasdfdsfdsfs
                     \nd\nd\nd\nd\dn\dnd\dnd d d d dd"
-                    android:text="@{reviewInfo.body}"
+                    android:text="@{myReviewInfo.body}"
                     app:layout_constraintTop_toBottomOf="@+id/circleImageView2"
                     tools:layout_editor_absoluteX="0dp" />
 

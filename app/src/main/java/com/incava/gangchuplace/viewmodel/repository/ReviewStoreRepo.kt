@@ -2,6 +2,7 @@ package com.incava.gangchuplace.viewmodel.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.incava.gangchuplace.model.MyReviewInfo
 import com.incava.gangchuplace.model.ReviewInfo
 import com.incava.gangchuplace.util.Common.fireStore
 import kotlinx.coroutines.CoroutineScope
@@ -13,12 +14,12 @@ import kotlinx.coroutines.tasks.await
 class ReviewStoreRepo {
 
     // 해당 가게의 리뷰를 가지고 있는 List
-    var storeReviewList = MutableLiveData<MutableList<ReviewInfo>>()
+    var storeReviewList = MutableLiveData<MutableList<MyReviewInfo>>()
 
     fun loadStoreReviewList(storeTitle: String) {
         CoroutineScope(Dispatchers.IO).launch {
             //가게 리뷰를 담을 빈 배열
-            var list = mutableListOf<ReviewInfo>()
+            var list = mutableListOf<MyReviewInfo>()
             //가게의 리뷰를 담고 있는 스냅샷
             val querySnapshot = fireStore.collection("Store")
                 .document(storeTitle)
@@ -57,12 +58,11 @@ class ReviewStoreRepo {
             (job.get("image") ?: "").toString()
         }.await()
     }
-
-    // ReviewInfo객체로 만들어 주는 메서드.
-    private fun getReviewInfo(data: Map<String, Any>,name : String,image : String): ReviewInfo {
-        return ReviewInfo(
-            name= name,
-            img = image,
+    private fun getReviewInfo(data: Map<String, Any>, name: String,profile: String): MyReviewInfo {
+        return MyReviewInfo(
+            profile = profile,
+            name = name,
+            image = data["image"].toString(),
             timeStamp = data["timeStamp"].toString(),
             rank = data["rank"].toString(),
             body = data["body"].toString(),

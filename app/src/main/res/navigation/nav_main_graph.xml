@@ -107,7 +107,7 @@
         android:name="com.incava.gangchuplace.view.write.ReviewPageFragment"
         android:label="리뷰" >
         <argument
-            android:name="reviewInfo"
+            android:name="myReviewInfo"
             app:argType="string" />
     </fragment>
     <fragment

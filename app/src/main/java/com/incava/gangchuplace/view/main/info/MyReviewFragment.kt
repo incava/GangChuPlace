@@ -8,16 +8,23 @@ import com.incava.gangchuplace.R
 import com.incava.gangchuplace.base.BaseFragment
 import com.incava.gangchuplace.databinding.FragmentMyReviewBinding
 import com.incava.gangchuplace.model.User
+import com.incava.gangchuplace.util.Common
 import com.incava.gangchuplace.viewmodel.DetailPageViewModel
+import com.incava.gangchuplace.viewmodel.MyReviewViewModel
 
 
 class MyReviewFragment : BaseFragment<FragmentMyReviewBinding>(R.layout.fragment_my_review) {
-    private val detailPageViewModel: DetailPageViewModel by activityViewModels()
+    private val myReviewViewModel: MyReviewViewModel by viewModels()
+    val uniqueId by lazy{
+        Common.getSharedPreference(requireContext()).run {
+            "${loginRoute}+${email}"
+        }
+    }
     override fun init() {
         binding.apply {
-            detailPageVM = detailPageViewModel
+            myReviewVM = myReviewViewModel
             // storePlace를 전달.
-            detailPageViewModel.setUser(User("인간","","ingi1118@naver.com","카카오톡","123123"))
+            myReviewViewModel.requestMyReview(uniqueId)
             toolbar.setupWithNavController(findNavController())
         }
     }

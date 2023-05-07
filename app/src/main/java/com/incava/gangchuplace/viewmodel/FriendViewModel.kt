@@ -65,7 +65,7 @@ class FriendViewModel : ViewModel() {
         var friendIds = mutableListOf<String>()
         var user = getSharedPreference(view.context)
         val query = fireStore.collection("User")
-            .document("${user.loginRoute}+${user.id}")
+            .document("${user.loginRoute}+${user.email}")
             .collection(collection)
             .get()
             .await()
@@ -108,7 +108,7 @@ class FriendViewModel : ViewModel() {
                     }
                 } else if (requestDuplicateCheck(
                         friendId.documents[0].id,
-                        "${user.loginRoute}+${user.id}"
+                        "${user.loginRoute}+${user.email}"
                     ).documents.isNotEmpty()
                 ) {
                     //만약 이미 요청한 아이디가 있다면
@@ -120,13 +120,13 @@ class FriendViewModel : ViewModel() {
                         async {
                             uploadRequestFriend(
                                 friendId.documents[0].id,
-                                "${user.loginRoute}+${user.id}"
+                                "${user.loginRoute}+${user.email}"
                             )
                         },
                         async {
                             uploadRequestedFriend(
                                 friendId.documents[0].id,
-                                "${user.loginRoute}+${user.id}"
+                                "${user.loginRoute}+${user.email}"
                             )
                         }
                     )

@@ -13,7 +13,7 @@ class MyHeartFragment : BaseFragment<FragmentMyHeartBinding>(R.layout.fragment_m
     private val gangChuViewModel : GangChuViewModel by activityViewModels()
     val uniqueId by lazy{
         getSharedPreference(requireContext()).run {
-            "${loginRoute}+${id}"
+            "${loginRoute}+${email}"
         }
     }
     override fun init() {

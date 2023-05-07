@@ -106,29 +106,7 @@ class LoginRepo(private val application: Application) {
             .apply()
     }
 
-    fun requestLogin(id: String, userDTO: UserDTO) {
-        val docRef = fireStore.collection("User").document(id)
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                //id값이 있는지 확인
-                val document = docRef.get().await()
 
-                //아이디가 존재여부 확인
-                if (document.exists()) {
-                    // Document가 존재하는 경우 값들을 읽어와 저장.
-                    saveInfo(document, id)
-                } else {
-                    // Document가 존재하지 않는 경우 데이터 추가.
-                    docRef.set(userDTO).await()
-                    Log.d(TAG, "DocumentSnapshot successfully written!")
-                }
-                checkLogin.postValue(true)
-            } catch (e: Exception) {
-                checkLogin.postValue(false)
-                Log.w(TAG, "Error writing document", e)
-            }
-        }
-    }
 
 }
 

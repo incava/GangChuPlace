@@ -14,7 +14,7 @@ class GangChuFragment : BaseFragment<FragmentGangChuBinding>(R.layout.fragment_g
     val gangChuViewModel by lazy { ViewModelProvider(requireActivity())[GangChuViewModel::class.java] }
     val uniqueId by lazy{
         getSharedPreference(requireContext()).run {
-            "${loginRoute}+${id}"
+            "${loginRoute}+${email}"
         }
     }
     override fun init() {

@@ -63,13 +63,13 @@ class GangChuViewModel(application: Application) : AndroidViewModel(application)
             // 체크에 따른 찜하기 or 실패
             if (checked) { // 찜 기능.
                 val result =
-                    heartStoreRepo.insertHeartStore("${userInfo.loginRoute}+${userInfo.id}", item)
+                    heartStoreRepo.insertHeartStore("${userInfo.loginRoute}+${userInfo.email}", item)
                 Toast.makeText(view.context, if (result) "찜 완료 " else "실패", Toast.LENGTH_SHORT)
                     .show()
             } else {
                 //찜 해제 기능
                 val result =
-                    heartStoreRepo.deleteHeartStore("${userInfo.loginRoute}+${userInfo.id}", item)
+                    heartStoreRepo.deleteHeartStore("${userInfo.loginRoute}+${userInfo.email}", item)
                 Toast.makeText(view.context, if (result) "찜 해제" else "실패", Toast.LENGTH_SHORT)
                     .show()
             }

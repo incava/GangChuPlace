@@ -73,7 +73,7 @@ class WriteViewModel : ViewModel() {
 
                     // sharedPreference 파일 접근.
                     getSharedPreference(view.context).also {
-                        id = it.id
+                        id = it.email
                         loginRoute = it.loginRoute
                     }
 

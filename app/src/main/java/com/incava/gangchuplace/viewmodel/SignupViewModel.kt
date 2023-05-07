@@ -5,9 +5,10 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.incava.gangchuplace.R
-import com.incava.gangchuplace.adapter.Common
-import com.incava.gangchuplace.adapter.Common.fireStore
+import com.incava.gangchuplace.adapter.CommonBindingAdapter
 import com.incava.gangchuplace.model.UserDTO
+import com.incava.gangchuplace.util.Common.fireStore
+import com.incava.gangchuplace.util.Common.showDialog
 
 class SignupViewModel : ViewModel() {
 
@@ -35,7 +36,7 @@ class SignupViewModel : ViewModel() {
 
     fun signupCheck(view: View) {
         if (password!=passwordConfirm){
-            Common.showDialog(view.context, "회원가입 실패!", "아이디 또는 비밀번호를 다시 한번 확인해 주세요.")
+            showDialog(view.context, "회원가입 실패!", "아이디 또는 비밀번호를 다시 한번 확인해 주세요.")
             return
         }
         val user = UserDTO(nickname,"",loginRoute,password)
@@ -47,7 +48,7 @@ class SignupViewModel : ViewModel() {
                 view.findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
             }
             .addOnFailureListener {
-                Common.showDialog(view.context, "회원가입 실패!", "아이디 또는 비밀번호를 다시 한번 확인해 주세요.")
+                showDialog(view.context, "회원가입 실패!", "아이디 또는 비밀번호를 다시 한번 확인해 주세요.")
             }
     }
 

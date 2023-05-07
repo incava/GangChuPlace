@@ -8,10 +8,10 @@ import androidx.fragment.app.findFragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.QuerySnapshot
-import com.incava.gangchuplace.adapter.Common.fireStore
-import com.incava.gangchuplace.adapter.Common.getSharedPreference
-import com.incava.gangchuplace.adapter.Common.showDialog
 import com.incava.gangchuplace.model.User
+import com.incava.gangchuplace.util.Common.fireStore
+import com.incava.gangchuplace.util.Common.getSharedPreference
+import com.incava.gangchuplace.util.Common.showDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

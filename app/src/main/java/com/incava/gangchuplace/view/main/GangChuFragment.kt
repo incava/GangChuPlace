@@ -4,9 +4,9 @@ import android.Manifest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import com.incava.gangchuplace.R
-import com.incava.gangchuplace.adapter.Common.getSharedPreference
 import com.incava.gangchuplace.base.BaseFragment
 import com.incava.gangchuplace.databinding.FragmentGangChuBinding
+import com.incava.gangchuplace.util.Common.getSharedPreference
 import com.incava.gangchuplace.viewmodel.GangChuViewModel
 
 class GangChuFragment : BaseFragment<FragmentGangChuBinding>(R.layout.fragment_gang_chu) {

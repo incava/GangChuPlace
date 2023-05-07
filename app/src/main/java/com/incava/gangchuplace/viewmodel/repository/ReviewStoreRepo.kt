@@ -2,11 +2,8 @@ package com.incava.gangchuplace.viewmodel.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.incava.gangchuplace.adapter.Common.fireStore
-import com.incava.gangchuplace.model.GangChuPreview
-import com.incava.gangchuplace.model.ReviewDTO
 import com.incava.gangchuplace.model.ReviewInfo
-import com.incava.gangchuplace.model.StorePlace
+import com.incava.gangchuplace.util.Common.fireStore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

@@ -1,7 +1,8 @@
 package com.incava.gangchuplace.viewmodel.repository
 
-import com.incava.gangchuplace.adapter.Common.fireStore
+
 import com.incava.gangchuplace.model.GangChuPreview
+import com.incava.gangchuplace.util.Common.fireStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext

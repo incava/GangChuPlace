@@ -12,9 +12,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import com.google.gson.Gson
 import com.incava.gangchuplace.R
-import com.incava.gangchuplace.adapter.Common.getSharedPreference
 import com.incava.gangchuplace.base.BaseContainerFragmentDirections
 import com.incava.gangchuplace.model.GangChuPreview
+import com.incava.gangchuplace.util.Common.getSharedPreference
 import com.incava.gangchuplace.view.main.GangChuFragment
 import com.incava.gangchuplace.view.main.MainActivity
 import com.incava.gangchuplace.view.main.info.MyHeartFragmentDirections

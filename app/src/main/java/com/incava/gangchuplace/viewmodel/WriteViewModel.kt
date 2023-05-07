@@ -1,39 +1,26 @@
 package com.incava.gangchuplace.viewmodel
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import android.net.Uri
-import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.result.PickVisualMediaRequest
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.google.firebase.storage.FirebaseStorage
-import com.google.gson.Gson
 import com.incava.gangchuplace.R
-import com.incava.gangchuplace.adapter.Common.fireStore
-import com.incava.gangchuplace.adapter.Common.getCurrentDateTime
-import com.incava.gangchuplace.adapter.Common.getSharedPreference
 import com.incava.gangchuplace.model.ReviewDTO
-import com.incava.gangchuplace.model.ReviewInfo
 import com.incava.gangchuplace.model.StorePlace
-import com.incava.gangchuplace.model.User
-import com.incava.gangchuplace.model.UserDTO
+import com.incava.gangchuplace.util.Common.fireStore
+import com.incava.gangchuplace.util.Common.getCurrentDateTime
+import com.incava.gangchuplace.util.Common.getSharedPreference
 import com.incava.gangchuplace.view.main.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.io.File
-import java.lang.StringBuilder
-import kotlin.math.log
 
 class WriteViewModel : ViewModel() {
 

@@ -8,9 +8,9 @@ import android.location.LocationManager
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.QuerySnapshot
-import com.incava.gangchuplace.adapter.Common.fireStore
 import com.incava.gangchuplace.model.GangChuPreview
 import com.incava.gangchuplace.model.StorePlace
+import com.incava.gangchuplace.util.Common.fireStore
 import com.naver.maps.geometry.LatLng
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred

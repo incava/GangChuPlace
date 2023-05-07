@@ -7,9 +7,8 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.DocumentSnapshot
-import com.incava.gangchuplace.adapter.Common
-import com.incava.gangchuplace.adapter.Common.fireStore
 import com.incava.gangchuplace.model.UserDTO
+import com.incava.gangchuplace.util.Common.fireStore
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import kotlinx.coroutines.CoroutineScope
@@ -31,10 +30,18 @@ class LoginRepo(private val application: Application) {
                     val image = user.kakaoAccount?.profile?.thumbnailImageUrl ?: ""
                     val loginRoute = "kakao"
                     val id = "${loginRoute}+${user.id}"
-                    val userDTO = UserDTO(nickname = id+"0", image = image, loginRoute = loginRoute, password = "")
-                    saveInfo(userDTO,id)
+                    val userDTO = UserDTO(
+                        nickname = id + "0",
+                        image = image,
+                        loginRoute = loginRoute,
+                        password = ""
+                    )
+                    saveInfo(userDTO, id)
                     checkLogin.postValue(true)
-                    Log.i("user정보", "${user.id.toString()} + ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+                    Log.i(
+                        "user정보",
+                        "${user.id.toString()} + ${user.kakaoAccount?.profile?.thumbnailImageUrl}"
+                    )
                 } else {
                     Log.e(TAG, "카카오 로그인 실패", error)
                     checkLogin.postValue(false)
@@ -86,6 +93,7 @@ class LoginRepo(private val application: Application) {
             .putString("image", snapshot.getString("image"))
             .apply()
     }
+
     // 오버로딩으로 userDTO로 sharedPreferences를 사용해 로그인시 정보를 저장.
     private fun saveInfo(userDTO: UserDTO, id: String) {
         //빌더 패턴 사용으로 sharePreference 파일에 저장
@@ -94,7 +102,7 @@ class LoginRepo(private val application: Application) {
             .putString("password", userDTO.password)
             .putString("loginRoute", userDTO.loginRoute)
             .putString("nickname", userDTO.nickname)
-            .putString("image",userDTO.image)
+            .putString("image", userDTO.image)
             .apply()
     }
 

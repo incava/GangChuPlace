@@ -1,17 +1,14 @@
 package com.incava.gangchuplace.adapter
 
 import android.Manifest
-import android.R.attr.text
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.incava.gangchuplace.adapter.Common.getSharedPreference
-import kotlin.math.roundToLong
+import com.incava.gangchuplace.util.Common.getSharedPreference
 
 
 object GangChuBindingAdapter {

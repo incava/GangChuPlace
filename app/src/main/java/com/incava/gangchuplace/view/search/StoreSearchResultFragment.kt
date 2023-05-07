@@ -2,9 +2,10 @@ package com.incava.gangchuplace.view.search
 
 import androidx.fragment.app.activityViewModels
 import com.incava.gangchuplace.R
-import com.incava.gangchuplace.adapter.Common.getSharedPreference
+
 import com.incava.gangchuplace.base.BaseFragment
 import com.incava.gangchuplace.databinding.FragmentStoreSearchResultBinding
+import com.incava.gangchuplace.util.Common.getSharedPreference
 import com.incava.gangchuplace.viewmodel.GangChuViewModel
 
 

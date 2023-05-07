@@ -4,9 +4,10 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.incava.gangchuplace.R
-import com.incava.gangchuplace.adapter.Common
+import com.incava.gangchuplace.adapter.CommonBindingAdapter
 import com.incava.gangchuplace.base.BaseFragment
 import com.incava.gangchuplace.databinding.FragmentLoginBinding
+import com.incava.gangchuplace.util.Common.showDialog
 import com.incava.gangchuplace.viewmodel.LoginViewModel
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
@@ -27,7 +28,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                     Toast.makeText(requireContext(), "로그인 성공!", Toast.LENGTH_SHORT).show()
                     moveHome()
                 } else {//로그인 실패시
-                    Common.showDialog(requireContext(), "로그인 실패", "아이디 또는 비밀번호를 다시 한번 확인해 주세요.")
+                    showDialog(requireContext(), "로그인 실패", "아이디 또는 비밀번호를 다시 한번 확인해 주세요.")
                 }
             })
         }

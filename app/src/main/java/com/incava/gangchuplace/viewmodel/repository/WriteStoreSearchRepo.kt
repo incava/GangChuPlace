@@ -3,7 +3,6 @@ package com.incava.gangchuplace.viewmodel.repository
 import android.text.Html
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.incava.gangchuplace.adapter.Common
 import com.incava.gangchuplace.model.StorePlace
 import com.incava.gangchuplace.model.StorePlaceDTO
 import com.incava.gangchuplace.network.NaverPlaceService

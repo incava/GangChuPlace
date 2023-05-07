@@ -93,6 +93,19 @@ object ToolbarBindingAdapter {
             }
         }
     }
+    @JvmStatic
+    @BindingAdapter("setMapToolbar")
+    fun setMapToolbar(view: Toolbar, s : String) {
+        view.apply {
+            setOnMenuItemClickListener {
+                //강추로 돌아 가는 버튼을 누를 경우,
+                if (it.itemId == R.id.gang_chu) {
+                    findNavController().navigate(R.id.action_gangChuMapFragment_to_gangChuFragment)
+                }
+                true
+            }
+        }
+    }
 
 
 }

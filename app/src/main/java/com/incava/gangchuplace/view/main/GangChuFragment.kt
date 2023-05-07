@@ -1,7 +1,10 @@
 package com.incava.gangchuplace.view.main
 
 import android.Manifest
+import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.incava.gangchuplace.R
 import com.incava.gangchuplace.base.BaseFragment
@@ -11,12 +14,14 @@ import com.incava.gangchuplace.viewmodel.GangChuViewModel
 
 class GangChuFragment : BaseFragment<FragmentGangChuBinding>(R.layout.fragment_gang_chu) {
 
-    val gangChuViewModel by lazy { ViewModelProvider(requireActivity())[GangChuViewModel::class.java] }
+
+    val gangChuViewModel  : GangChuViewModel by activityViewModels()
     val uniqueId by lazy{
         getSharedPreference(requireContext()).run {
             "${loginRoute}+${email}"
         }
     }
+
     override fun init() {
         binding.gangChu = this
         binding.gangChuVM = gangChuViewModel
@@ -26,5 +31,8 @@ class GangChuFragment : BaseFragment<FragmentGangChuBinding>(R.layout.fragment_g
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
         gangChuViewModel.requestGangChuList(uniqueId)
     }
+
+
+
 
 }

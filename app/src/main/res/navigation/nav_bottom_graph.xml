@@ -15,8 +15,8 @@
         android:label="fragment_gang_chu"
         tools:layout="@layout/fragment_gang_chu">
         <action
-            android:id="@+id/action_gangChuFragment_to_mapFragment"
-            app:destination="@id/mapFragment" />
+            android:id="@+id/action_gangChuFragment_to_gangChuMapFragment"
+            app:destination="@id/gangChuMapFragment" />
     </fragment>
     <fragment
         android:id="@+id/rouletteFragment"
@@ -41,9 +41,15 @@
             app:destination="@id/rouletteFragment" />
     </fragment>
     <fragment
-        android:id="@+id/mapFragment"
-        android:name="com.incava.gangchuplace.view.main.MapFragment"
-        android:label="MapFragment" />
+        android:id="@+id/gangChuMapFragment"
+        android:name="com.incava.gangchuplace.view.main.GangChuMapFragment"
+        android:label="강추 맛집 지도" >
+        <action
+            android:id="@+id/action_gangChuMapFragment_to_gangChuFragment"
+            app:destination="@id/gangChuFragment"
+            app:popUpTo="@id/gangChuFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <action
         android:id="@+id/action_global_nav_write_graph"
         app:destination="@id/nav_write_graph" />

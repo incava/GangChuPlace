@@ -115,7 +115,7 @@ class GangChuViewModel(application: Application) : AndroidViewModel(application)
             }
 
             R.id.map -> view.findNavController()
-                .navigate(R.id.action_gangChuFragment_to_mapFragment) // map으로 이동.
+                .navigate(R.id.action_gangChuFragment_to_gangChuMapFragment) // map으로 이동.
         }
     }
     //    action_storeSearchResultFragment_to_detailPageFragment

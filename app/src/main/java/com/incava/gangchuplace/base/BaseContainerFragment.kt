@@ -19,9 +19,9 @@ class BaseContainerFragment : Fragment() {
     private var _binding : FragmentBaseContainerBinding? = null
     private val binding get() = _binding!!
 
-    var time : Long = 0
+    //var time : Long = 0
 
-    lateinit var backPressedCallback : OnBackPressedCallback
+    //lateinit var backPressedCallback : OnBackPressedCallback
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,16 +31,17 @@ class BaseContainerFragment : Fragment() {
         _binding = FragmentBaseContainerBinding.inflate(inflater,container,false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        backPressedCallback = requireActivity().onBackPressedDispatcher.addCallback(this){
-            if (System.currentTimeMillis() - time < 3000){// 3초 안에 2번 back이 눌릴 시 시스템 종료.
-                requireActivity().finish()
-            }
-            time = System.currentTimeMillis() // 다시 time 조정.
-            Toast.makeText(requireContext(),"한번 더 누르면 종료 됩니다.", Toast.LENGTH_SHORT).show()
-        }
-        initNavigation()
+//        backPressedCallback = requireActivity().onBackPressedDispatcher.addCallback(this){
+//            if (System.currentTimeMillis() - time < 3000){// 3초 안에 2번 back이 눌릴 시 시스템 종료.
+//                requireActivity().finish()
+//            }
+//            time = System.currentTimeMillis() // 다시 time 조정.
+//            Toast.makeText(requireContext(),"한번 더 누르면 종료 됩니다.", Toast.LENGTH_SHORT).show()
+//        }
+    initNavigation()
     }
 
     private fun initNavigation() {

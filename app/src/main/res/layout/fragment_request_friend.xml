@@ -35,7 +35,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
-            app:setFriendAdapter="@{friendVM.requestFriendList}"
+            app:setFriendAdapter="@{friendVM.requestedFriendList}"
             app:friendType="@{Integer.valueOf(1)}" />
 
         <androidx.appcompat.widget.AppCompatTextView

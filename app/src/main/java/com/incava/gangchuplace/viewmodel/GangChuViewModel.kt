@@ -45,11 +45,6 @@ class GangChuViewModel(application: Application) : AndroidViewModel(application)
 
     var researchKeyword = ""
 
-    var filterName = MutableLiveData("평점순")
-
-    var filterMethod = mutableListOf("평점순", "거리순", "리뷰순", "친구 리뷰순", "친구 평점순")
-
-
     init {
         _gangChuList.value = mutableListOf()
         _gangChuSearchList.value = mutableListOf()
@@ -84,10 +79,9 @@ class GangChuViewModel(application: Application) : AndroidViewModel(application)
     }
 
     //임시로 설정한 메서드
-    fun setFilterList(view: View) {
+    fun setSortFilterList(filter : String) {
         //todo 추후 리스트에 대한 정렬 하는 기능 구현
-        filterName.value = filterMethod[Random().nextInt(filterMethod.size)]
-        Log.i("filterName", filterName.value.toString())
+        Log.i("filterName", filter.toString())
     }
 
     //메인에 들어갈 가게 리스트를 요청 하는 메서드

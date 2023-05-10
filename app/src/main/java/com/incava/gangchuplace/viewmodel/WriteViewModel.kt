@@ -21,6 +21,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.io.File
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class WriteViewModel : ViewModel() {
 
@@ -81,7 +83,7 @@ class WriteViewModel : ViewModel() {
                     val imageUri = uploadStorage("${id}+${loginRoute}","Review",storePlace.title)
 
 
-                    val time = getCurrentDateTime()
+                    val time = getDate()
                     // 보낼 reviewDTO
                     val reviewDTO = ReviewDTO(
                         timeStamp = time,
@@ -143,6 +145,12 @@ class WriteViewModel : ViewModel() {
         val uploadTask = imageRef.putFile(file)
         uploadTask.await()
         return imageRef.downloadUrl.await().toString() //url을 다운 받은 후 리턴.
+    }
+
+    private fun getDate() : String{
+        val currentDateTime = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")
+        return currentDateTime.format(formatter)
     }
 
 

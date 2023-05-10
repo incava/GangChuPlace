@@ -37,6 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:padding="2dp"
                 android:background="@color/white">
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -55,9 +56,10 @@
                     android:layout_marginTop="8dp"
                     >
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="16sp"
                         android:text='@{"장소 : " + detailPageVM.gangChuPreview.storePlace.title}'
                         android:layout_weight="3"
                         tools:layout_editor_absoluteX="51dp"
@@ -74,7 +76,8 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="주소 : 인천광역시 계양구 안남로 573번길 18"
+                    android:textSize="16sp"
+                    android:text='@{"주소 : " + detailPageVM.gangChuPreview.storePlace.address}'
                     android:layout_marginBottom="8dp"
                     />
 

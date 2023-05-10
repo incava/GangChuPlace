@@ -1,14 +1,21 @@
 package com.incava.gangchuplace.adapter
 
 import android.Manifest
+import android.R
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.incava.gangchuplace.model.GangChuPreview
 import com.incava.gangchuplace.util.Common.getSharedPreference
+import com.incava.gangchuplace.viewmodel.GangChuViewModel
 
 
 object GangChuBindingAdapter {
@@ -19,15 +26,6 @@ object GangChuBindingAdapter {
     fun setNameBind(view: TextView, noUse: String) {
         view.text = getSharedPreference(view.context).nickname
     }
-
-    @JvmStatic
-    @BindingAdapter("setFilterName")
-    fun setFilterName(view: TextView, name: String) {
-        val content = SpannableString(name)
-        content.setSpan(UnderlineSpan(), 0, name.length, 0)
-        view.text = content
-    }
-
     @SuppressLint("SetTextI18n")
     @JvmStatic
     @BindingAdapter("translateDistance")
@@ -43,4 +41,24 @@ object GangChuBindingAdapter {
             }
         }"
     }
+
+    fun setAdapters(view : Spinner, gangChuVM : GangChuViewModel){
+        view.apply {
+            adapter = ArrayAdapter(
+                view.context, R.layout.simple_dropdown_item_1line,
+                resources.getStringArray(com.incava.gangchuplace.R.array.gang_chu_filter)
+            )
+            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+                    if (parent != null) {
+                        gangChuVM.setSortFilterList(parent.getItemAtPosition(position).toString())
+                    }
+                }
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+
+                }
+            }
+        }
+    }
+
 }

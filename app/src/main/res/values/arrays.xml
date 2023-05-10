@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gang_chu_filter">
+        <item>평점순</item>
+        <item>이름순</item>
+        <item>거리순</item>
+        <item>친구 평점순</item>
+    </string-array>
+</resources>

@@ -18,7 +18,6 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:menu="@menu/review_page_menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,13 +37,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:padding="2dp"
                 android:background="@color/white">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/normal_image"
+                    android:scaleType="centerInside"
+                    setImage="@{detailPageVM.gangChuPreview.storePlace.image}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -56,10 +56,11 @@
                     android:layout_marginTop="8dp"
                     >
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="성동 오랑"
+                        android:textSize="16sp"
+                        android:text='@{"장소 : " + detailPageVM.gangChuPreview.storePlace.title}'
                         android:layout_weight="3"
                         tools:layout_editor_absoluteX="51dp"
                         tools:layout_editor_absoluteY="459dp" />
@@ -67,7 +68,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="평점 : 4.6"
+                        android:text='@{"평점 : " + String.valueOf(detailPageVM.gangChuPreview.rank) + "점"}'
                         android:layout_weight="1"
                         />
                 </LinearLayout>
@@ -75,7 +76,8 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="주소 : 인천광역시 계양구 안남로 573번길 18"
+                    android:textSize="16sp"
+                    android:text='@{"주소 : " + detailPageVM.gangChuPreview.storePlace.address}'
                     android:layout_marginBottom="8dp"
                     />
 
@@ -106,7 +108,7 @@
                         />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    setDetailAdapter="@{detailPageVM}"
+                    setDetailAdapter="@{detailPageVM.detailPageList}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 

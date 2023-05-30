@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.incava.gangchuplace.model.GangChuPreview
+import com.incava.gangchuplace.model.MyReviewInfo
+import com.incava.gangchuplace.model.ReviewInfo
 import com.incava.gangchuplace.model.RouletteMenuModel
 import com.incava.gangchuplace.model.StorePlace
 import com.incava.gangchuplace.model.User
@@ -17,27 +19,36 @@ object RecyclerViewBindingAdapter {
     // DetailAdapter를 연결하는 바인딩 어댑터
     @JvmStatic
     @BindingAdapter("setDetailAdapter")
-    fun setDetailAdapter(view: RecyclerView, vm: DetailPageViewModel) {
+    fun setDetailAdapter(view: RecyclerView, items : MutableList<MyReviewInfo>) {
         view.apply {
-            adapter = DetailAdapter(vm)
+            adapter = DetailAdapter(items)
+            layoutManager = LinearLayoutManager(view.context)
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("setMyReviewAdapter")
+    fun setMyReviewAdapter(view: RecyclerView, items : MutableList<MyReviewInfo>) {
+        view.apply {
+            adapter = MyReviewAdapter(items)
             layoutManager = LinearLayoutManager(view.context)
         }
     }
 
     @JvmStatic
     @BindingAdapter("setMyHeartAdapter")
-    fun setMyHeartAdapter(view: RecyclerView, vm: GangChuViewModel) {
+    fun setMyHeartAdapter(view: RecyclerView, items: MutableList<GangChuPreview>) {
         view.apply {
-            adapter = MyHeartAdapter(vm)
+            adapter = MyHeartAdapter(items)
             layoutManager = LinearLayoutManager(view.context)
         }
     }
 
     @JvmStatic
     @BindingAdapter("setWriteStoreAdapter")
-    fun setWriteStoreAdapter(view: RecyclerView, item: MutableList<StorePlace>) {
+    fun setWriteStoreAdapter(view: RecyclerView, items: MutableList<StorePlace>) {
         view.apply {
-            adapter = WriteAdapter(item)
+            adapter = WriteAdapter(items)
             layoutManager = LinearLayoutManager(view.context)
         }
     }

@@ -12,13 +12,14 @@ import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.incava.gangchuplace.R
 import com.incava.gangchuplace.base.BaseFragment
 import com.incava.gangchuplace.databinding.FragmentRequestFriendDialogBinding
 import com.incava.gangchuplace.viewmodel.FriendViewModel
 
 class RequestFriendFragmentDialog :  DialogFragment(){
-    private val friendViewModel : FriendViewModel by activityViewModels()
+    private val friendViewModel : FriendViewModel by viewModels()
 
     private var _binding : FragmentRequestFriendDialogBinding? = null
     val binding get() = _binding!!

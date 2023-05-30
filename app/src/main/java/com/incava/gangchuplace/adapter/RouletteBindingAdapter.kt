@@ -1,23 +1,15 @@
 package com.incava.gangchuplace.adapter
 
-import android.content.res.Resources
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.util.DisplayMetrics
-import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.LiveData
-import androidx.navigation.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bluehomestudio.luckywheel.LuckyWheel
 import com.bluehomestudio.luckywheel.WheelItem
 import com.incava.gangchuplace.R
-import com.incava.gangchuplace.model.RouletteMenuModel
+import com.incava.gangchuplace.util.Common.showDialog
 import com.incava.gangchuplace.viewmodel.RouletteViewModel
 
 object RouletteBindingAdapter {
@@ -44,7 +36,7 @@ object RouletteBindingAdapter {
             //돌림판이 멈췄을때 반응하는 리스너
             setLuckyWheelReachTheTarget {
                 rouletteViewModel.isRotate = false
-                Common.showDialog(this.context,"메뉴 결과","${list[rouletteViewModel.point.value?.toInt()!!].text}(으)로 결정되었습니다.\n그 곳으로 가볼까요?")
+                showDialog(this.context,"메뉴 결과","${list[rouletteViewModel.point.value?.toInt()!!].text}(으)로 결정되었습니다.\n그 곳으로 가볼까요?")
             }
         }
 

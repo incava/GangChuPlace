@@ -2,23 +2,28 @@ package com.incava.gangchuplace.viewmodel
 
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.incava.gangchuplace.R
-import com.incava.gangchuplace.adapter.Common
-import com.incava.gangchuplace.adapter.Common.fireStore
-import com.incava.gangchuplace.model.UserDTO
+import com.incava.gangchuplace.util.Common
+import com.incava.gangchuplace.util.SignupCode
+import com.incava.gangchuplace.viewmodel.repository.SignupRepo
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SignupViewModel : ViewModel() {
 
-    private var id = ""
+    private val signupRepo by lazy { SignupRepo() }
+    private var email = ""
     private var nickname = ""
     private var password = ""
     private var passwordConfirm = ""
-    private var loginRoute = "home"
+    val isLoading = MutableLiveData(false)
 
     fun setId(txt: String) {
-        id = txt
+        email = txt
     }
 
     fun setNickname(txt: String) {
@@ -34,21 +39,21 @@ class SignupViewModel : ViewModel() {
     }
 
     fun signupCheck(view: View) {
-        if (password!=passwordConfirm){
-            Common.showDialog(view.context, "회원가입 실패!", "아이디 또는 비밀번호를 다시 한번 확인해 주세요.")
-            return
-        }
-        val user = UserDTO(nickname,"",loginRoute,password)
-        fireStore.collection("User")
-            .document("home+${id}")
-            .set(user)
-            .addOnSuccessListener {
-                Toast.makeText(view.context, "회원가입 완료!", Toast.LENGTH_SHORT).show()
+        CoroutineScope(Dispatchers.Main).launch {
+            isLoading.postValue(true)
+            val result = signupRepo.requestSignup(email, nickname, password, passwordConfirm)
+            isLoading.postValue(false)
+            if (result == SignupCode.SignupSuccess) {
+                //회원 가입 성공
+                Toast.makeText(view.context, "회원 가입 성공", Toast.LENGTH_SHORT).show()
                 view.findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
             }
-            .addOnFailureListener {
-                Common.showDialog(view.context, "회원가입 실패!", "아이디 또는 비밀번호를 다시 한번 확인해 주세요.")
+            else{
+                //회원 가입 실패
+                Common.showDialog(view.context,"회원 가입 실패",result.comment)
             }
+        }
+
     }
 
 }

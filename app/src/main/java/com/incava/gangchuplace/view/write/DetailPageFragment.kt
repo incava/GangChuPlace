@@ -15,6 +15,7 @@ import com.google.gson.Gson
 import com.incava.gangchuplace.R
 import com.incava.gangchuplace.base.BaseFragment
 import com.incava.gangchuplace.databinding.FragmentDetailPageBinding
+import com.incava.gangchuplace.model.GangChuPreview
 import com.incava.gangchuplace.model.StorePlace
 import com.incava.gangchuplace.viewmodel.DetailPageViewModel
 import com.naver.maps.geometry.LatLng
@@ -31,8 +32,8 @@ class DetailPageFragment : BaseFragment<FragmentDetailPageBinding>(R.layout.frag
 
     // 받아온 args를 가져와 storePlace에 Json화.
     val args: DetailPageFragmentArgs by navArgs()
-    val storePlace: StorePlace by lazy {
-        Gson().fromJson(args.storePlace, StorePlace::class.java)
+    val gangChuPreview: GangChuPreview by lazy {
+        Gson().fromJson(args.gangChuPreview, GangChuPreview::class.java)
     }
     lateinit var naverMap : NaverMap
 
@@ -43,8 +44,9 @@ class DetailPageFragment : BaseFragment<FragmentDetailPageBinding>(R.layout.frag
     override fun init() {
         binding.apply {
             detailPageVM = detailPageViewModel
+            Log.i("gangChuPreview",gangChuPreview.toString())
             // storePlace를 전달.
-            detailPageViewModel.setStorePlace(storePlace)
+            detailPageViewModel.setGangChuPreview(gangChuPreview)
             // 툴바를 연결
             toolbar.setupWithNavController(findNavController())
             ivMapTransparent.setOnTouchListener { view, motionEvent ->
@@ -80,14 +82,14 @@ class DetailPageFragment : BaseFragment<FragmentDetailPageBinding>(R.layout.frag
     }
 
     private fun settingMark() {
-        val pos = LatLng(storePlace.mapx.toDouble(),storePlace.mapy.toDouble())
+        val pos = LatLng(gangChuPreview.storePlace.mapx,gangChuPreview.storePlace.mapy)
         val cameraUpdate = CameraUpdate.scrollTo(pos) //카메라 움직임.
             .animate(CameraAnimation.Fly) //애니메이션 추가.
         naverMap.moveCamera(cameraUpdate)
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
         val marker = Marker()
         marker.position = pos//마커 위도 경도 넣기.
-        marker.captionText = storePlace.title  // 앱바의 제목과 일치하므로 넣어줌.
+        marker.captionText = gangChuPreview.storePlace.title  // 앱바의 제목과 일치하므로 넣어줌.
         marker.map = naverMap // 마커 생성.
     }
 

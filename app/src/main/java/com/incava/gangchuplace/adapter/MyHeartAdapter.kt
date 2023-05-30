@@ -11,11 +11,10 @@ import com.incava.gangchuplace.model.GangChuPreview
 import com.incava.gangchuplace.view.main.MainActivity
 import com.incava.gangchuplace.viewmodel.GangChuViewModel
 
-class MyHeartAdapter(val vm: GangChuViewModel) :
+class MyHeartAdapter(val myHeartList : MutableList<GangChuPreview>) :
     RecyclerView.Adapter<MyHeartAdapter.VH>() {
 
     // 찜한 가게 리스트
-    val myHeartList:MutableList<GangChuPreview> = vm.gangChuList.value ?: mutableListOf()
     inner class VH(val binding: ItemMyHeartStoreBinding) : ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -26,7 +25,7 @@ class MyHeartAdapter(val vm: GangChuViewModel) :
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.binding.apply {
             gangChuPreview = myHeartList[position]
-            gangChuVM = vm
+            gangChuVM = ViewModelProvider(holder.binding.root.context as MainActivity)[GangChuViewModel::class.java]
         }
     }
 }

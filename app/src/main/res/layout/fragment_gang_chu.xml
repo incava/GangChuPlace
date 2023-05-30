@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="gangChu"
-            type="com.incava.gangchuplace.view.main.GangChuFragment"/>
+            type="com.incava.gangchuplace.view.main.GangChuFragment" />
+
         <variable
             name="gangChuVM"
             type="com.incava.gangchuplace.viewmodel.GangChuViewModel" />
@@ -48,24 +50,22 @@
             android:id="@+id/appCompatTextView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="강추 만의 추천 장소 리스트"
-            android:paddingStart="8dp"
             android:layout_margin="16dp"
+            android:paddingStart="8dp"
+            android:text="강추 만의 추천 장소 리스트"
             android:textSize="24sp"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            tools:layout_editor_absoluteX="0dp" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/appCompatButton"
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/rect_no_border"
-            android:drawableEnd="@drawable/vector_drop_down"
-            android:onClick="@{(view)->gangChuVM.setFilterList(view)}"
-            setFilterName="@{gangChuVM.filterName}"
-            android:padding="8dp"
-            android:layout_margin="8dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:dropDownHeight="160dp"
+            android:ems="10"
+            android:inputType="none"
+            android:scrollbars="vertical"
+            android:onItemSelected="@{(parent,view,position,id)->gangChuVM.setSortFilterList((parent.getItemAtPosition(position)).toString())}"
+            app:layout_constraintStart_toStartOf="@+id/appCompatTextView5"
             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -73,9 +73,10 @@
             recyclerAdapter="@{gangChuVM.gangChuList}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatButton" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"

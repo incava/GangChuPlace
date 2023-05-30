@@ -1,19 +1,13 @@
 package com.incava.gangchuplace.adapter
 
 import android.util.Log
-import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.BindingAdapter
-import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.incava.gangchuplace.R
-import com.incava.gangchuplace.databinding.FragmentRequestFriendBinding
-import com.incava.gangchuplace.model.ReviewInfo
-import com.incava.gangchuplace.view.main.MainActivity
+import com.incava.gangchuplace.model.MyReviewInfo
 import com.incava.gangchuplace.viewmodel.FriendViewModel
 import com.incava.gangchuplace.viewmodel.GangChuViewModel
 import com.incava.gangchuplace.viewmodel.MyInfoViewModel
@@ -34,7 +28,7 @@ object ToolbarBindingAdapter {
     //Todo 툴바 링크 전송 관련.
     @JvmStatic
     @BindingAdapter("setReviewPageToolbar")
-    fun setReviewPageToolbar(view: Toolbar, reviewInfo: ReviewInfo) {
+    fun setReviewPageToolbar(view: Toolbar, myReviewInfo: MyReviewInfo) {
         view.apply {
             setupWithNavController(findNavController())
             setOnMenuItemClickListener {
@@ -99,8 +93,19 @@ object ToolbarBindingAdapter {
             }
         }
     }
-
-
+    @JvmStatic
+    @BindingAdapter("setMapToolbar")
+    fun setMapToolbar(view: Toolbar, s : String) {
+        view.apply {
+            setOnMenuItemClickListener {
+                //강추로 돌아 가는 버튼을 누를 경우,
+                if (it.itemId == R.id.gang_chu) {
+                    findNavController().navigate(R.id.action_gangChuMapFragment_to_gangChuFragment)
+                }
+                true
+            }
+        }
+    }
 
 
 }

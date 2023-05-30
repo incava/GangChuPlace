@@ -14,22 +14,31 @@
         android:layout_height="match_parent"
         tools:context=".view.search.StoreSearchFragment">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/edit_search"
+            setSearchListener="@{gangChuVM}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rect_edit_border"
             android:drawableEnd="@drawable/vector_search"
             android:hint="장소를 검색해주세요"
-            android:layout_margin="8dp"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
             android:onTextChanged="@{(text,start,before,count) -> gangChuVM.setSearchKeyword(text.toString())}"
             android:padding="16dp"
-            android:inputType="text"
-            android:imeOptions="actionSearch"
-            setSearchListener="@{gangChuVM}"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,24 +1,12 @@
 package com.incava.gangchuplace.viewmodel
 
 import android.app.Application
-import android.content.Context
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
-import com.google.firebase.firestore.DocumentSnapshot
-import com.incava.gangchuplace.R
-import com.incava.gangchuplace.adapter.Common
-import com.incava.gangchuplace.adapter.Common.fireStore
 import com.incava.gangchuplace.viewmodel.repository.LoginRepo
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 /**
  * 로그인에 사용되는 뷰모델

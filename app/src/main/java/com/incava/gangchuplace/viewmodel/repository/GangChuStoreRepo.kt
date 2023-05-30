@@ -188,6 +188,7 @@ class GangChuStoreRepo(val application: Application) {
         }
     }
 
+    //친구의 아이디 가져 오는 메서드
     private fun loadFriendId(id: String): Deferred<QuerySnapshot?> {
         //makeLoop()
         return CoroutineScope(Dispatchers.IO).async {
@@ -275,42 +276,42 @@ class GangChuStoreRepo(val application: Application) {
     fun requestFilterSearchStore(query: String, id: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val queryList = query.split(" ")//만약 여러 결과를 위해 " "가 들어갔을 경우 따로 생각해줘야함.
-            var storeList = loadStoreInfo(id).toMutableSet()
-            Log.i("sampleList",storeList.toString())
-            // 담을 빈 리스트
-            var list = mutableListOf<GangChuPreview>()
-            storeList.forEach { item ->
-                // 원하는 검색 결과가 제목, 카테고리, 설명과 일치,포함하는 단어가 있을 경우를 찾음.
-                queryList.forEach { queryItem ->
-                    if (item.storePlace.title.contains(queryItem) || item.storePlace.category.contains(
-                            queryItem
-                        ) || item.storePlace.description.contains(queryItem)
-                    ) {
-                        list.add(item)
-                    }
+            var storeList = loadStoreInfo(id)
+            //var storeList = loadStoreInfo(id).toMutableSet()
+//            Log.i("sampleList",storeList.toString())
+//            // 담을 빈 리스트
+//            var list = mutableListOf<GangChuPreview>()
+
+            // filter와 any 내장 함수를 통해, 간결하게 리팩토링
+            val list = storeList.filter { item->
+                queryList.any{queryItem->
+                    item.storePlace.title.contains(queryItem) || item.storePlace.category.contains(queryItem) || item.storePlace.description.contains(queryItem)
                 }
             }
+//            storeList.forEach { item ->
+//                // 원하는 검색 결과가 제목, 카테고리, 설명과 일치,포함하는 단어가 있을 경우를 찾음.
+//                queryList.forEach { queryItem ->
+//                    if (item.storePlace.title.contains(queryItem) || item.storePlace.category.contains(
+//                            queryItem
+//                        ) || item.storePlace.description.contains(queryItem)
+//                    ) {
+//                        list.add(item)
+//                    }
+//                }
+//            }
             Log.i("list",list.toString())
-            storeFilterList.postValue(list)
+            storeFilterList.postValue(list.toMutableList())
         }
     }
 
     fun requestMyHeartStore(id: String) {
         CoroutineScope(Dispatchers.IO).launch {
             var storeList = loadStoreInfo(id).toMutableSet()
-            // 담을 빈 리스트
-            var list = mutableListOf<GangChuPreview>()
-            storeList.forEach { item ->
-                        //찜한 가게의 정보만 담아 저장.
-                        if(item.isHeart) list.add(item)
-                }
-            heartStoreList.postValue(list)
+            //filter 함수를 통한 간결성 확인
+            val list = storeList.filter {item->
+                item.isHeart
+            }
+            heartStoreList.postValue(list.toMutableList())
         }
     }
-
-
-
-
-
-
 }

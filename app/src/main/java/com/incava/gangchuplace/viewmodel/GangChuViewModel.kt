@@ -20,6 +20,7 @@ import com.incava.gangchuplace.view.main.MainActivity
 import com.incava.gangchuplace.view.main.info.MyHeartFragmentDirections
 import com.incava.gangchuplace.view.search.StoreSearchResultFragment
 import com.incava.gangchuplace.view.search.StoreSearchResultFragmentDirections
+import com.incava.gangchuplace.viewmodel.repository.GangChuSortRepo
 import com.incava.gangchuplace.viewmodel.repository.GangChuStoreRepo
 import com.incava.gangchuplace.viewmodel.repository.HeartStoreRepo
 import kotlinx.coroutines.CoroutineScope
@@ -31,6 +32,8 @@ import java.util.Random
 class GangChuViewModel(application: Application) : AndroidViewModel(application) {
 
     private val gangChuStoreRepo by lazy { GangChuStoreRepo(application) }
+
+    private val gangChuSortRepo by lazy { GangChuSortRepo() }
 
     private val heartStoreRepo by lazy { HeartStoreRepo() }
 
@@ -78,10 +81,13 @@ class GangChuViewModel(application: Application) : AndroidViewModel(application)
         gangChuStoreRepo.requestMyHeartStore(id)
     }
 
-    //임시로 설정한 메서드
+    //메뉴 정렬 메서드
     fun setSortFilterList(filter : String) {
-        //todo 추후 리스트에 대한 정렬 하는 기능 구현
-        Log.i("filterName", filter.toString())
+        CoroutineScope(Dispatchers.Default).launch { // 계산 목적의 Thread로 Default 사용
+            val result = gangChuSortRepo.gangChuSort(gangChuList.value?: mutableListOf(),filter)
+            Log.i("result",result.toString())
+            gangChuList.postValue(result)
+        }
     }
 
     //메인에 들어갈 가게 리스트를 요청 하는 메서드

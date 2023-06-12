@@ -251,7 +251,8 @@ class GangChuStoreRepo(val application: Application) {
         }
         //받아왔을 때,
         val manager = application.getSystemService(LOCATION_SERVICE) as LocationManager
-        val location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+        val location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER) ?: manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+        Log.i("Location",location?.longitude.toString())
         myLocation = LatLng(location?.latitude ?: 37.541, location?.longitude ?: 126.986)
     }
 
@@ -269,6 +270,7 @@ class GangChuStoreRepo(val application: Application) {
             Math.toRadians(lat2)
         )
         val c = 2 * asin(sqrt(a))
+        Log.i("distance",(r * c).toString())
         return (r * c).toInt()
     }
 

@@ -61,11 +61,11 @@ class GangChuMapFragment : BaseFragment<FragmentGangChuMapBinding>(R.layout.frag
         //만약 권한을 못 받았다면 서울시청으로 놓고 리턴.
         if (checkSelfPermission(requireContext(),Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED) {
             return LatLng(37.541, 126.986)
-
         }
         //받아왔을 때,
         val manager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        val location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+        val location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)?: manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+        Log.i("loc","long : ${location?.latitude} lng : ${location?.longitude}")
         return LatLng(location?.latitude ?: 37.541, location?.longitude ?: 126.986)
     }
 

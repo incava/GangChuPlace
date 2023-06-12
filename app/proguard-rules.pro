@@ -23,3 +23,17 @@
 -dontwarn org.conscrypt.**
 -dontwarn org.bouncycastle.**
 -dontwarn org.openjsse.**
+
+
+# Retrofit 난독화 제외
+-keep class com.incava.gangchuplace.model.**{ *; }
+-keep interface com.incava.gangchuplace.network.** { *; }
+
+# Kakao Api 난독화 제외
+-keep class com.kakao.sdk.**.model.* { <fields>; }
+-keep class * extends com.google.gson.TypeAdapter
+
+# https://github.com/square/okhttp/pull/6792
+-dontwarn org.bouncycastle.jsse.**
+-dontwarn org.conscrypt.*
+-dontwarn org.openjsse.**

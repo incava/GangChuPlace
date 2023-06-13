@@ -7,6 +7,9 @@ import android.location.LocationManager
 import android.util.Log
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.incava.gangchuplace.R
 import com.incava.gangchuplace.base.BaseFragment
 import com.incava.gangchuplace.databinding.FragmentGangChuMapBinding
@@ -28,13 +31,13 @@ class GangChuMapFragment : BaseFragment<FragmentGangChuMapBinding>(R.layout.frag
     val gangChuViewModel by lazy { ViewModelProvider(requireActivity())[GangChuViewModel::class.java] }
 
     override fun init() {
-
         val fm = childFragmentManager
         val mapFragment = fm.findFragmentById(R.id.map) as MapFragment?
             ?: MapFragment.newInstance().also {
                 fm.beginTransaction().add(R.id.map, it).commit()
             }
         (mapFragment as MapFragment).getMapAsync(this@GangChuMapFragment)
+        binding.toolbar.setupWithNavController(findNavController())
     }
 
     override fun onMapReady(map: NaverMap) {

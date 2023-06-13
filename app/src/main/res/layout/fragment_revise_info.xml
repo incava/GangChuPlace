@@ -5,21 +5,24 @@
 
     <data>
         <variable
-            name="myInfoVM"
-            type="com.incava.gangchuplace.viewmodel.MyInfoViewModel" />
+            name="reviseInfoVM"
+            type="com.incava.gangchuplace.viewmodel.ReviseInfoViewModel" />
+
+        <variable
+            name="reviseInfoFragment"
+            type="com.incava.gangchuplace.view.main.info.ReviseInfoFragment" />
     </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".view.main.info.ReviseInfoFragment">
+        android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            setReviseInfoToolbar="@{myInfoVM}"
+            setReviseInfoToolbar="@{reviseInfoVM}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -27,16 +30,29 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/civ_profile"
-            setCircleImage="@{}"
+            android:src="@drawable/normal_image"
+            setCircleImage="@{reviseInfoVM.image}"
+            android:padding="2dp"
+            android:background="@drawable/rect_edit_normal_border"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:background="@drawable/rect_edit_normal_border"
+            android:clickable="true"
+            android:onClick="@{(view)->reviseInfoFragment.uploadImage()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:layout_constraintVertical_bias="0.211" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/vector_photo_camera"
+            android:paddingRight="4dp"
+            android:paddingBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/civ_profile"
+            app:layout_constraintEnd_toEndOf="@+id/civ_profile" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/tv_nickname"
@@ -49,8 +65,9 @@
             android:paddingStart="10dp"
             android:textSize="16sp"
             android:background="@drawable/rect_edit_circle"
+            android:onTextChanged="@{(text,start,before,count) -> reviseInfoVM.setNickName(text.toString())}"
             android:hint="닉네임"
-            android:text="닉네임"
+            bindingTextNickname="@{reviseInfoVM}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/civ_profile" />

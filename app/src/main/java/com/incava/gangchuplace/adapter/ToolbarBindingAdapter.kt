@@ -11,6 +11,7 @@ import com.incava.gangchuplace.model.MyReviewInfo
 import com.incava.gangchuplace.viewmodel.FriendViewModel
 import com.incava.gangchuplace.viewmodel.GangChuViewModel
 import com.incava.gangchuplace.viewmodel.MyInfoViewModel
+import com.incava.gangchuplace.viewmodel.ReviseInfoViewModel
 import com.incava.gangchuplace.viewmodel.WriteViewModel
 
 object ToolbarBindingAdapter {
@@ -50,11 +51,11 @@ object ToolbarBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("setReviseInfoToolbar")
-    fun setReviseInfoToolbar(view: Toolbar, myInfoViewModel: MyInfoViewModel) {
+    fun setReviseInfoToolbar(view: Toolbar, reviseInfoViewModel : ReviseInfoViewModel) {
         view.setupWithNavController(view.findNavController())
         view.setOnMenuItemClickListener {
             //todo 리스너 구현
-            myInfoViewModel.saveInfo(view)
+            reviseInfoViewModel.renameNickname()
             true
         }
     }

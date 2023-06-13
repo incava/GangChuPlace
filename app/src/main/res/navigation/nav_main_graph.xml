@@ -114,7 +114,11 @@
         android:id="@+id/reviseInfoFragment"
         android:name="com.incava.gangchuplace.view.main.info.ReviseInfoFragment"
         android:label="프로필 변경"
-        tools:layout="@layout/fragment_revise_info" />
+        tools:layout="@layout/fragment_revise_info" >
+        <action
+            android:id="@+id/action_reviseInfoFragment_to_baseContainerFragment"
+            app:destination="@id/baseContainerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/revisePasswordFragment"
         android:name="com.incava.gangchuplace.view.main.info.RevisePasswordFragment"

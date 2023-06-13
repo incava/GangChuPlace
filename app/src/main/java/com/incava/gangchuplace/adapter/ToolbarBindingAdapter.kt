@@ -12,6 +12,7 @@ import com.incava.gangchuplace.viewmodel.FriendViewModel
 import com.incava.gangchuplace.viewmodel.GangChuViewModel
 import com.incava.gangchuplace.viewmodel.MyInfoViewModel
 import com.incava.gangchuplace.viewmodel.ReviseInfoViewModel
+import com.incava.gangchuplace.viewmodel.RevisePasswordViewModel
 import com.incava.gangchuplace.viewmodel.WriteViewModel
 
 object ToolbarBindingAdapter {
@@ -62,11 +63,11 @@ object ToolbarBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("setRevisePassToolbar")
-    fun setRevisePassToolbar(view: Toolbar, myInfoViewModel: MyInfoViewModel) {
+    fun setRevisePassToolbar(view: Toolbar, revisePasswordViewModel: RevisePasswordViewModel) {
         view.setupWithNavController(view.findNavController())
         view.setOnMenuItemClickListener {
             //todo 리스너 구현
-            myInfoViewModel.saveInfo(view)
+            revisePasswordViewModel.transformPassword()
             true
         }
     }

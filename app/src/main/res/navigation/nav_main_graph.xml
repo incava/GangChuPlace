@@ -122,7 +122,11 @@
     <fragment
         android:id="@+id/revisePasswordFragment"
         android:name="com.incava.gangchuplace.view.main.info.RevisePasswordFragment"
-        android:label="비밀번호 변경" />
+        android:label="비밀번호 변경" >
+        <action
+            android:id="@+id/action_revisePasswordFragment_to_baseContainerFragment"
+            app:destination="@id/baseContainerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/storeSearchResultFragment"
         android:name="com.incava.gangchuplace.view.search.StoreSearchResultFragment"

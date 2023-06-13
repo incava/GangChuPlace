@@ -13,6 +13,7 @@ import com.incava.gangchuplace.application.GlobalApplication
 import com.incava.gangchuplace.util.Common
 import com.incava.gangchuplace.util.Prefs
 import com.incava.gangchuplace.util.ProfileCode
+import com.incava.gangchuplace.util.Regex
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -46,7 +47,7 @@ class ReviseInfoViewModel : ViewModel() {
                         .run { "${loginRoute}+${email}" }
                     Log.i("image",image.value.toString())
                     //만약 기존의 닉네임과 다르다면 실행.
-                    if (GlobalApplication.prefs.getSharedPreference().nickname != nickname){
+                    if (isRightNickName()){
                         val nicknameQuery = Common.fireStore.collection("User")
                             .whereEqualTo("nickname", nickname)
                             .get()
@@ -77,6 +78,10 @@ class ReviseInfoViewModel : ViewModel() {
                     resultEvent.postValue(ProfileCode.UpLoadFail)
                 }
         }
+    }
+    //닉네임 형식이 맞았는지, 이전과 다른 닉네임인지를 확인하는 메서드
+    fun isRightNickName():Boolean{
+        return GlobalApplication.prefs.getSharedPreference().nickname != nickname && Regex.regexCheck(nickname,"nickname")
     }
 
     //스토리지 Review에 사진을 업로드 하는 메서드

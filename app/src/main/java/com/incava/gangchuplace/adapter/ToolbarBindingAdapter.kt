@@ -109,5 +109,11 @@ object ToolbarBindingAdapter {
         }
     }
 
-
+    // item에 해당하는 제목을 보여줌.
+    @JvmStatic
+    @BindingAdapter("setReviewPageToolbar")
+    fun setReviewPageToolbar(view: Toolbar, theme : String) {
+        view.title = theme
+        view.setupWithNavController(view.findNavController())
+    }
 }

@@ -104,8 +104,7 @@
     </fragment>
     <fragment
         android:id="@+id/reviewPageFragment"
-        android:name="com.incava.gangchuplace.view.write.ReviewPageFragment"
-        android:label="리뷰" >
+        android:name="com.incava.gangchuplace.view.write.ReviewPageFragment">
         <argument
             android:name="myReviewInfo"
             app:argType="string" />

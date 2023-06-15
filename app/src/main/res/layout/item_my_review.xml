@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 tools:text="띠뚜뻐거"
-                android:text='@{"장소 : " + myReviewInfo.name}'
+                android:text='@{"장소 : " + myReviewInfo.store}'
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
                 app:layout_constraintStart_toEndOf="@+id/circleImageView"

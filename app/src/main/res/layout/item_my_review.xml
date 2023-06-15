@@ -75,10 +75,10 @@
                 android:id="@+id/appCompatTextView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_margin="8dp"
                 android:ellipsize="end"
-                android:lines="6"
-                android:maxLines="6"
+                android:lines="3"
+                android:maxLines="3"
                 android:text="@{myReviewInfo.body}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -86,18 +86,22 @@
                 tools:text="asdsadsadsadsadasdsadasdasda\n\n\n\n\nsdsadasdasdsad\n\n\n\n\nasfdasdfdsfdsfs" />
 
             <TextView
+                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="작성시간 : 2023-04-11"
                 android:text='@{"작성시간 : " + myReviewInfo.timeStamp}'
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="작성시간 : 2023-04-11" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="8dp"
                 setImage="@{myReviewInfo.image}"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
+                android:adjustViewBounds="true"
+                app:layout_constraintBottom_toBottomOf="@+id/textView3"
+                app:layout_constraintEnd_toStartOf="@+id/textView3"
                 app:layout_constraintStart_toStartOf="@+id/appCompatTextView9"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView9" />
 

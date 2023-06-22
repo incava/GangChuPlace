@@ -1,5 +1,6 @@
 package com.incava.gangchuplace.viewmodel
 
+import android.provider.Settings.Global
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -7,7 +8,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.incava.gangchuplace.R
+import com.incava.gangchuplace.application.GlobalApplication
 import com.incava.gangchuplace.model.User
+import com.incava.gangchuplace.util.Prefs
 import com.incava.gangchuplace.view.main.MainActivity
 
 class MyInfoViewModel : ViewModel() {
@@ -17,7 +20,12 @@ class MyInfoViewModel : ViewModel() {
     val myInfo: MutableLiveData<User> get() = _myInfo
 
     init {
-        _myInfo.value = User("인기", "", "ingi111111@naver.com", "카카오", "123123")
+        loadMyInfo()
+    }
+
+    // 나의 정보를 로드.
+    private fun loadMyInfo(){
+        _myInfo.value = GlobalApplication.prefs.getSharedPreference()
     }
 
     fun logout(view: View) {

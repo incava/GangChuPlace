@@ -44,4 +44,10 @@ object Common {
         }
     }
 
+    fun transformLatLngFromKatech(num : Double ) : Double {
+        // NaverSearchApi에서 mapX,mapY의 리스폰스값이 바뀌는 문제 발생.
+        // 카택을 통한 TM128 변환 -> 7자리로 나누면 바로 경도 위도가 나오도록 변경 됨.
+        return num / 100_000_00
+    }
+
 }

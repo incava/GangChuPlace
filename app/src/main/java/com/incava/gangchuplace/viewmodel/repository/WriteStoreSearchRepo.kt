@@ -7,10 +7,13 @@ import com.incava.gangchuplace.model.StorePlace
 import com.incava.gangchuplace.model.StorePlaceDTO
 import com.incava.gangchuplace.network.NaverPlaceService
 import com.incava.gangchuplace.network.RetrofitHelper
+import com.incava.gangchuplace.util.Common.transformLatLngFromKatech
+import com.naver.maps.geometry.LatLng
 import com.naver.maps.geometry.Tm128
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.roundToInt
 
 /**
  * 네이버에서 가게 정보에 관련된 값을 가져 오는 Repo
@@ -37,9 +40,11 @@ class WriteStoreSearchRepo {
                 Log.i("장소검색", response.body()?.items.toString())
                 response.body()?.items?.forEach {
                     it.title = Html.fromHtml(it.title, Html.FROM_HTML_MODE_COMPACT).toString()
-                    val latLng = Tm128(it.mapx, it.mapy).toLatLng()
-                    it.mapx = latLng.latitude
-                    it.mapy = latLng.longitude
+//                    val latLng = Tm128(it.mapx, it.mapy).toLatLng()
+                    val latLng = LatLng(transformLatLngFromKatech(it.mapx), transformLatLngFromKatech(it.mapy))
+                    it.mapx = latLng.longitude
+                    it.mapy = latLng.latitude
+                    Log.i("mapXX",it.mapx.toString())
                 }
                 response.body()?.items ?: return //이 부분 !?
                 searchData.postValue(response.body()?.items)
@@ -51,6 +56,8 @@ class WriteStoreSearchRepo {
 
         })
     }
+
+
 
 
 

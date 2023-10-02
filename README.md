@@ -3,11 +3,12 @@
 친구들만의 강추 플레이스를 공유해보세요!
 
 # 프로젝트정보
-Laguage : Kotlin
-MinSdk : 26
-MaxSdk : 33
-개발기간 : 23.03.29 ~ 23.04.26 (1달) - 리팩토링 진행 중
-개발인원 : 1명
+Laguage : Kotlin \n
+MinSdk : 26 \n
+MaxSdk : 33 \n
+개발기간 : 23.03.29 ~ 23.04.26 (1달) - 리팩토링 진행 중 \n
+개발인원 : 1명 \n
+
 ### 주요기술 및 라이브러리
 - 리뷰 DB저장을 위한 Firebase를 이용한 FireStorage, FireStore 사용
 - 리뷰 장소를 보여주기 위한 Grid RecyclerView사용

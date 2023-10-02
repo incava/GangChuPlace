@@ -9,9 +9,10 @@ import com.incava.gangchuplace.databinding.FragmentFriendBinding
 import com.incava.gangchuplace.viewmodel.FriendViewModel
 
 class FriendFragment : BaseFragment<FragmentFriendBinding>(R.layout.fragment_friend) {
-    private val friendViewModel: FriendViewModel by viewModels()
+    private val friendViewModel: FriendViewModel by activityViewModels()
     override fun init() {
         binding.apply {
+            friendViewModel.loadFriendInfo()
             friend = this@FriendFragment
             binding.friendVM = friendViewModel
         }

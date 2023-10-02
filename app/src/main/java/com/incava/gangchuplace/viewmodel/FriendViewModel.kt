@@ -43,12 +43,12 @@ class FriendViewModel(application: Application) : AndroidViewModel(application) 
 
     private var friendName: String = "" // 친구추가시 editText에 반응하여 넣어지는 값 변수
 
-    init {
-        loadFriendInfo()
-    }
-
     //모든 정보를 load
-    private fun loadFriendInfo() {
+    fun loadFriendInfo() {
+        // 초기화 후, 친구 리스트 받아오기.
+        _friendList.postValue(mutableListOf())
+        _requestedFriendList.postValue(mutableListOf())
+        _myRequestFriendList.postValue(mutableListOf())
         CoroutineScope(Dispatchers.IO).launch {
             Log.i("loadFriedInfo","실행중")
             val id = getUniqueId()

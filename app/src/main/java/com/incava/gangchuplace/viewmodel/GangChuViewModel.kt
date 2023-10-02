@@ -26,7 +26,6 @@ import com.incava.gangchuplace.viewmodel.repository.HeartStoreRepo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.Random
 
 
 class GangChuViewModel(application: Application) : AndroidViewModel(application) {
@@ -48,6 +47,10 @@ class GangChuViewModel(application: Application) : AndroidViewModel(application)
 
     var researchKeyword = ""
 
+    // 강추 플레이스 가게의 정렬 타입
+    private var sortType = "평점순"
+
+
     init {
         _gangChuList.value = mutableListOf()
         _gangChuSearchList.value = mutableListOf()
@@ -61,13 +64,19 @@ class GangChuViewModel(application: Application) : AndroidViewModel(application)
             // 체크에 따른 찜하기 or 실패
             if (checked) { // 찜 기능.
                 val result =
-                    heartStoreRepo.insertHeartStore("${userInfo.loginRoute}+${userInfo.email}", item)
+                    heartStoreRepo.insertHeartStore(
+                        "${userInfo.loginRoute}+${userInfo.email}",
+                        item
+                    )
                 Toast.makeText(view.context, if (result) "찜 완료 " else "실패", Toast.LENGTH_SHORT)
                     .show()
             } else {
                 //찜 해제 기능
                 val result =
-                    heartStoreRepo.deleteHeartStore("${userInfo.loginRoute}+${userInfo.email}", item)
+                    heartStoreRepo.deleteHeartStore(
+                        "${userInfo.loginRoute}+${userInfo.email}",
+                        item
+                    )
                 Toast.makeText(view.context, if (result) "찜 해제" else "실패", Toast.LENGTH_SHORT)
                     .show()
             }
@@ -82,17 +91,18 @@ class GangChuViewModel(application: Application) : AndroidViewModel(application)
     }
 
     //메뉴 정렬 메서드
-    fun setSortFilterList(filter : String) {
+    fun setSortFilterList(filter: String) {
         CoroutineScope(Dispatchers.Default).launch { // 계산 목적의 Thread로 Default 사용
-            val result = gangChuSortRepo.gangChuSort(gangChuList.value?: mutableListOf(),filter)
-            Log.i("result",result.toString())
+            sortType = filter
+            val result = gangChuSortRepo.gangChuSort(gangChuList.value ?: mutableListOf(), filter)
+            Log.i("result", result.toString())
             gangChuList.postValue(result)
         }
     }
 
     //메인에 들어갈 가게 리스트를 요청 하는 메서드
     fun requestGangChuList(id: String) {
-        gangChuStoreRepo.requestStoreList(id)
+        gangChuStoreRepo.requestStoreList(id,sortType)
     }
 
     // 검색 결과에 따른 가게 리스트를 요청 하는 메서드

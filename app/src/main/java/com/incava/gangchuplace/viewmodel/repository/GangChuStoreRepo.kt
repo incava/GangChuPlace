@@ -31,6 +31,9 @@ import kotlin.math.sqrt
 
 class GangChuStoreRepo(val application: Application) {
 
+
+    private val gangChuSortRepo by lazy { GangChuSortRepo() }
+
     lateinit var myLocation: LatLng
 
     // 모든 가게의 정보를 가지고 있는 List
@@ -42,9 +45,9 @@ class GangChuStoreRepo(val application: Application) {
     // 찜한 가게의 정보를 가지고 있는 List
     var heartStoreList = MutableLiveData<MutableList<GangChuPreview>>()
 
-    fun requestStoreList(id: String) {
+    fun requestStoreList(id: String,query: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            storeList.postValue(loadStoreInfo(id))
+            storeList.postValue(gangChuSortRepo.gangChuSort(loadStoreInfo(id),query))
         }
 
     }

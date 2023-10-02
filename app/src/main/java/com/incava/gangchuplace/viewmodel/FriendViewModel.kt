@@ -50,10 +50,13 @@ class FriendViewModel(application: Application) : AndroidViewModel(application) 
     //모든 정보를 load
     private fun loadFriendInfo() {
         CoroutineScope(Dispatchers.IO).launch {
+            Log.i("loadFriedInfo","실행중")
             val id = getUniqueId()
             _friendList.postValue(friendRepo.loadUserInfo(id, "Friend"))
             _requestedFriendList.postValue(friendRepo.loadUserInfo(id, "RequestedFriend"))
             _myRequestFriendList.postValue(friendRepo.loadUserInfo(id, "RequestFriend"))
+            Log.i("friendRepo",friendRepo.loadUserInfo(id, "RequestFriend").toString())
+            Log.i("friendRepo2",myRequestFriendList.value.toString())
         }
     }
 
@@ -146,7 +149,6 @@ class FriendViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     fun setFriendName(editString: String) {
-
         friendName = editString
     }
 

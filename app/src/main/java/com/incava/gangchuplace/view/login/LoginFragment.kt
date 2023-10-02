@@ -1,6 +1,7 @@
 package com.incava.gangchuplace.view.login
 
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.incava.gangchuplace.R
@@ -8,12 +9,14 @@ import com.incava.gangchuplace.adapter.CommonBindingAdapter
 import com.incava.gangchuplace.base.BaseFragment
 import com.incava.gangchuplace.databinding.FragmentLoginBinding
 import com.incava.gangchuplace.util.Common.showDialog
+import com.incava.gangchuplace.viewmodel.FriendViewModel
 import com.incava.gangchuplace.viewmodel.LoginViewModel
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
     private val loginViewModel: LoginViewModel by lazy {
         ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application = requireActivity().application))[LoginViewModel::class.java] }
+
 
     override fun init() {
         binding.loginVM = loginViewModel

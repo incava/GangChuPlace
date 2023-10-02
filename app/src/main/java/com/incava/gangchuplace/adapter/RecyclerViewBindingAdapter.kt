@@ -79,7 +79,11 @@ object RecyclerViewBindingAdapter {
     fun setFriendAdapter(view: RecyclerView, item: MutableList<User>, txt: Int) {
         view.apply {
             layoutManager = LinearLayoutManager(view.context)
-            adapter = FriendAdapter(item, txt)
+            val friendAdapter = FriendAdapter(txt)
+            friendAdapter.setHasStableIds(true)
+            // 깜빡임 제거
+            adapter = friendAdapter
+            (view.adapter as FriendAdapter).friendList = item
         }
     }
 

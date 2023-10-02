@@ -10,11 +10,9 @@ import com.incava.gangchuplace.viewmodel.FriendViewModel
 
 
 class MyFriendFragment : BaseFragment<FragmentMyFriendBinding>(R.layout.fragment_my_friend) {
-    private val friendViewModel: FriendViewModel by viewModels()
+    private val friendViewModel: FriendViewModel by activityViewModels()
     override fun init() {
-
         // 자동으로  해주는 AACviewModel말고 직접 provider로 받기
-
         binding.apply {
             binding.friendVM = friendViewModel
         }

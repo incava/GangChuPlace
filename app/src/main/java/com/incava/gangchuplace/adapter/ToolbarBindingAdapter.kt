@@ -84,7 +84,7 @@ object ToolbarBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("setFriendToolbar")
-    fun setFriendToolbar(view: Toolbar, friendViewModel: FriendViewModel) {
+    fun setFriendToolbar(view: Toolbar, txt : String) {
         view.apply {
             setOnMenuItemClickListener {
                 //todo 리스너 구현

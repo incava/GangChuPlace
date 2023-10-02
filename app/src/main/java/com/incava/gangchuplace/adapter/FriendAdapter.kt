@@ -13,8 +13,10 @@ import com.incava.gangchuplace.model.User
 import com.incava.gangchuplace.view.main.MainActivity
 import com.incava.gangchuplace.viewmodel.FriendViewModel
 
-class FriendAdapter(private val friendList: MutableList<User>, val type: Int) :
+class FriendAdapter(val type: Int) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    var friendList = mutableListOf<User>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder{
         when (type) {

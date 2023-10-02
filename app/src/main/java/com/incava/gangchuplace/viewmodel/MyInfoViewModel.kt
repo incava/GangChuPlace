@@ -4,8 +4,10 @@ import android.provider.Settings.Global
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.incava.gangchuplace.R
 import com.incava.gangchuplace.application.GlobalApplication
@@ -33,6 +35,7 @@ class MyInfoViewModel : ViewModel() {
             .setMessage("로그아웃을 하시겠습니까?")
             .setNegativeButton("취소") { dialog, _ -> dialog.dismiss() }
             .setPositiveButton("확인") { _, _ ->
+                // 로그아웃 후, 다시 ViewModel을 생성하기
                 (view.context as MainActivity).findNavController(R.id.main_nav_host)
                     .navigate(R.id.action_baseContainerFragment_to_loginFragment)
             }.show()

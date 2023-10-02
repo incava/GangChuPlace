@@ -4,22 +4,18 @@
 
 # 프로젝트정보 
 
- ### Laguage : Kotlin
- ### MinSdk : 26  
- ### MaxSdk : 33   
- ### 개발기간 : 23.03.29 ~ 23.04.26 (1달) - 리팩토링 진행 중  
- ### 개발인원 : 1명 
-
-
-
-
-### 주요기술 및 라이브러리
-- 리뷰 DB저장을 위한 Firebase를 이용한 FireStorage, FireStore 사용
-- 리뷰 장소를 보여주기 위한 Grid RecyclerView사용
-- 리뷰 장소 글쓰기 위한 장소 검색 API(Naver Search API)사용
-- 카카오 로그인을 위한 Kakao Auth API사용
-- LiveData와 Repository패턴을 사용한 MVVM패턴
-- SingleActivity와 그에 맞게 Navigation패턴을 이용
+ #### Laguage : Kotlin
+ #### MinSdk : 26  
+ #### MaxSdk : 33   
+ #### 개발기간 : 23.03.29 ~ 23.04.26 (1달) - 리팩토링 진행 중  
+ #### 개발인원 : 1명 
+ #### 주요기술 및 라이브러리
+ - 리뷰 DB저장을 위한 Firebase를 이용한 FireStorage, FireStore 사용
+ - 리뷰 장소를 보여주기 위한 Grid RecyclerView사용
+ - 리뷰 장소 글쓰기 위한 장소 검색 API(Naver Search API)사용
+ - 카카오 로그인을 위한 Kakao Auth API사용
+ - LiveData와 Repository패턴을 사용한 MVVM패턴
+ - SingleActivity와 그에 맞게 Navigation패턴을 이용
 
 # 프로젝트를 생각하게 된 계기
 

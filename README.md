@@ -10,7 +10,7 @@
  #### 개발기간 : 23.03.29 ~ 23.04.26 (1달) - 리팩토링 진행 중  
  #### 개발인원 : 1명 
  #### 주요기술 및 라이브러리
- - 리뷰 DB저장을 위한 Firebase제품 중 Storage, FireStore 사용
+ - 리뷰 DB저장을 위해 Firebase제품 중 Storage, FireStore 사용
  - 리뷰 장소를 보여주기 위한 Grid RecyclerView사용
  - 리뷰 장소 글쓰기 위한 장소 검색 API(Naver Search API)사용
  - 카카오 로그인을 위한 Kakao Auth API사용
@@ -33,9 +33,9 @@
 
 <table style="width:70%; margin:auto;">
   <tr>
-    <th style="text-align:center; width:33.33%"><b> 회원가입, 로그인</b></th>
-    <th style="text-align:center; width:33.33%"><b> 강추 화면 및 상세 페이지 </b></th>
-      <th style="text-align:center; width:33.33%"><b> 강추 리뷰 쓰기 </b></th>
+    <th style="text-align:center; width:25%"><b> 회원가입, 로그인</b></th>
+    <th style="text-align:center; width:25%"><b> 강추 화면 및 상세 페이지 </b></th>
+      <th style="text-align:center; width:25%"><b> 강추 리뷰 쓰기 </b></th>
   </tr>
   <tr>
     <td style="text-align:center; "><img src="https://github.com/incava/GangChuPlace/assets/68988975/2a2c61d2-41a2-40e3-80b1-30ccf5ffc381.gif" width="250" height="500"></td>

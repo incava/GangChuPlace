@@ -5,19 +5,10 @@
 친구들만의 강추 플레이스를 공유해보세요!
 
 # 프로젝트정보 
-
- #### Laguage : Kotlin
- #### MinSdk : 26  
+ #### Language : Kotlin
  #### MaxSdk : 33   
  #### 개발기간 : 23.03.29 ~ 23.04.26 (1달) - 리팩토링 진행 중  
  #### 개발인원 : 1명 
- #### 주요기술 및 라이브러리
- - 리뷰 DB저장을 위해 Firebase제품 중 Storage, FireStore 사용
- - 리뷰 장소를 보여주기 위한 Grid RecyclerView사용
- - 리뷰 장소 글쓰기 위한 장소 검색 API(Naver Search API)사용
- - 카카오 로그인을 위한 Kakao Auth API사용
- - LiveData와 Repository패턴을 사용한 MVVM패턴
- - SingleActivity와 그에 맞게 Navigation패턴을 이용
 
 # 프로젝트를 생각하게 된 계기
 
@@ -30,6 +21,16 @@
 ### 2. 주변 친구와의 공통점 찾기
 
 친구들과 이야기 한다면 공통점으로 인해 더욱더 친해지는 계기가 되기도 하고, 한명한명에게 코스 추천을 받을 수도 없다. 만약 친구들이 갔던 곳이라면 거기 어디가 어땠는지, 꿀팁이라던지 물어볼 계기도 생길 수 있고, 긴밀한 관계로 이어질 수 있는 부분이라 생각하여 만들게 되었습니다.
+ 
+ ## 주요기술 및 라이브러리
+ - 리뷰 DB저장을 위해 Firebase제품 중 Storage, FireStore 사용
+ - 리뷰 장소를 보여주기 위한 Grid RecyclerView사용
+ - 리뷰 장소 글쓰기 위한 장소 검색 API(Naver Search API)사용
+ - 카카오 로그인을 위한 Kakao Auth API사용
+ - LiveData와 Repository패턴을 사용한 MVVM패턴
+ - SingleActivity와 그에 맞게 Navigation패턴을 이용
+
+
 
 # 실행영상
 

@@ -1,3 +1,5 @@
+
+<img src="https://github.com/incava/GangChuPlace/assets/68988975/9756b694-0eb2-48e7-aa20-31984b136b32.png" width="100%" height="200"/>
 # 강추 플레이스
 리뷰 이벤트로 인해 신뢰가 깨진 추천 장소들을 아카이빙 하며 친구들끼리 서로 공유하기 위한 앱입니다!
 친구들만의 강추 플레이스를 공유해보세요!
@@ -80,12 +82,5 @@
   </tr>
 </table>
 
-
-
-
-
-# Todo 
-DI주입을 통한 MVVM패턴 리팩토링
-ViewModel의 의존성과 특징 구분해서 리팩토링
 
 
